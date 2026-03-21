@@ -1,32 +1,17 @@
-# Disk Usage Monitoring
+# 디스크 사용량 모니터링
 
-This guide explains how to monitor disk usage and set thresholds for alerting.
+**목표:** 디스크 사용량 모니터링 및 임계값(Threshold) 기반 알림 구현
 
-## Analyzing `df -h`
+## `df -h` 분석
+- `df -h` 명령 기반 디스크 공간 가독성 향상
+- 특정 파티션(예: `/`) 사용률 파싱:
+    - `df / | grep / | awk '{ print $5 }' | sed 's/%//g'`
+    - `df /`: 루트 디스크 정보 조회
+    - `grep /`: 마운트 지점 포함 라인 검색
+    - `awk '{ print $5 }'`: 5번째 열(사용률 %) 추출
+    - `sed 's/%//g'`: `%` 문자 제거
 
-The `df -h` command displays disk space usage in human-readable format.
-
-To parse it for a specific partition (e.g., the root partition `/`):
-
-```bash
-# Get usage percentage for the root partition
-df / | grep / | awk '{ print $5 }' | sed 's/%//g'
-```
-
-- `df /`: Get disk info for root.
-- `grep /`: Match the line containing the mount point.
-- `awk '{ print $5 }'`: Extract the 5th column (Usage %).
-- `sed 's/%//g'`: Remove the `%` character.
-
-## Setting Thresholds
-
-It's common practice to set a threshold (e.g., 90%) after which a warning is triggered.
-
-```bash
-THRESHOLD=90
-CURRENT=$(df / | grep / | awk '{ print $5 }' | sed 's/%//g')
-
-if [ "$CURRENT" -gt "$THRESHOLD" ]; then
-    echo "WARNING: Disk usage is over $THRESHOLD%!"
-fi
-```
+## 임계값 설정
+- 경고 발생 임계값(예: 90%) 설정 및 비교
+- 예시: `THRESHOLD=90`, `CURRENT=$(df / | ...)`
+- `if [ "$CURRENT" -gt "$THRESHOLD" ]; then ... fi`: 사용률 초과 시 경고 메시지 출력

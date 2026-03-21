@@ -1,33 +1,20 @@
-# Cron Alert System
+# 크론(Cron) 알림 시스템
 
-This guide explains how to log cron results and send alerts in an Ubuntu/Debian environment.
+**목표:** Ubuntu/Debian 환경 크론 작업 결과 기록 및 알림 자동화
 
-## Logging Cron Results
+## 크론 결과 로깅
+- 표준 출력(stdout) 및 표준 에러(stderr) 리다이렉션 기반 로그 기록
+- 설정 예시: `* * * * * /path/to/script.sh >> /var/log/cron_tasks.log 2>&1`
+    - `>>`: 표준 출력 로그 파일 추가(append)
+    - `2>&1`: 표준 에러를 표준 출력으로 리다이렉션하여 통합 기록
 
-To log the output of a cron job, you can redirect stdout and stderr to a log file:
+## 알림 전송
+- `mail` 명령(`mailutils` 패키지) 활용 알림 발송
+- 설치 및 실행:
+    - `sudo apt update && sudo apt install -y mailutils`: 패키지 설치
+    - `echo "메시지" | mail -s "제목" admin@example.com`: 알림 전송
 
-```bash
-* * * * * /path/to/script.sh >> /var/log/cron_tasks.log 2>&1
-```
-
-- `>>`: Appends stdout to the log file.
-- `2>&1`: Redirects stderr to stdout, so both are captured in the log.
-
-## Sending Alerts
-
-You can send alerts using the `mail` command (part of `mailutils`).
-
-```bash
-# Install mailutils if not present
-sudo apt update && sudo apt install -y mailutils
-
-# Send an alert
-echo "Task failed on $(hostname)" | mail -s "CRON ALERT: Task Failure" admin@example.com
-```
-
-## Implementation
-
-The `cron_task.sh` script provides a template for:
-1. Performing a task.
-2. Logging the result with timestamps.
-3. Sending an alert if the task fails.
+## 구현 사항 (`cron_task.sh`)
+1. 작업 수행 및 결과 기록
+2. 타임스탬프 기반 로깅
+3. 작업 실패 시 알림 전송 로직 포함

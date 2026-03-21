@@ -1,19 +1,18 @@
-# Automating Security with ClamAV
+# ClamAV 활용 보안 자동화 가이드
 
-## What is ClamAV?
-ClamAV is an open-source antivirus engine for detecting trojans, viruses, malware & other malicious threats.
+## ClamAV 개요
+- **정의:** 오픈 소스 멀웨어/바이러스 탐지 엔진.
+- **주요 구성 요소:**
+  - **clamd:** 백그라운드 상주형 고속 스캔 데몬.
+  - **clamscan:** CLI 기반 수동/예약 스캔 도구.
+  - **freshclam:** 바이러스 정의 DB 최신화 유틸리티.
 
-### Key Components
-- **clamd**: The background daemon for faster scanning.
-- **clamscan**: The command-line scanner.
-- **freshclam**: The utility for updating virus definitions.
+## 보안 스캔 자동화 전략
+1. **DB 최신화:** `cron` 주기 설정을 통한 `freshclam` 일일 실행.
+2. **정기 스캔:** 주요 경로(`/home`, `/var/www` 등) 대상 쉘 스크립트 기반 스캔.
+3. **결과 보고:** 스캔 로그 기록 및 탐지 시 즉각 알림 시스템 구축.
 
-## Automating Security Scans
-1. **Regular updates**: Run `freshclam` daily via `cron`.
-2. **Scheduled scans**: Scan critical directories (like `/home` and `/var/www`) using a shell script.
-3. **Automated Reporting**: Log scan results and send alerts if threats are found.
-
-## Common Commands
-- **Update virus database**: `sudo freshclam`
-- **Scan a directory**: `clamscan -r /home`
-- **Scan and move infected files**: `clamscan -r --move=/quarantine /home`
+## 주요 명령어
+- **DB 업데이트:** `sudo freshclam`
+- **경로 재귀 스캔:** `clamscan -r [디렉토리]`
+- **탐지 파일 격리:** `clamscan -r --move=[격리경로] [대상경로]`

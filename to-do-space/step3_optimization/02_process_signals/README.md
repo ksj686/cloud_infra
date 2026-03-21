@@ -1,21 +1,20 @@
-# Process Management and Signals
+# 프로세스 관리 및 시그널(Signals) 가이드
 
-## Understanding Linux Signals
-Linux uses signals to communicate with running processes.
+## Linux 시그널 이해
+- **개요:** 실행 중인 프로세스 간 통신 및 제어 메커니즘.
+- **주요 시그널 유형:**
+  1. **SIGTERM (15):** 정상 종료 요청. 리소스 정리 및 파일 닫기 수행 유도.
+     - 명령어: `kill [PID]` 또는 `kill -15 [PID]`
+  2. **SIGKILL (9):** 즉시 강제 종료. 프로세스 제어 불가 및 잔류 데이터 발생 위험.
+     - 명령어: `kill -9 [PID]`
+  3. **SIGHUP (1):** 터미널 접속 끊김 알림 또는 데몬 설정 재로드 용도.
+- **운영 원칙:**
+  - `SIGTERM` 우선 시도: 프로세스 자가 정리 기회 부여.
+  - `SIGKILL` 최후 수단: 응답 불능 상태에서만 제한적 사용.
 
-### Key Signals
-1. **SIGTERM (15)**: The default signal sent by `kill`. It requests the process to terminate gracefully, allowing it to clean up resources, close files, etc.
-   - Command: `kill 1234` or `kill -15 1234`
-2. **SIGKILL (9)**: Forces the process to terminate immediately. The process cannot catch this signal or perform any cleanup. This can leave "stale" lock files or temporary data.
-   - Command: `kill -9 1234`
-3. **SIGHUP (1)**: Often used to tell a daemon to reload its configuration.
-
-### Best Practices
-- **Try SIGTERM first**: Always attempt to stop a process gracefully.
-- **Use SIGKILL only as a last resort**: Only if the process is unresponsive and SIGTERM fails.
-
-## Handling Zombie Processes
-A zombie process (`Z` state in `ps`) is a process that has finished execution but remains in the process table.
-- They don't use memory or CPU, but they do consume a process ID (PID).
-- Usually, they disappear once their parent process "reaps" them.
-- If they persist, you may need to kill the parent process.
+## 좀비(Zombie) 프로세스 관리
+- **상태:** `ps` 조회 시 `Z` 표시. 실행 종료 후 프로세스 테이블에 잔류.
+- **특징:** CPU/메모리 비점유, PID 리소스 소모.
+- **해결 방안:**
+  - 부모 프로세스의 자식 수거(reap) 대기.
+  - 지속 발생 시 부모 프로세스 재시작 또는 종료 검토.

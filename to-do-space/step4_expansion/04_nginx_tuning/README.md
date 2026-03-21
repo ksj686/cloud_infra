@@ -1,28 +1,21 @@
-# Nginx Performance Tuning
+# Nginx 성능 최적화(Tuning) 가이드
 
-## Overview
-Nginx is a high-performance web server, reverse proxy, and load balancer. Proper tuning can significantly improve application response times and handle more concurrent users.
+## 개요
+- **목적:** 웹 서버, 리버스 프록시, 로드 밸런서 성능 극대화 및 응답 시간 단축.
 
-### Core Tuning Areas
-1. **Worker Processes**: Match the number of CPU cores.
-   - `worker_processes auto;`
-2. **Worker Connections**: Increase the maximum connections per worker.
-   - `worker_connections 1024;` (up to 65535 depending on OS limits)
-3. **Keepalive**: Reduce overhead by reusing existing connections.
-   - `keepalive_timeout 65;`
-4. **Gzip Compression**: Reduce the size of sent files.
-   - `gzip on;`
-5. **Caching**: Store frequently accessed data in memory or disk.
-   - `proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=my_cache:10m;`
+## 핵심 튜닝 영역
+1. **Worker Processes:** 시스템 CPU 코어 수와 일치화 (`worker_processes auto;`).
+2. **Worker Connections:** 워커당 최대 연결 수 확장 (`worker_connections 1024;`).
+3. **Keepalive:** 연결 재사용을 통한 핸드셰이크 오버헤드 축소 (`keepalive_timeout 65;`).
+4. **Gzip 압축:** 데이터 전송량 감소 및 대역폭 효율화 (`gzip on;`).
+5. **캐싱:** 빈번한 요청 데이터 메모리/디스크 저장 (`proxy_cache_path` 설정).
 
-## Managing Nginx Service
-- **Enable on boot**: `sudo systemctl enable nginx`
-- **Stop**: `sudo systemctl stop nginx`
-- **Start**: `sudo systemctl start nginx`
-- **Restart (full)**: `sudo systemctl restart nginx`
-- **Reload (soft)**: `sudo systemctl reload nginx` (highly recommended for config changes)
-- **Check Status**: `sudo systemctl status nginx`
+## 서비스 관리 명령어
+- **부팅 시 자동 시작:** `sudo systemctl enable nginx`
+- **서비스 제어:** `start`, `stop`, `restart` (완전 재시작).
+- **설정 재로드:** `sudo systemctl reload nginx` (서비스 중단 없는 설정 반영).
+- **상태 조회:** `sudo systemctl status nginx`
 
-## Verification
-Always test your configuration before reloading:
-- `sudo nginx -t`
+## 설정 검증
+- **무결성 확인:** 설정 반영 전 구문 오류 점검 필수.
+  - 명령어: `sudo nginx -t`
