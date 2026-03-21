@@ -55,14 +55,18 @@
     - Nginx 성능 최적화: 캐싱, 압축(Gzip), 버퍼 튜닝을 통한 응답 속도 향상함.
 
 ## Phase 5: 자동화 워크플로우 및 CI/CD (Pipeline)
-**구축 단계:** 인프라 변경의 신뢰성 확보를 위한 배포 자동화 파이프라인 구축
+**구축 단계:** 인프라 변경 신뢰성 확보를 위한 단계별 보안 자동화 파이프라인 구축함.
 
-- **Pre-commit 검증**
-    - 코드 품질 체크: 설정 파일(YAML 등) 구문 검증 및 Lint 적용함.
-    - 보안 스캔: 코드 내 시크릿(API Key 등) 노출 방지 스캔함.
-- **GitHub Actions Workflows**
-    - 검증 자동화: 변경 사항 발생 시 테스트 VM 구성 적합성 자동 검증함.
-    - 배포 자동화: GitOps 체계 기반 승인 코드 인프라 반영함.
+- **로컬 보안 검증 (Local Security)**
+    - `pre-commit/Husky`: 커밋 전 로컬 환경에서 자동 검사 강제함.
+    - `Gitleaks`: 소스 코드 내 민감 정보(API Key, Secret) 유출 원천 차단함.
+    - `ESLint/Bandit`: 언어별 정적 분석을 통한 코드 품질 및 기초 보안 확보함.
+- **지속적 통합 보안 (CI Security)**
+    - `CodeQL/Semgrep`: SAST(정적 분석) 기반 소스 코드 보안 취약점 심층 분석함.
+    - `npm audit/pnpm audit`: SCA(오픈소스 감사) 기반 종속성 라이브러리 취약점 점검함.
+- **아티팩트 및 알림 (Artifact & Alert)**
+    - `Trivy`: 빌드된 Docker 이미지의 OS 및 패키지 취약점 스캔함.
+    - `Slack/Email`: 보안 이벤트 및 파이프라인 실패 시 실시간 알림 연동함.
 
 ## Phase 6: 코드형 인프라 및 확장성 (Scalability)
 **구축 단계:** 인적 실수 방지 및 대규모 환경 복제를 위한 IaC 체계 완성

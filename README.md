@@ -25,6 +25,7 @@
     - `build/`: 초기 설치 및 구성 절차임.
     - `ops/`: 일상 운영 및 온보딩 절차임.
     - `recovery/`: 장애 대응 및 복구 절차임.
+- **[case_studies/](./case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물임.
 
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
 - **Phase 1 (Foundation):** 시스템 기초 다지기, 하드닝 및 커널 최적화 수행함.
@@ -33,3 +34,11 @@
 - **Phase 4 (Observability):** 운영 가시성 확보, 서비스 안정화 및 가용성 관리함.
 - **Phase 5 (Pipeline):** 자동화 워크플로우, 형상 관리 및 배포 자동화 구축함.
 - **Phase 6 (Scalability):** 코드형 인프라 완성, 대규모 환경 복제 및 확장성 확보함.
+
+## 5. 단계별 자동화 보안 도구 (Automated Security Tools)
+| 단계 (Phase) | 도구 (Tool) | 목적 |
+| :--- | :--- | :--- |
+| **Phase 1: Local** | `pre-commit`, `Husky`, `Gitleaks` | 커밋 전 민감 정보 유출 차단 및 코드 품질 검사함 |
+| **Phase 2: CI** | `CodeQL`, `Semgrep`, `npm/pnpm audit` | SAST 및 오픈소스 라이브러리 취약점 심층 분석함 |
+| **Phase 3: Artifact** | `Trivy` | Docker 이미지 OS 및 패키지 취약점 스캔함 |
+| **Phase 4: Alert** | `Slack`, `Discord`, `SMTP` | 파이프라인 실패 및 보안 이벤트 실시간 알림함 |

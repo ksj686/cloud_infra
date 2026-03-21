@@ -19,8 +19,8 @@
     2.  **리소스 모니터링:** 디스크/CPU 임계치 초과 여부 확인 및 대응. [Playbook: ops/resource_monitor.md]
     3.  **시스템 보안 감사:** `auditd`를 통한 중요 파일 변조 감시 및 추적. [Playbook: ops/audit_system.md]
     4.  **정기 사용자 감사:** 불필요한 계정 및 취약한 권한 점검. [Playbook: ops/user_audit.md]
-    4.  **로그 순환 최적화:** Logrotate를 통한 디스크 용량 관리. [Playbook: ops/log_rotate.md]
-    5.  **안전한 인프라 업데이트:** 패키지 업데이트 리스크 관리. [Playbook: ops/safe_upgrade.md]
+    5.  **로그 순환 최적화:** Logrotate를 통한 디스크 용량 관리. [Playbook: ops/log_rotate.md]
+    6.  **안전한 인프라 업데이트:** 패키지 업데이트 리스크 관리. [Playbook: ops/safe_upgrade.md]
         - **흐름:** Backup -> Test in Staging -> Selective Update -> Verification.
 
 ## 🔵 Scenario 3: 신입 사원 온보딩 (Human Operation)
@@ -37,3 +37,11 @@
     2.  **스토리지 부족 대응:** LVM 온라인 볼륨 확장 또는 데이터 정리. [Playbook: recovery/lvm_resize.md]
     3.  **데이터 유실 복구:** 최신 백업본(7일 내)을 활용한 시점 복구(RTO 1시간 이내). [Playbook: recovery/backup_restore.md]
     4.  **커널/부팅 불가 복구:** GRUB 응급 복구 모드를 통한 설정 원복. [Playbook: recovery/grub_rescue.md]
+
+## 🛡️ Scenario 5: 보안 자동화 파이프라인 (Security Pipeline)
+- **개요:** 인프라 코드 및 서비스 변경 시 단계별 자동화 도구를 통한 보안 무결성 검증함.
+- **주요 절차:**
+    1.  **로컬 커밋 보안 검증:** `pre-commit` 및 `Gitleaks`를 통한 시크릿 유출 원천 차단함. [Playbook: build/security_pipeline.md]
+    2.  **종속성 취약점 점검 (SCA):** 더미 웹서버 기반 `npm/pnpm audit` 실행 및 리포팅함.
+    3.  **이미지 보안 스캔:** Docker 빌드 후 `Trivy`를 이용한 OS/패키지 취약점 정밀 스캔함.
+    4.  **보안 이벤트 알림:** 취약점 발견 시 Slack으로 즉시 알림 및 배포 중단함.
