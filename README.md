@@ -42,3 +42,18 @@
 | **Phase 2: CI** | `CodeQL`, `Semgrep`, `npm/pnpm audit` | SAST 및 오픈소스 라이브러리 취약점 심층 분석함 |
 | **Phase 3: Artifact** | `Trivy` | Docker 이미지 OS 및 패키지 취약점 스캔함 |
 | **Phase 4: Alert** | `Slack`, `Discord`, `SMTP` | 파이프라인 실패 및 보안 이벤트 실시간 알림함 |
+
+## 6. 프로젝트 비전: 보안 필수 체계가 완비된 표준 환경 (Starter Kit)
+본 프로젝트는 단순 실습을 넘어, 어떤 클라우드/온프레미스 환경에서도 **적용 가능한 보안 표준 기반**을 제공하는 것을 목표로 함. 사용자는 최소한의 설정만으로도 검증된 보안 인프라를 신속하게 구축할 수 있음.
+
+## 7. 유사 사례 및 참고 프로젝트 (Benchmarking)
+- **[Ansible Lockdown]:** 업계 표준 보안 지침(CIS Benchmark) 기반의 OS 자동 강화 프로젝트임.
+- **[DevSec Hardening Framework]:** "보안을 코드처럼" 관리하는 자동화 템플릿 제공함.
+- **[AWS Landing Zone]:** 대규모 클라우드 환경의 초기 보안 가드레일을 설정해주는 서비스임.
+- **차별점:** 본 프로젝트는 복잡한 기업용 도구보다 가볍고 실무 중심적인 개조식 가이드와 실행 스크립트를 제공하여 접근성을 높임.
+
+## 8. 향후 보완 방향 (Roadmap)
+- **IaC 코드화 (Ansible/Terraform):** 현재의 문서 가이드를 버튼 하나로 실행 가능한 코드로 전환함.
+- **Golden Image 빌드:** 보안 하드닝이 완료된 표준 OS 이미지 생성 자동화(Packer 활용)함.
+- **컴플라이언스 매핑:** KISA 가이드라인 및 CIS Benchmark 항목 준수 여부 시각화함.
+- **멀티 클라우드 지원:** AWS, Azure 등 주요 CSP별 보안 설정 템플릿 제공함.

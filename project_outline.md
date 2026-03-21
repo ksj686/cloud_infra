@@ -1,6 +1,7 @@
 # Cloud Infrastructure Project Outline (A to Z)
 
 **프로젝트 목표:** 실무 수준 인프라 설계 및 단계적 고도화 (A to Z)
+- **보안 표준 환경 구축 키트 지향:** 최소한의 설정만으로 보안 필수 체계가 완비된 인프라 환경 구축을 지원함.
 **핵심 원칙:** 보안(Security), 가용성(Availability), 자동화(Automation)
 
 ---
