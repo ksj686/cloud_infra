@@ -7,7 +7,7 @@
 # ==============================================================================
 
 # Slack Webhook URL (사용자의 환경에 맞게 수정 필요)
-SLACK_WEBHOOK_URL="https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+SLACK_WEBHOOK_URL="https://hooks.slack.com/services/REPLACE_WITH_YOUR_URL_HERE"
 
 # 현재 날짜 및 시간
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
