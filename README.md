@@ -26,6 +26,8 @@
     - `ops/`: 일상 운영 및 온보딩 절차임.
     - `recovery/`: 장애 대응 및 복구 절차임.
 - **[case_studies/](./case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물임.
+- **[to-do-list.md](./to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵임.
+- **[to-do-space/](./to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소임.
 
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
 - **Phase 1 (Foundation):** 시스템 기초 다지기, 하드닝 및 커널 최적화 수행함.
