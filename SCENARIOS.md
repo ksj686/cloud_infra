@@ -34,9 +34,10 @@
 - **개요:** 하드웨어 장애 또는 데이터 유실 발생 시 시스템 정상화 절차.
 - **주요 절차:**
     1.  **RAID 디스크 장애 복구:** 결함 발생 디스크 교체 및 미러링 리빌딩. [Playbook: recovery/raid_rebuild.md]
-    2.  **스토리지 부족 대응:** LVM 온라인 볼륨 확장 또는 데이터 정리. [Playbook: recovery/lvm_resize.md]
-    3.  **데이터 유실 복구:** 최신 백업본(7일 내)을 활용한 시점 복구(RTO 1시간 이내). [Playbook: recovery/backup_restore.md]
-    4.  **커널/부팅 불가 복구:** GRUB 응급 복구 모드를 통한 설정 원복. [Playbook: recovery/grub_rescue.md]
+    2.  **서비스 프로세스 자동 복구:** Nginx 등 주요 서비스 중단 시 셀프 힐링 스크립트 작동 확인.
+    3.  **스토리지 부족 대응:** LVM 온라인 볼륨 확장 또는 데이터 정리. [Playbook: recovery/lvm_resize.md]
+    4.  **데이터 유실 복구:** 최신 백업본(7일 내)을 활용한 시점 복구(RTO 1시간 이내). [Playbook: recovery/backup_restore.md]
+    5.  **커널/부팅 불가 복구:** GRUB 응급 복구 모드를 통한 설정 원복. [Playbook: recovery/grub_rescue.md]
 
 ## 🛡️ Scenario 5: 보안 자동화 파이프라인 (Security Pipeline)
 - **개요:** 인프라 코드 및 서비스 변경 시 단계별 자동화 도구를 통한 보안 무결성 검증함.
