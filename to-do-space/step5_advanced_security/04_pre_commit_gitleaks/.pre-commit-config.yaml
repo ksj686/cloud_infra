@@ -1,0 +1,21 @@
+# .pre-commit-config.yaml
+# Gitleaks 및 기본 보안 점검 설정
+
+repos:
+  # 1. Gitleaks 훅 설정
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.2
+    hooks:
+      - id: gitleaks
+        name: "Gitleaks (Secret Scanning)"
+        description: "Detect hardcoded secrets in the codebase"
+
+  # 2. 기본 코드 품질 및 보안 점검 훅 (공식 레포지토리)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml # YAML 구문 오류 확인
+      - id: check-json # JSON 구문 오류 확인
+      - id: check-merge-conflict # 머지 충돌 마커 확인
+      - id: end-of-file-fixer # 파일 끝 개행 문자 자동 추가
+      - id: trailing-whitespace # 불필요한 공백 제거
