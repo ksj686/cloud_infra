@@ -20,6 +20,7 @@
 
 ## 3. 문서 시스템 가이드 (Documentation Guide)
 - **[README.md](./README.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공함.
+- **[project_outline.md](./project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트임.
 - **[SCENARIOS.md](./SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스임.
 - **[playbooks/](./playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)임.
     - `build/`: 초기 설치 및 구성 절차임.
