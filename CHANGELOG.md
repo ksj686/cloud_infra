@@ -25,6 +25,7 @@
 | 2026-03-28 | `🚀 Feature` | 고도화 기술 가이드 및 프로젝트 개선 전략 분석 문서 구축 | `knowledge_base/*` |
 | 2026-03-28 | `⚙️ Refactor` | 기존 작성 문서(`project_outline.md`, `README.md`, `knowledge_base/*`, `playbooks/*`)에 순수 명사형 종결 스타일 일괄 적용 | `*.md` |
 | 2026-03-28 | `🧪 Test` | 엔터프라이즈 HA(Step 6) 및 클라우드 네이티브/AI(Step 7) 실습 로드맵 확장 및 학습 공간 구축 | `to-do-list.md`, `to-do-space/*` |
+| 2026-03-30 | `🚀 Feature` | MkDocs Material 기반 웹 포털 환경 구축 및 사이드바 내비게이션 구조 설계 | `mkdocs.yml` |
 
 ## [인프라 설계 상세 복구 및 가상화 전략 전환]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
