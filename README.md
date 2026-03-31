@@ -4,6 +4,27 @@
 
 ---
 
+## 🚀 학습 로드맵 (Learning Roadmap)
+
+```mermaid
+graph TD
+    subgraph "Phase 1-3: Foundation & Persistence"
+    S1[Step 1: Automation] --> S2[Step 2: Troubleshoot]
+    S2 --> S3[Step 3: Optimization]
+    end
+    subgraph "Phase 4-5: Ops & Security"
+    S3 --> S4[Step 4: Expansion]
+    S4 --> S5[Step 5: Advanced Security]
+    end
+    subgraph "Phase 6-7: Enterprise & AI"
+    S5 --> S6[Step 6: Enterprise HA]
+    S6 --> S7[Step 7: Cloud Native AI]
+    end
+    style S1 fill:#f9f,stroke:#333,stroke-width:2px
+```
+
+---
+
 ## 1. 프로젝트 개요 (Overview)
 - **목적:** 안정적이고 보안이 강화된 리눅스 기반 인프라 아키텍처 설계 및 운영 표준 정립
 - **핵심 원칙:**

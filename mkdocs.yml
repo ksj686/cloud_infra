@@ -1,0 +1,79 @@
+site_name: Cloud Infra Project
+site_description: 실무 기반 보안 및 가용성 중심 인프라 구축 가이드
+site_author: Gemini CLI User
+
+theme:
+  name: material
+  language: ko
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Home: README.md
+  - Blueprint: project_outline.md
+  - Knowledge Base:
+      - Overview: knowledge_base/analysis_and_improvement.md
+      - Tech Guide: knowledge_base/advanced_tech_guide.md
+      - Checklist: knowledge_base/full_tech_checklist.md
+  - Playbooks:
+      - Ops:
+          - Audit System: playbooks/ops/audit_system.md
+          - Safe Upgrade: playbooks/ops/safe_upgrade.md
+          - SSH Onboarding: playbooks/ops/ssh_onboarding.md
+      - Recovery:
+          - RAID Rebuild: playbooks/recovery/raid_rebuild.md
+  - Solutions:
+      - Overview: solutions/README.md
+      - Airflow: solutions/01_airflow/README.md
+      - Wazuh: solutions/02_wazuh/README.md
+      - Prometheus & Grafana: solutions/03_prometheus_grafana/README.md
+      - Vault: solutions/04_vault/README.md
+      - Proxmox VE: solutions/05_proxmox_ve/README.md
+  - Roadmap: to-do-list.md
+  - Lab Space:
+      - Overview: to-do-space/README.md
+      - Step 1 (Automation): to-do-space/step1_automation/README.md
+      - Step 2 (Troubleshooting): to-do-space/step2_troubleshooting/README.md
+      - Step 3 (Optimization): to-do-space/step3_optimization/README.md
+      - Step 4 (Expansion): to-do-space/step4_expansion/README.md
+      - Step 5 (Security): to-do-space/step5_advanced_security/README.md
+      - Step 6 (Enterprise HA): to-do-space/step6_enterprise_ha/README.md
+      - Step 7 (Cloud Native AI): to-do-space/step7_cloud_native_ai/README.md
+  - Changelog: CHANGELOG.md
+
+plugins:
+  - search
