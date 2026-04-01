@@ -20,6 +20,7 @@
 ## 2. 작업 완료 및 검증 원칙
 - 모든 설계 변경 시 `docs/project_outline.md`의 **Phase별 구축 순서**와 보안/자동화 원칙에 위배되지 않는지 확인
 - 새로운 실습 항목은 `docs/to-do-space/` 폴더 하위에 실습 가이드(`README.md`)와 함께 정리하여 사용자가 단계별로 따라 하기 편하도록 구성
+- **환경 설정 기록 유지 (Mandatory):** 개발 도구 설치, MkDocs 설정, 시스템 환경 변수 등 초기 세팅 및 환경과 관련된 모든 사항을 `docs/ENVIRONMENT_SETUP.md`에 상시 기록하여 최신 상태 유지
 
 ## 3. 기록 관리 (CHANGELOG & Archive)
 - **날짜 정확성 확보 (Mandatory):** `docs/CHANGELOG.md` 또는 날짜가 포함된 기록물 작성 직전, 반드시 `run_shell_command`를 통해 현재 시스템 날짜(`Get-Date -Format "yyyy-MM-dd"`) 확인 후 기재. 추측에 의한 날짜 기입 엄격 금지
