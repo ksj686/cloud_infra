@@ -51,6 +51,7 @@ graph TD
 - **[knowledge_base/](./knowledge_base/):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
 - **[PROJECT_WORKFLOW.md](./PROJECT_WORKFLOW.md):** 프로젝트 실행 공정 및 대화 기반 의사결정 로그
 - **[CURRENT_TASK_GUIDE.md](./CURRENT_TASK_GUIDE.md):** 현재 진행 중인 활성 작업에 대한 단계별 실행 매뉴얼
+- **[ENVIRONMENT_SETUP.md](./ENVIRONMENT_SETUP.md):** MkDocs 가동 및 초기 환경 구축을 위한 영구적 실행 지침
 - **[to-do-list.md](./to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
 - **[to-do-space/](./to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
 - **[solutions/](./solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
