@@ -41,17 +41,17 @@ graph TD
 - **Monitoring:** Prometheus, Grafana, Thanos (Multi-cluster), Loki
 
 ## 3. 문서 시스템 가이드 (Documentation Guide)
-- **[README.md](./docs/index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
-- **[project_outline.md](./docs/project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
-- **[SCENARIOS.md](./docs/SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
-- **[playbooks/](./docs/playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
+- **[README.md](./index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
+- **[project_outline.md](./project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
+- **[SCENARIOS.md](./SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
+- **[playbooks/](./playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
     - `ops/`: 일상 운영 및 온보딩 절차
     - `recovery/`: 장애 대응 및 복구 절차
-- **[case_studies/](./docs/case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물
-- **[knowledge_base/](./docs/knowledge_base/):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
-- **[to-do-list.md](./docs/to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
-- **[to-do-space/](./docs/to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
-- **[solutions/](./docs/solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
+- **[case_studies/](./case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물
+- **[knowledge_base/](./knowledge_base/):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
+- **[to-do-list.md](./to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
+- **[to-do-space/](./to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
+- **[solutions/](./solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
 
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
 - **Phase 1 (Foundation):** 시스템 기초, 하드닝 및 커널 최적화 수행

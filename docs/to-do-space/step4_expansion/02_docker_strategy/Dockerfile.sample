@@ -1,0 +1,28 @@
+# Use a lightweight base image
+FROM alpine:3.18
+
+# Set environment variables
+ENV APP_HOME=/app
+ENV PORT=8080
+
+# Create application directory
+WORKDIR $APP_HOME
+
+# Install dependencies and perform cleanup in one layer
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    && rm -rf /var/cache/apk/*
+
+# Copy application files (after installing dependencies for better caching)
+COPY . $APP_HOME
+
+# Create a non-root user for security
+RUN adduser -D myuser
+USER myuser
+
+# Expose the application port
+EXPOSE $PORT
+
+# Define the command to run the application
+CMD ["python3", "app.py"]

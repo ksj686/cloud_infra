@@ -43,7 +43,7 @@ markdown_extensions:
       permalink: true
 
 nav:
-  - Home: README.md
+  - Home: index.md
   - Blueprint: project_outline.md
   - Knowledge Base:
       - Overview: knowledge_base/analysis_and_improvement.md

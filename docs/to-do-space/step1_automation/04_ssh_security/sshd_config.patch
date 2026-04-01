@@ -1,0 +1,14 @@
+--- /etc/ssh/sshd_config
++++ /etc/ssh/sshd_config.new
+@@ -12,1 +12,1 @@
+-#Port 22
++Port 2222
+@@ -32,1 +32,1 @@
+-#PermitRootLogin prohibit-password
++PermitRootLogin no
+@@ -56,1 +56,1 @@
+-#PasswordAuthentication yes
++PasswordAuthentication no
+@@ -58,0 +58,2 @@
++PubkeyAuthentication yes
++ChallengeResponseAuthentication no
