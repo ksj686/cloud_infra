@@ -49,6 +49,8 @@ graph TD
     - `recovery/`: 장애 대응 및 복구 절차
 - **[case_studies/](./docs/case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물
 - **[knowledge_base/](./docs/knowledge_base/):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
+- **[PROJECT_WORKFLOW.md](./docs/PROJECT_WORKFLOW.md):** 프로젝트 실행 공정 및 대화 기반 의사결정 로그
+- **[CURRENT_TASK_GUIDE.md](./docs/CURRENT_TASK_GUIDE.md):** 현재 진행 중인 활성 작업에 대한 단계별 실행 매뉴얼
 - **[to-do-list.md](./docs/to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
 - **[to-do-space/](./docs/to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
 - **[solutions/](./docs/solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
