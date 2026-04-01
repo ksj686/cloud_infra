@@ -18,18 +18,18 @@
     - **Phase 6 (IaC/확장):** 코드 기반 인프라 관리(Ansible/Terraform), 환경 복제 및 스케일링.
 
 ## 2. 작업 완료 및 검증 원칙
-- 모든 설계 변경 시 `project_outline.md`의 **Phase별 구축 순서**와 보안/자동화 원칙에 위배되지 않는지 확인함.
-- 새로운 실습 항목은 `to-do-space/` 폴더 하위에 실습 가이드(`README.md`)와 함께 정리하여 사용자가 단계별로 따라 하기 편하도록 구성함.
+- 모든 설계 변경 시 `docs/project_outline.md`의 **Phase별 구축 순서**와 보안/자동화 원칙에 위배되지 않는지 확인
+- 새로운 실습 항목은 `docs/to-do-space/` 폴더 하위에 실습 가이드(`README.md`)와 함께 정리하여 사용자가 단계별로 따라 하기 편하도록 구성
 
 ## 3. 기록 관리 (CHANGELOG & Archive)
-- **날짜 정확성 확보 (Mandatory):** `CHANGELOG.md` 또는 날짜가 포함된 기록물 작성 직전, 반드시 `run_shell_command`를 통해 현재 시스템 날짜(`Get-Date -Format "yyyy-MM-dd"`) 확인 후 기재. 추측에 의한 날짜 기입 엄격 금지
+- **날짜 정확성 확보 (Mandatory):** `docs/CHANGELOG.md` 또는 날짜가 포함된 기록물 작성 직전, 반드시 `run_shell_command`를 통해 현재 시스템 날짜(`Get-Date -Format "yyyy-MM-dd"`) 확인 후 기재. 추측에 의한 날짜 기입 엄격 금지
 - **기록 보존:** 새로운 기록 추가 시 기존 기록의 날짜나 내용을 함부로 수정하지 않으며, 오직 당일 작업 내역에 대해서만 현재 날짜를 적용
-- **작업 단위 기록:** 모든 주요 설계 및 설정 변경 사항은 `CHANGELOG.md`에 작업명 단위로 그룹화하여 기록
+- **작업 단위 기록:** 모든 주요 설계 및 설정 변경 사항은 `docs/CHANGELOG.md`에 작업명 단위로 그룹화하여 기록
 - **Git 커밋 전략 자동 제안 (Mandatory):** 작업 완료 후 `git status` 기반 변경 사항 분석. 논리적 단위로 그룹화하여 (1) 그룹명, (2) 대상 파일 및 상태, (3) 커밋 메시지(제목 및 상세 내역) 형식을 콘솔에 텍스트로 제안. 에이전트의 독단적 커밋 실행은 엄격히 금지하며, 실행 명령어 제시는 생략
 - **분류 체계 준수:** 🚀 Feature, 🛠️ Fix, 🔥 Removal, 🔒 Security, 📝 Docs, ⚙️ Refactor, 🧪 Test, 📦 Dependency, 🎨 Style 분류를 사용하여 변경 성격 명시
 - **아카이빙 전략:** 
-    - `CHANGELOG.md`가 500라인을 초과하거나 분기가 종료될 경우, 과거 기록을 `archives/changelogs/` 하위로 이전함.
-    - 이전 시 파일명 형식은 `[YEAR]_[Q/MONTH]_CHANGELOG.md`를 따름.
+    - `docs/CHANGELOG.md`가 500라인을 초과하거나 분기가 종료될 경우, 과거 기록을 `docs/archives/changelogs/` 하위로 이전
+    - 이전 시 파일명 형식은 `[YEAR]_[Q/MONTH]_CHANGELOG.md` 준수
 - **추적성 확보:** 수정 파일 목록을 반드시 포함하여 변경 사항의 영향 범위를 파악할 수 있도록 함.
 
 ## 4. 문서 작성 및 기술 기록 원칙
