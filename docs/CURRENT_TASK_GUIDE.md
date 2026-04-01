@@ -1,49 +1,43 @@
 # Current Active Task Execution Guide
 
-본 문서는 현재 진행 중인 '웹 포털 전환 및 루트 정리' 작업을 완수하기 위한 단계별 상세 실행 매뉴얼
+본 문서는 현재 진행 중인 '웹 포털 전환 및 루트 정리' 작업의 마무리를 위한 단계별 상세 실행 매뉴얼
 
 ---
 
-## 🏃 1단계: 루트 잔여 폴더 정리 (Final Cleanup)
-웹 포털 통합을 위해 아직 루트에 남아있는 마지막 콘텐츠 소스를 `docs/` 하위로 이동
+## 🏃 1단계: 루트 정리 완료 (Cleanup Finished)
+모든 콘텐츠 소스의 `docs/` 하위 통합 완료
 
-- **작업 현황:** `disk_mount/`, `vi편집기/`, `우분투커널빌드/` 삭제 완료
-- **남은 대상:** `lecture/`
-- **실행 명령어:**
-    ```powershell
-    mv lecture docs/
-    ```
+- **완료 현황:** `lecture/` 이동 완료 (`docs/lecture/`)
+- **특이 사항:** `lecture/` 폴더는 분석용 소스로서 MkDocs 웹 메뉴(nav)에서 제외하여 보안 및 가시성 관리
 
 ---
 
-## 📂 2단계: MkDocs 내비게이션 최적화
-새로 이동한 `lecture/` 폴더를 웹 사이트 메뉴에 노출하도록 설정 업데이트
+## 📂 2단계: MkDocs 최종 점검
+이동된 소스들이 웹 빌드에 영향을 주지 않는지 확인
 
 - **작업 파일:** `mkdocs.yml`
-- **추가 항목 제안:**
-    ```yaml
-    - Materials:
-        - Lecture Notes: lecture/ (주요 파일 경로 지정)
-    ```
+- **점검 항목:** `nav` 섹션에 `lecture/` 관련 경로가 포함되지 않았는지 확인 (현재 포함 안 됨)
 
 ---
 
-## 🌿 3단계: Git 분할 커밋 (Logical Committing)
-남은 변경 사항을 논리적 단위로 나누어 커밋
+## 🌿 3단계: Git 최종 커밋 (Final Committing)
+웹 포털 전환 작업을 마무리하는 논리적 분할 커밋 실행
 
-### [커밋 A] 프로젝트 관리 및 실행 가이드 구축
-- **대상:** `docs/PROJECT_WORKFLOW.md`, `docs/CURRENT_TASK_GUIDE.md`, `README.md`, `docs/index.md`, `docs/CHANGELOG.md`
-- **메시지:** `docs: 프로젝트 관리 및 실시간 실행 가이드 체계 구축`
+### [커밋 A] 웹 포털 인프라 및 소스 통합
+- **대상:** `mkdocs.yml`, `docs/`, `README.md`
+- **메시지:** `feat: MkDocs Material 웹 포털 구축 및 전 소스 docs/ 통합`
 
-### [커밋 B] 기술 지침 및 원칙 개정
-- **대상:** `GEMINI.md`, `.gitignore`
-- **메시지:** `docs: Git 커밋 제안 자동화 지침 및 분류 체계 개정`
+### [커밋 B] 루트 정리 및 중복 제거
+- **대상:** 루트에서 삭제된 모든 폴더 및 파일의 삭제 상태 스테이징
+- **메시지:** `refactor: 루트 디렉토리 정리 및 docs/ 디렉토리로 소스 일원화`
+
+### [커밋 C] 프로젝트 관리 지침 및 로드맵 최신화
+- **대상:** `GEMINI.md`, `docs/CHANGELOG.md`, `docs/PROJECT_WORKFLOW.md`, `docs/CURRENT_TASK_GUIDE.md`
+- **메시지:** `docs: 프로젝트 관리 지침 고도화 및 실행 워크플로우 구축`
 
 ---
 
 ## 🔍 4단계: 최종 검증 (Validation)
-작업 결과물이 의도대로 작동하는지 로컬 환경에서 테스트
-
 1. **로컬 웹 서버 가동:** `mkdocs serve` 실행
-2. **접속 확인:** `http://127.0.0.1:8000` 접속 후 좌측 메뉴 작동 여부 확인
-3. **경로 체크:** 모든 하이퍼링크 및 이미지 정상 출력 확인
+2. **메뉴 확인:** `lecture/` 내용이 좌측 메뉴에 노출되지 않는지 확인
+3. **콘텐츠 확인:** 나머지 문서들이 정상적으로 렌더링되는지 확인
