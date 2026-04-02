@@ -23,8 +23,9 @@
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
 | 2026-04-02 | `🛠️ Fix` | `exclude_docs` 설정 형식 오류(List -> Multiline String) 수정 및 빌드 정상화 | `mkdocs.yml` |
-| 2026-04-02 | `⚙️ Refactor` | `mkdocs.yml` 내 불필요한 docs/ 접두어 제거 및 내비게이션 경로 일관성 확보 | `mkdocs.yml` |
-| 2026-04-02 | `📝 Docs` | case_studies 및 policies 폴더 docs/ 이동에 따른 참조 링크 전수 업데이트 | `README.md`, `docs/index.md` |
+| 2026-04-02 | `⚙️ Refactor` | MkDocs 내비게이션 구조 최종 최적화 및 누락된 모든 문서(Scenario, Playbooks 등) 메뉴 등록 | `mkdocs.yml` |
+| 2026-04-02 | `🧪 Test` | 각 실습 Step별 인덱스(README.md) 생성 및 웹 포털 내비게이션 연결성 강화 | `docs/to-do-space/*/README.md` |
+| 2026-04-02 | `📝 Docs` | 문서 간 잘못된 상대 경로 및 디렉토리 직접 링크 전수 수정 | `README.md`, `docs/*.md` |
 
 ## [프로젝트 관리 및 실행 가이드 체계 구축]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
