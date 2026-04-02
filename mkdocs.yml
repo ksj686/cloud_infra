@@ -27,7 +27,7 @@ theme:
     - search.highlight
     - content.code.copy
 
-# 빌드 제외 설정 (에러 해결을 위해 멀티라인 문자열 형식 사용)
+# 빌드 제외 설정 (분석용 소스 제외)
 exclude_docs: |
   lecture/**
 
@@ -48,7 +48,9 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Blueprint: project_outline.md
+  - Strategy & Blueprint:
+      - Blueprint: project_outline.md
+      - Scenarios: SCENARIOS.md
   - Knowledge Base:
       - Overview: knowledge_base/analysis_and_improvement.md
       - Tech Guide: knowledge_base/advanced_tech_guide.md
@@ -58,6 +60,9 @@ nav:
           - Audit System: playbooks/ops/audit_system.md
           - Safe Upgrade: playbooks/ops/safe_upgrade.md
           - SSH Onboarding: playbooks/ops/ssh_onboarding.md
+      - Build:
+          - Security Pipeline: playbooks/build/security_pipeline.md
+          - Storage Setup: playbooks/build/storage_setup.md
       - Recovery:
           - RAID Rebuild: playbooks/recovery/raid_rebuild.md
   - Policies:
@@ -70,7 +75,11 @@ nav:
       - Wazuh: solutions/02_wazuh/README.md
       - Prometheus & Grafana: solutions/03_prometheus_grafana/README.md
       - Vault: solutions/04_vault/README.md
-      - Proxmox VE: solutions/05_proxmox_ve/README.md
+      - Proxmox VE:
+          - Guide: solutions/05_proxmox_ve/README.md
+          - HA Cluster: solutions/05_proxmox_ve/01_ha_cluster.md
+          - Backup PBS: solutions/05_proxmox_ve/02_backup_pbs.md
+          - Automation API: solutions/05_proxmox_ve/03_automation_api.md
   - Management:
       - Workflow: PROJECT_WORKFLOW.md
       - Task Guide: CURRENT_TASK_GUIDE.md
