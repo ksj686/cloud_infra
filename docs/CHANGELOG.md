@@ -22,6 +22,8 @@
 ## [MkDocs 빌드 오류 수정 및 경로 일관성 확보]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
+| 2026-04-02 | `🚀 Feature` | Nginx 로드 밸런싱 기반 무중단 롤링 업데이트(Rolling Update) 시나리오 설계 및 반영 | `docs/SCENARIOS.md` |
+| 2026-04-02 | `🔒 Security` | ClamAV 보안 스캔 인터페이스 고도화(자동 격리, 로깅, Slack 알림 기능 통합) | `docs/to-do-space/step4_expansion/03_security_clamav/clamav_scan.sh` |
 | 2026-04-02 | `🛠️ Fix` | `exclude_docs` 설정 형식 오류(List -> Multiline String) 수정 및 빌드 정상화 | `mkdocs.yml` |
 | 2026-04-02 | `⚙️ Refactor` | MkDocs 내비게이션 구조 최종 최적화 및 누락된 모든 문서(Scenario, Playbooks 등) 메뉴 등록 | `mkdocs.yml` |
 | 2026-04-02 | `🧪 Test` | 각 실습 Step별 인덱스(README.md) 생성 및 웹 포털 내비게이션 연결성 강화 | `docs/to-do-space/*/README.md` |
