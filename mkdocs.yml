@@ -27,9 +27,9 @@ theme:
     - search.highlight
     - content.code.copy
 
-# 빌드 및 검색 인덱스에서 제외할 파일 설정
-exclude_docs:
-  - "lecture/**"
+# 빌드 제외 설정 (에러 해결을 위해 멀티라인 문자열 형식 사용)
+exclude_docs: |
+  lecture/**
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -60,7 +60,10 @@ nav:
           - SSH Onboarding: playbooks/ops/ssh_onboarding.md
       - Recovery:
           - RAID Rebuild: playbooks/recovery/raid_rebuild.md
-  - Case Studies: docs/case_studies/20260321_github_push_protection.md
+  - Policies:
+      - Backup Policy: policies/backup_policy.md
+      - Log Policy: policies/log_policy.md
+  - Case Studies: case_studies/20260321_github_push_protection.md
   - Solutions:
       - Overview: solutions/README.md
       - Airflow: solutions/01_airflow/README.md
