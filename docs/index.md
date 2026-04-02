@@ -44,17 +44,17 @@ graph TD
 - **[README.md](./index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
 - **[project_outline.md](./project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
 - **[SCENARIOS.md](./SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
-- **[playbooks/](./playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
+- **[playbooks/](./playbooks/ops/audit_system.md):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
     - `ops/`: 일상 운영 및 온보딩 절차
     - `recovery/`: 장애 대응 및 복구 절차
-- **[case_studies/](./case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물
-- **[knowledge_base/](./knowledge_base/):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
+- **[case_studies/](./case_studies/20260321_github_push_protection.md):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물
+- **[knowledge_base/](./knowledge_base/analysis_and_improvement.md):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
 - **[PROJECT_WORKFLOW.md](./PROJECT_WORKFLOW.md):** 프로젝트 실행 공정 및 대화 기반 의사결정 로그
 - **[CURRENT_TASK_GUIDE.md](./CURRENT_TASK_GUIDE.md):** 현재 진행 중인 활성 작업에 대한 단계별 실행 매뉴얼
 - **[ENVIRONMENT_SETUP.md](./ENVIRONMENT_SETUP.md):** MkDocs 가동 및 초기 환경 구축을 위한 영구적 실행 지침
 - **[to-do-list.md](./to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
-- **[to-do-space/](./to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
-- **[solutions/](./solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
+- **[to-do-space/](./to-do-space/README.md):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
+- **[solutions/](./solutions/README.md):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
 
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
 - **Phase 1 (Foundation):** 시스템 기초, 하드닝 및 커널 최적화 수행
