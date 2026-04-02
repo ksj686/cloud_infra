@@ -27,6 +27,10 @@ theme:
     - search.highlight
     - content.code.copy
 
+# 빌드 및 검색 인덱스에서 제외할 파일 설정
+exclude_docs:
+  - "lecture/**"
+
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -56,6 +60,7 @@ nav:
           - SSH Onboarding: playbooks/ops/ssh_onboarding.md
       - Recovery:
           - RAID Rebuild: playbooks/recovery/raid_rebuild.md
+  - Case Studies: docs/case_studies/20260321_github_push_protection.md
   - Solutions:
       - Overview: solutions/README.md
       - Airflow: solutions/01_airflow/README.md
@@ -63,6 +68,10 @@ nav:
       - Prometheus & Grafana: solutions/03_prometheus_grafana/README.md
       - Vault: solutions/04_vault/README.md
       - Proxmox VE: solutions/05_proxmox_ve/README.md
+  - Management:
+      - Workflow: PROJECT_WORKFLOW.md
+      - Task Guide: CURRENT_TASK_GUIDE.md
+      - Env Setup: ENVIRONMENT_SETUP.md
   - Roadmap: to-do-list.md
   - Lab Space:
       - Overview: to-do-space/README.md
