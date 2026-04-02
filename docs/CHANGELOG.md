@@ -19,6 +19,13 @@
 
 ---
 
+## [MkDocs 빌드 오류 수정 및 경로 일관성 확보]
+| 날짜 | 분류 | 수정 내용 | 수정 파일 |
+| :--- | :--- | :--- | :--- |
+| 2026-04-02 | `🛠️ Fix` | `exclude_docs` 설정 형식 오류(List -> Multiline String) 수정 및 빌드 정상화 | `mkdocs.yml` |
+| 2026-04-02 | `⚙️ Refactor` | `mkdocs.yml` 내 불필요한 docs/ 접두어 제거 및 내비게이션 경로 일관성 확보 | `mkdocs.yml` |
+| 2026-04-02 | `📝 Docs` | case_studies 및 policies 폴더 docs/ 이동에 따른 참조 링크 전수 업데이트 | `README.md`, `docs/index.md` |
+
 ## [프로젝트 관리 및 실행 가이드 체계 구축]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
