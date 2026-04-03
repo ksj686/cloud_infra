@@ -1,58 +1,65 @@
 # Project Environment Setup Guide
 
-본 문서는 프로젝트의 문서화 포털(MkDocs) 가동 및 초기 개발 환경 구축을 위한 영구적 실행 지침
+본 문서는 프로젝트의 안정적인 가동을 위해 Python(Poetry) 및 Node.js(nvm) 기반의 표준화된 개발 환경 구축 지침 및 웹 포털 검증 절차 정리
 
 ---
 
-## 1. 필수 소프트웨어 (Prerequisites)
-- **Python 3.x:** MkDocs 엔진 구동을 위한 기본 런타임
-- **Pip:** 파이썬 패키지 관리 도구
+## 1. Node.js 환경 구축 (nvm)
+버전 관리 및 충돌 방지를 위해 `nvm` 사용 필수
 
----
-
-## 2. 라이브러리 및 테마 설치 (Installation)
-MkDocs Material 테마 및 필수 플러그인 설치
-
-- **명령어:**
+- **nvm 설치 (Windows):** [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) 다운로드 및 설치
+- **Node.js 설치 및 사용:**
     ```bash
-    pip install mkdocs-material mkdocs-mermaid2-plugin
+    # LTS 버전 설치 (Node.js 20.x 이상 권장)
+    nvm install lts
+    nvm use lts
     ```
-- **구성 요소 설명:**
-    - `mkdocs-material`: Google Material Design 기반 고성능 문서 테마
-    - `mkdocs-mermaid2-plugin`: 마크다운 내 Mermaid 다이어그램 렌더링 지원
+- **권장 도구 설치 (pnpm):** 속도 및 용량 효율을 위해 `pnpm` 사용 권장
+    ```bash
+    npm install -g pnpm
+    ```
 
 ---
 
-## 3. 로컬 서버 가동 (Local Development)
-문서 수정 사항을 실시간으로 확인하기 위한 로컬 개발 서버 실행
+## 2. Python 환경 구축 (Poetry)
+결정론적 의존성 관리 및 가상 환경 분리를 위해 `Poetry` 사용 필수
 
-- **실행 위치:** **프로젝트 루트 디렉토리** (`mkdocs.yml` 파일 존재 위치)
-- **기본 명령어:**
+### 2.1 Poetry 설치 및 설정
+- **설치:** [Poetry 공식 문서](https://python-poetry.org/docs/#installation) 참조
+- **가상 환경 경로 설정:** 프로젝트 폴더 내에 가상 환경이 생성되도록 설정 권장
     ```bash
-    mkdocs serve
+    poetry config virtualenvs.in-project true
     ```
-- **실행 오류 시 대체 명령어 (Windows PATH 미설정 시):**
+
+### 2.2 프로젝트 초기화 및 가상 환경 가동
+- **패키지 설치:** `pyproject.toml`에 정의된 의존성 일괄 설치
+    ```bash
+    poetry install
+    ```
+- **가상 환경 진입:** `poetry shell` 명령을 통해 활성화
+
+---
+
+## 3. MkDocs 웹 포털 가동 및 빌드
+가상 환경 내에서 MkDocs 서버 실행 및 정적 자산 생성
+
+- **로컬 개발 서버 실행:**
+    ```bash
+    poetry run mkdocs serve
+    ```
+- **실행 오류 시 (Windows PATH 미설정):**
     ```bash
     python -m mkdocs serve
     ```
-- **접속 주소:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- **정적 빌드 (Production):** 실제 배포용 HTML 파일 생성
+    ```bash
+    poetry run mkdocs build
+    ```
+- **결과물:** 루트의 `site/` 디렉토리에 생성
 
 ---
 
-## 4. 환경 변수 설정 (Windows PATH)
-`mkdocs` 명령어가 인식되지 않을 경우 아래 경로를 시스템 환경 변수 `Path`에 추가
-
-- **대상 경로:** `%APPDATA%\Python\Python313\Scripts` 
-    - (실제 경로: `C:\Users\SamuelK\AppData\Roaming\Python\Python313\Scripts`)
-- **적용 방법:**
-    1. '시스템 환경 변수 편집' 실행
-    2. '환경 변수' 버튼 클릭
-    3. '사용자 변수' 또는 '시스템 변수'의 `Path` 항목 편집
-    4. 위 경로 추가 후 터미널 재시작
-
----
-
-## 5. 웹 포털 검증 체크리스트 (Validation)
+## 4. 웹 포털 검증 체크리스트 (Validation)
 서버 가동 후 정상 작동 여부 전수 검사 항목
 
 - [ ] **내비게이션:** 좌측 트리 메뉴 및 상단 탭 정상 작동 여부
@@ -63,11 +70,9 @@ MkDocs Material 테마 및 필수 플러그인 설치
 
 ---
 
-## 5. 정적 빌드 및 배포 (Build)
-실제 배포용 정적 자산(HTML/CSS/JS) 생성
-
-- **명령어:**
-    ```bash
-    mkdocs build
-    ```
-- **결과물:** 루트의 `site/` 디렉토리에 생성 (웹 서버 호스팅용 소스)
+## 5. 트러블슈팅 및 관리 원칙
+- **.venv 푸시 금지:** 가상 환경 폴더(`.venv`)는 머신 의존적 경로를 포함하므로 절대 Git에 커밋하지 않음 (`.gitignore` 설정 확인)
+- **환경 변수 설정:** `mkdocs` 명령어가 인식되지 않을 경우 `%APPDATA%\Python\Python313\Scripts` 경로를 시스템 `Path`에 추가
+- **의존성 동기화:** 패키지 추가/삭제 시 반드시 `poetry add` 또는 `poetry remove` 사용하여 `poetry.lock` 파일 유지
+- **빌드 제외:** 분석용 소스(`lecture/**`)는 `mkdocs.yml`의 `exclude_docs` 설정을 통해 가시성 및 빌드 오류 관리
+- **상시 업데이트:** 환경과 관련된 모든 사항은 본 문서(`docs/ENVIRONMENT_SETUP.md`)에 누적 기록하여 최신 상태 유지
