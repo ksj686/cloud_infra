@@ -1,5 +1,14 @@
-*.pdf
+# Python Virtual Environment
+.venv/
+__pycache__/
+*.py[cod]
 
+# Poetry
+dist/
+.recommenders/
+
+# Temporary and Log files
+*.pdf
 going_to_commit.txt
 
 log
