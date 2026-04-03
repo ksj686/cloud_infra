@@ -21,10 +21,21 @@
 
 ---
 
-## 2. Python 환경 구축 (Poetry)
-결정론적 의존성 관리 및 가상 환경 분리를 위해 `Poetry` 사용 필수
+## 2. Python 환경 구축 (Poetry & pyenv)
+결정론적 의존성 관리 및 참여자 간 Python 버전 동기화를 위해 `Poetry` 및 `pyenv` 사용 필수
 
-### 2.1 Poetry 설치 및 설정
+### 2.1 Python 버전 관리 (pyenv)
+- **목적:** `.python-version` 파일에 명시된 버전과 로컬 실행 버전의 완벽한 일치 보장
+- **권장 버전:** **Python 3.12.x (안정성 및 라이브러리 호환성 최적)**
+- **설치:** [pyenv-win](https://github.com/pyenv-win/pyenv-win) (Windows용) 설치
+- **버전 동기화:**
+    ```bash
+    # .python-version에 명시된 버전 설치 및 적용
+    pyenv install 3.12.8
+    pyenv local 3.12.8
+    ```
+
+### 2.2 Poetry 설치 및 설정
 - **설치:** [Poetry 공식 문서](https://python-poetry.org/docs/#installation) 참조
 - **가상 환경 경로 설정:** 프로젝트 폴더 내에 가상 환경이 생성되도록 설정 권장
     ```bash
