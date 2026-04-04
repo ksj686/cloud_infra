@@ -14,33 +14,23 @@
         Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
         ```
     2.  **환경 변수 반영:** 터미널 종료 후 재시작
-    3.  **Python 3.12.8 설치:**
-        ```bash
-        pyenv install 3.12.8
-        ```
-    4.  **로컬 버전 적용:**
-        ```bash
-        # 프로젝트 루트(cloud_infra) 폴더에서 실행
-        pyenv local 3.12.8
-        ```
-    5.  **버전 확인:** `python --version` 실행 결과가 `Python 3.12.8`인지 확인
+    3.  **Python 3.12.8 설치:** `pyenv install 3.12.8`
+    4.  **로컬 버전 적용:** `pyenv local 3.12.8` (프로젝트 루트에서 실행)
 
-### 1.2 Python Poetry 초기화
-- **목적:** `pyproject.toml` 생성을 통한 라이브러리 버전 고정
+### 1.2 Poetry 설치 및 초기화
+- **목적:** 라이브러리 의존성 관리 및 버전 고정
 - **실행 절차:**
-    1.  **가상환경 생성 위치 설정:**
+    1.  **Poetry 설치 (명령어 미인식 시):**
+        ```powershell
+        (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+        ```
+    2.  **PATH 등록:** 설치 완료 메시지에 표시된 경로(예: `%APPDATA%\Python\Scripts` 또는 `%APPDATA%\pypoetry\venv\Scripts`)를 시스템 `Path`에 추가
+    3.  **가상환경 생성 위치 설정:**
         ```bash
         poetry config virtualenvs.in-project true
         ```
-    2.  **프로젝트 초기화:**
-        ```bash
-        poetry init
-        ```
-        - **주의:** 대화형 질문 중 `Compatible Python dependency` 입력 시 `^3.12` 입력
-    3.  **필수 의존성 추가:**
-        ```bash
-        poetry add mkdocs-material mkdocs-mermaid2-plugin
-        ```
+    4.  **프로젝트 초기화:** `poetry init` (Python 버전 질문 시 `^3.12` 입력)
+    5.  **필수 의존성 추가:** `poetry add mkdocs-material mkdocs-mermaid2-plugin`
 
 ### 1.3 Node.js nvm 설치 및 적용
 - **목적:** 프로젝트 권장 LTS 버전 사용 보장

@@ -26,12 +26,12 @@
 
 ---
 
-## 2. Python 환경 구축 (Poetry & pyenv)
-결정론적 의존성 관리 및 참여자 간 Python 버전 동기화를 위해 `Poetry` 및 `pyenv` 사용 필수
-
 ### 2.1 Python 버전 관리 (pyenv)
 - **목적:** `.python-version` 파일에 명시된 버전과 로컬 실행 버전의 완벽한 일치 보장
 - **권장 버전:** **Python 3.12.x (안정성 및 라이브러리 호환성 최적)**
+- **관리 원칙 (중요):** 
+    - 시스템 전역 파이썬(Windows Installer 방식) 및 **Python Launcher(py.exe) 전수 삭제**
+    - 모든 버전 관리를 `pyenv`로 일원화하여 PATH 및 명령어 실행 우선순위 충돌 방지
 - **설치:** [pyenv-win](https://github.com/pyenv-win/pyenv-win) (Windows용) 설치
 - **버전 동기화:**
     ```bash
@@ -41,7 +41,14 @@
     ```
 
 ### 2.2 Poetry 설치 및 설정
-- **설치:** [Poetry 공식 문서](https://python-poetry.org/docs/#installation) 참조
+- **공식 설치 스크립트 (Windows):**
+    ```powershell
+    (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+    ```
+- **환경 변수 등록 (중요):** 설치 후 아래 후보 경로 중 본인의 환경에 맞는 경로를 시스템 `Path` 최상단에 추가
+    - `%APPDATA%\Python\Scripts` (일반적인 사용자 설치 경로)
+    - `%APPDATA%\pypoetry\venv\Scripts` (Poetry 전용 가상환경 경로)
+    - `%USERPROFILE%\.local\bin` (기타 표준 경로)
 - **가상 환경 경로 설정:** 프로젝트 폴더 내에 가상 환경이 생성되도록 설정 권장
     ```bash
     poetry config virtualenvs.in-project true
@@ -89,6 +96,9 @@
 ## 5. 트러블슈팅 및 관리 원칙
 - **.venv 푸시 금지:** 가상 환경 폴더(`.venv`)는 머신 의존적 경로를 포함하므로 절대 Git에 커밋하지 않음 (`.gitignore` 설정 확인)
 - **환경 변수 설정:** `mkdocs` 명령어가 인식되지 않을 경우 `%APPDATA%\Python\Python313\Scripts` 경로를 시스템 `Path`에 추가
+- **pyenv 우선순위 (중요):** `pyenv local` 설정 후에도 버전이 변하지 않을 경우 아래 사항 확인
+    - **시스템 변수 충돌:** 윈도우 시스템 변수 `Path`에 기존 파이썬 경로가 등록된 경우 사용자 변수보다 우선 실행됨. 시스템 변수 내 파이썬 경로 삭제 또는 하단 이동 조치 권장
+    - **명령어 우선순위:** `where.exe python` 실행 시 `pyenv` 경로가 가장 상단에 출력되는지 확인
 - **의존성 동기화:** 패키지 추가/삭제 시 반드시 `poetry add` 또는 `poetry remove` 사용하여 `poetry.lock` 파일 유지
 - **빌드 제외:** 분석용 소스(`lecture/**`)는 `mkdocs.yml`의 `exclude_docs` 설정을 통해 가시성 및 빌드 오류 관리
 - **상시 업데이트:** 환경과 관련된 모든 사항은 본 문서(`docs/ENVIRONMENT_SETUP.md`)에 누적 기록하여 최신 상태 유지
