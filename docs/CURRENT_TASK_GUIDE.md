@@ -1,44 +1,63 @@
 # Current Active Task Execution Guide
 
-본 문서는 환경 관리 도구(Poetry, pyenv, nvm)의 실제 적용 및 'Step 6: 고가용성 DB 환경' 구축 착수를 위한 상세 실행 매뉴얼
+본 문서는 환경 관리 도구(pyenv, Poetry, nvm)의 실제 설치 및 'Step 6: 고가용성 DB 환경' 구축 착수를 위한 단계별 정밀 실행 매뉴얼
 
 ---
 
 ## 🛠️ 1단계: 개발 환경 표준화 적용 (Environment Migration)
-`ENVIRONMENT_SETUP.md` 지침에 따른 실제 도구 초기화 및 의존성 고정
 
-### 1.1 Python 버전 고정 (pyenv)
+### 1.1 Python 버전 고정 및 pyenv 설치
 - **목적:** 프로젝트 권장 안정판(3.12.8) 사용 보장
-- **실행 명령어:**
-    ```bash
-    # 1. Python 3.12.8 설치
-    pyenv install 3.12.8
-
-    # 2. 로컬 버전 적용 (.python-version 파일 생성 확인)
-    pyenv local 3.12.8
-    ```
+- **실행 절차:**
+    1.  **pyenv-win 설치 (명령어 미인식 시):**
+        ```powershell
+        Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+        ```
+    2.  **환경 변수 반영:** 터미널 종료 후 재시작
+    3.  **Python 3.12.8 설치:**
+        ```bash
+        pyenv install 3.12.8
+        ```
+    4.  **로컬 버전 적용:**
+        ```bash
+        # 프로젝트 루트(cloud_infra) 폴더에서 실행
+        pyenv local 3.12.8
+        ```
+    5.  **버전 확인:** `python --version` 실행 결과가 `Python 3.12.8`인지 확인
 
 ### 1.2 Python Poetry 초기화
 - **목적:** `pyproject.toml` 생성을 통한 라이브러리 버전 고정
-- **실행 명령어:**
-    ```bash
-    # 1. Poetry 설정 확인 (가상환경 내 위치 설정)
-    poetry config virtualenvs.in-project true
+- **실행 절차:**
+    1.  **가상환경 생성 위치 설정:**
+        ```bash
+        poetry config virtualenvs.in-project true
+        ```
+    2.  **프로젝트 초기화:**
+        ```bash
+        poetry init
+        ```
+        - **주의:** 대화형 질문 중 `Compatible Python dependency` 입력 시 `^3.12` 입력
+    3.  **필수 의존성 추가:**
+        ```bash
+        poetry add mkdocs-material mkdocs-mermaid2-plugin
+        ```
 
-    # 2. 프로젝트 초기화 (Python 버전 물을 때 3.12.8 입력)
-    poetry init
-
-    # 3. 필수 의존성 추가 (MkDocs 및 플러그인)
-    poetry add mkdocs-material mkdocs-mermaid2-plugin
-    ```
-
-### 1.3 Node.js nvm 적용
+### 1.3 Node.js nvm 설치 및 적용
 - **목적:** 프로젝트 권장 LTS 버전 사용 보장
-- **실행 명령어:**
-    ```bash
-    nvm install lts
-    nvm use lts
-    ```
+- **실행 절차:**
+    1.  **nvm-windows 설치:** [공식 릴리즈](https://github.com/coreybutler/nvm-windows/releases)에서 `nvm-setup.exe` 다운로드 및 설치
+    2.  **LTS 버전 설치:**
+        ```bash
+        nvm install lts
+        ```
+    3.  **버전 적용:**
+        ```bash
+        nvm use lts
+        ```
+    4.  **pnpm 설치 (권장):**
+        ```bash
+        npm install -g pnpm
+        ```
 
 ---
 
@@ -68,7 +87,7 @@
 ---
 
 ## 🌿 4단계: 형상 관리 (Git)
-환경 초기화 결과물에 대한 커밋 수행
+환경 초기화 결과물에 대한 커밋 수행 (에이전트의 커밋 제안 가이드 준수)
 
 ### [커밋 제안] 개발 환경 표준화 완결 (Chore)
 - **대상:** `pyproject.toml`, `poetry.lock`, `.python-version`
