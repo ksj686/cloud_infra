@@ -45,10 +45,10 @@
     ```powershell
     (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
     ```
-- **환경 변수 등록 (중요):** 설치 후 아래 후보 경로 중 본인의 환경에 맞는 경로를 시스템 `Path` 최상단에 추가
-    - `%APPDATA%\Python\Scripts` (일반적인 사용자 설치 경로)
-    - `%APPDATA%\pypoetry\venv\Scripts` (Poetry 전용 가상환경 경로)
-    - `%USERPROFILE%\.local\bin` (기타 표준 경로)
+- **설치 경로 확인 및 등록 (CRITICAL):** 
+    1.  **로그 확인:** 설치 완료 직후 터미널에 출력되는 **`Add ... to your PATH`** 문구 뒤의 절대 경로를 반드시 확인 및 복사
+    2.  **절대 경로 등록:** 시스템 환경 변수(`%APPDATA%`) 인식 오류 방지를 위해, 복사한 **실제 절대 경로**를 시스템 `Path` 최상단에 직접 입력
+    3.  **경로 예시:** `C:\Users\[사용자계정]\AppData\Roaming\Python\Scripts`
 - **가상 환경 경로 설정:** 프로젝트 폴더 내에 가상 환경이 생성되도록 설정 권장
     ```bash
     poetry config virtualenvs.in-project true
@@ -95,7 +95,10 @@
 
 ## 5. 트러블슈팅 및 관리 원칙
 - **.venv 푸시 금지:** 가상 환경 폴더(`.venv`)는 머신 의존적 경로를 포함하므로 절대 Git에 커밋하지 않음 (`.gitignore` 설정 확인)
-- **환경 변수 설정:** `mkdocs` 명령어가 인식되지 않을 경우 `%APPDATA%\Python\Python313\Scripts` 경로를 시스템 `Path`에 추가
+- **환경 변수 설정:** `mkdocs` 또는 `poetry` 명령어가 인식되지 않을 경우 시스템 `Path`에 아래 경로 추가
+    - **권장 방식:** 환경 변수(`%APPDATA%`) 인식 오류 방지를 위해 **절대 경로** 직접 입력 권장
+    - **대상 경로 예시:** `C:\Users\[사용자계정]\AppData\Roaming\Python\Scripts`
+- **반영 확인 (중요):** 환경 변수 등록 후 반드시 **현재 실행 중인 모든 터미널 창을 닫고 재시작**해야 변경 사항이 적용됨
 - **pyenv 우선순위 (중요):** `pyenv local` 설정 후에도 버전이 변하지 않을 경우 아래 사항 확인
     - **시스템 변수 충돌:** 윈도우 시스템 변수 `Path`에 기존 파이썬 경로가 등록된 경우 사용자 변수보다 우선 실행됨. 시스템 변수 내 파이썬 경로 삭제 또는 하단 이동 조치 권장
     - **명령어 우선순위:** `where.exe python` 실행 시 `pyenv` 경로가 가장 상단에 출력되는지 확인

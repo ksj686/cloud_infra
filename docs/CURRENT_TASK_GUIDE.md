@@ -24,8 +24,10 @@
         ```powershell
         (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
         ```
-    2.  **PATH 등록:** 설치 완료 메시지에 표시된 경로(예: `%APPDATA%\Python\Scripts` 또는 `%APPDATA%\pypoetry\venv\Scripts`)를 시스템 `Path`에 추가
-    3.  **가상환경 생성 위치 설정:**
+    2.  **PATH 등록:** 설치 완료 메시지에 표시된 경로를 시스템 `Path`에 추가
+        - **주의:** `%APPDATA%` 대신 `C:\Users\[사용자]\AppData\...`와 같은 **절대 경로** 사용 권장
+    3.  **반영 확인:** 설정 완료 후 반드시 **모든 터미널 종료 후 재시작**
+    4.  **가상환경 생성 위치 설정:**
         ```bash
         poetry config virtualenvs.in-project true
         ```

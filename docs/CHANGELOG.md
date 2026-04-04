@@ -23,6 +23,7 @@
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
 | 2026-04-04 | `📝 Docs` | `nvm` 설치 전 기존 Node.js 삭제 권고 및 경로 충돌 방지 지침 추가 | `docs/ENVIRONMENT_SETUP.md`, `docs/CURRENT_TASK_GUIDE.md` |
+| 2026-04-04 | `📝 Docs` | Poetry 설치 시 터미널 로그를 통한 절대 경로 확인 및 PATH 등록 절차 구체화 | `docs/ENVIRONMENT_SETUP.md` |
 | 2026-04-03 | `⚙️ Refactor` | Python 의존성 관리 도구를 Poetry로 전환하고 결정론적 빌드 환경 구축 | `docs/ENVIRONMENT_SETUP.md` |
 | 2026-04-03 | `⚙️ Refactor` | Node.js 버전 관리를 위한 nvm 도입 지침 명시 및 pnpm 권장 사양 추가 | `docs/ENVIRONMENT_SETUP.md` |
 | 2026-04-03 | `🧹 Chore` | .venv 가상 환경 및 캐시 파일의 Git 추적 제외 규칙 강화 | `.gitignore` |
