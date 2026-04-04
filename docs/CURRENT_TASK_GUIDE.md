@@ -45,16 +45,17 @@
 ### 1.3 Node.js nvm 설치 및 적용
 - **목적:** 프로젝트 권장 LTS 버전 사용 보장
 - **실행 절차:**
-    1.  **nvm-windows 설치:** [공식 릴리즈](https://github.com/coreybutler/nvm-windows/releases)에서 `nvm-setup.exe` 다운로드 및 설치
-    2.  **LTS 버전 설치:**
+    1.  **기존 Node.js 제거 (중요):** 제어판 → 프로그램 제거를 통해 기존 설치된 Node.js 삭제 (경로 충돌 방지)
+    2.  **nvm-windows 설치:** [공식 릴리즈](https://github.com/coreybutler/nvm-windows/releases)에서 `nvm-setup.exe` 다운로드 및 설치
+    3.  **LTS 버전 설치:**
         ```bash
         nvm install lts
         ```
-    3.  **버전 적용:**
+    4.  **버전 적용:**
         ```bash
         nvm use lts
         ```
-    4.  **pnpm 설치 (권장):**
+    5.  **pnpm 설치 (권장):**
         ```bash
         npm install -g pnpm
         ```

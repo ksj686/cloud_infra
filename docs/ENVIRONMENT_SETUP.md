@@ -7,6 +7,11 @@
 ## 1. Node.js 환경 구축 (nvm)
 버전 관리 및 충돌 방지를 위해 `nvm` 사용 필수
 
+### 1.1 사전 준비 (주의 사항)
+- **기존 Node.js 삭제:** `nvm` 설치 전 제어판에서 기존 설치된 모든 Node.js 버전 전수 삭제 필수. 기존 설치본과 `nvm` 간의 실행 경로(Path) 충돌 방지 목적
+- **잔여 폴더 정리:** 삭제 후 `C:\Program Files\nodejs` 또는 `%AppData%\npm` 등 관련 폴더 잔존 여부 확인 및 수동 제거 권장
+
+### 1.2 nvm 설치 및 설정
 - **nvm 설치 (Windows):** [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) 다운로드 및 설치
 - **Node.js 설치 및 사용:**
     ```bash
