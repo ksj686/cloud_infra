@@ -29,7 +29,17 @@
 프로젝트별 독립된 가상 환경 및 의존성 버전 고정 체계 수립
 
 ### 2.1 pyenv-win을 이용한 버전 동기화
-- **설치:** [pyenv-win](https://github.com/pyenv-win/pyenv-win) 가이드에 따라 설치 및 PATH 등록
+- **공식 PowerShell 설치 (권장):**
+    ```powershell
+    # 1. 설치 스크립트 다운로드 및 실행 (설치 후 창이 닫힐 수 있으나 정상 설치됨)
+    Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+
+    # 2. (선택 사항) 창 종료를 원치 않는 경우 자식 셸에서 실행
+    powershell -NoProfile -Command "& {Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1' -OutFile './install-pyenv-win.ps1'; &'./install-pyenv-win.ps1'}"
+    ```
+- **중요 사전 설정 (Windows 10/11 필수):**
+    - **앱 실행 별칭 비활성화:** 설정 > 앱 > 앱 실행 별칭(App Execution Aliases)에서 `python.exe` 및 `python3.exe` (Microsoft Store용) 항목을 모두 **'켬'에서 '끔'**으로 변경 (명령어 충돌 방지)
+- **환경 변수 반영:** 설치 완료 후 **반드시 모든 터미널 창을 닫고 다시 시작**해야 `pyenv` 명령어를 인식함.
 - **버전 적용:**
     ```bash
     # .python-version 파일에 명시된 버전과 일치화
@@ -38,8 +48,14 @@
     ```
 
 ### 2.2 Poetry 설치 및 가상 환경 관리
-- **Poetry 설치:** [공식 설치 가이드](https://python-poetry.org/docs/#installation) 참조
-- **PATH 등록 (중요):** 설치 로그 하단 `Add ... to your PATH` 경로를 시스템 `Path` 최상단에 직접 등록
+- **공식 PowerShell 설치:**
+    ```powershell
+    (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+    ```
+- **PATH 등록 및 재시작 (중요):**
+    1. 설치 로그 하단 `Add ... to your PATH` 경로를 시스템 `Path` 최상단에 직접 등록
+    2. 일반적으로 `%AppData%\Python\Scripts` 또는 `%USERPROFILE%\AppData\Roaming\Python\Scripts`에 위치함
+    3. 환경 변수 등록 후 **터미널 재시작** 필수
 - **프로젝트 내부 가상 환경 설정:**
     ```bash
     poetry config virtualenvs.in-project true
