@@ -1,0 +1,20 @@
+[project]
+name = "cloud-infra"
+version = "0.1.0"
+description = "Cloud Infrastructure Project Documentation"
+authors = [
+    {name = "ksj686", email = "kim_se_joon@naver.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mkdocs-material>=9.7.6",
+    "mkdocs-mermaid2-plugin>=1.2.3"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"

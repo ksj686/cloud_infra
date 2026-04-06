@@ -32,7 +32,21 @@
         poetry config virtualenvs.in-project true
         ```
     4.  **프로젝트 초기화:** `poetry init` (Python 버전 질문 시 `^3.12` 입력)
-    5.  **필수 의존성 추가:** `poetry add mkdocs-material mkdocs-mermaid2-plugin`
+    5.  **필수 의존성 추가:**
+        ```bash
+        poetry add mkdocs-material mkdocs-mermaid2-plugin
+        ```
+    6.  **의존성 잠금 및 동기화 (NEW):**
+        ```bash
+        # pyproject.toml 변경 사항을 poetry.lock에 반영
+        poetry lock
+        ```
+    7.  **가상 환경 최종 구축 (CRITICAL):**
+        ```bash
+        # lock 파일 기반 패키지 실제 설치
+        poetry install
+        ```
+        - **확인:** 프로젝트 루트에 `.venv` 폴더가 생성되었는지 확인
 
 ### 1.3 Node.js nvm 설치 및 적용
 - **목적:** 프로젝트 권장 LTS 버전 사용 보장
