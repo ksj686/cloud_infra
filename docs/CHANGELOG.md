@@ -22,7 +22,8 @@
 ## [도커 데이터 관리 전략 수립 및 로드맵 보완]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
-| 2026-04-06 | `🚀 Feature` | 도커 데이터 영속성 확보를 위한 호스트 물리 귀속(Bind Mount) 원칙 수립 및 데이터 성격별(로그, 설정, 보안 자산 등) 활용 사례 가이드 보완 | `docs/to-do-space/step4_expansion/02_docker_strategy/README.md` |
+| 2026-04-06 | `🚀 Feature` | MariaDB Galera Cluster 3-Node 고가용성 아키텍처 설계 및 실습 가이드 구축 | `docs/to-do-space/step6_enterprise_ha/02_galera_cluster/README.md` |
+| 2026-04-06 | `🚀 Feature` | 도커 데이터 영속성 확보를 위한 호스트 물리 귀속(Bind Mount) 원칙 수립 및 데이터 성격별 활용 사례 가이드 보완 | `docs/to-do-space/step4_expansion/02_docker_strategy/README.md` |
 | 2026-04-06 | `🧪 Test` | 바인드 마운트를 이용한 DB 데이터 보호 실습 항목 로드맵 추가 | `docs/to-do-list.md` |
 | 2026-04-06 | `📝 Docs` | `poetry lock` 절차 및 상황별(신규/참여) 환경 구축 가이드 정밀화 | `docs/ENVIRONMENT_SETUP.md`, `docs/CURRENT_TASK_GUIDE.md` |
 
