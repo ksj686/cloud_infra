@@ -19,10 +19,13 @@
 
 ---
 
-## [의존성 관리 절차 고도화 및 가이드 보완]
+## [도커 데이터 관리 전략 수립 및 로드맵 보완]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
+| 2026-04-06 | `🚀 Feature` | 도커 데이터 영속성 확보를 위한 호스트 물리 귀속(Bind Mount) 원칙 수립 및 가이드 반영 | `docs/to-do-space/step4_expansion/02_docker_strategy/README.md` |
+| 2026-04-06 | `🧪 Test` | 바인드 마운트를 이용한 DB 데이터 보호 실습 항목 로드맵 추가 | `docs/to-do-list.md` |
 | 2026-04-06 | `📝 Docs` | `poetry lock` 절차 및 상황별(신규/참여) 환경 구축 가이드 정밀화 | `docs/ENVIRONMENT_SETUP.md`, `docs/CURRENT_TASK_GUIDE.md` |
+
 | 2026-04-04 | `📝 Docs` | `nvm` 설치 전 기존 Node.js 삭제 권고 및 경로 충돌 방지 지침 추가 | `docs/ENVIRONMENT_SETUP.md`, `docs/CURRENT_TASK_GUIDE.md` |
 | 2026-04-04 | `📝 Docs` | Poetry 설치 시 터미널 로그를 통한 절대 경로 확인 및 PATH 등록 절차 구체화 | `docs/ENVIRONMENT_SETUP.md` |
 | 2026-04-03 | `⚙️ Refactor` | Python 의존성 관리 도구를 Poetry로 전환하고 결정론적 빌드 환경 구축 | `docs/ENVIRONMENT_SETUP.md` |
