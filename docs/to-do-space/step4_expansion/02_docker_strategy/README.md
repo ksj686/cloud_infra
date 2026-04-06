@@ -41,6 +41,13 @@
 
 ## 주요 명령어
 - **이미지 빌드:** `docker build -t [이미지명]:[태그] .`
+- **컨테이너 상태 보존 (Golden Image):**
+    - `docker commit -m "[메시지]" [컨테이너명] [신규이미지명]`
+    - 용도: 설정 완료된 서버 상태를 이미지로 박제하여 환경 복제 및 배포에 활용
+- **커스텀 네트워크 및 별칭 (Internal LB):**
+    - 네트워크 생성: `docker network create --driver bridge [네트워크명]`
+    - 서비스 별칭 부여: `docker run --net [네트워크명] --net-alias [별칭] ...`
+    - 용도: 동일 별칭을 가진 여러 컨테이너로의 내부 DNS 기반 로드 밸런싱 구현
 - **컨테이너 실행:** `docker run -d -p [호스트포트]:[컨테이너포트] [이미지명]`
 - **상태 확인:** `docker ps` (실행 중), `docker ps -a` (전체)
 - **리소스 정리:** `docker rm -f [컨테이너ID]`, `docker system prune -a` (미사용 데이터 일괄 제거)
