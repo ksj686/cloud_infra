@@ -1,41 +1,56 @@
 # Current Active Task Execution Guide
 
-본 문서는 엔터프라이즈 HA 환경 구축의 첫 단계인 'MariaDB Galera Cluster' 설계를 위한 상세 실행 매뉴얼
+본 문서는 `to-do-list.md`의 첫 번째 실습인 'Step 1-1: 크론탭 실행 결과 알림 시스템 구축'을 위한 단계별 상세 실행 매뉴얼
 
 ---
 
-## 🏗️ 1단계: DB HA 클러스터 설계 및 가이드 확인
-실무 구축 전 아키텍처 및 요구사항 숙지
+## 🏗️ 1단계: 실습 환경 및 가이드 확인
+실무 시나리오 파악 및 소스 코드 위치 확인
 
-- **작업 대상:** `docs/to-do-space/step6_enterprise_ha/02_galera_cluster/README.md`
-- **핵심 확인 사항:**
-    - 3개 노드의 IP 주소 및 역할 매핑 확인
-    - 클러스터 통신용 필수 포트(4567, 4568, 4444) UFW 개방 계획 수립
-    - `galera.cnf` 설정 내 `wsrep_cluster_address` 구성 이해
+- **가이드 위치:** `docs/to-do-space/step1_automation/01_cron_alert/README.md`
+- **핵심 소스:** `docs/to-do-space/step1_automation/01_cron_alert/cron_task.sh`
+- **목표:** 주기적 작업의 성공/실패 여부를 로그로 남기고, 실패 시 관리자에게 알림 발송 체계 구축
 
 ---
 
-## 🚀 2단계: 가상 머신(VM) 프로비저닝
-Proxmox 환경을 이용한 DB 노드 3대 인프라 준비
+## 🚀 2단계: 실습 수행 절차 (Execution)
 
-- **작업 절차:**
-    1.  **기본 노드 생성:** Ubuntu 24.04 LTS 기반 VM 1대 설치 (호스트명: `db-node-01`)
-    2.  **초기 설정:** 업데이트 실행 및 MariaDB 패키지 사전 설치
-    3.  **클론 생성:** `db-node-01`을 'Full Clone'하여 `db-node-02`, `db-node-03` 생성
-    4.  **네트워크 개별화:** 각 노드 진입 후 IP 및 호스트명 고정 (192.168.100.11~13)
+### 2.1 알림용 패키지 설치
+메일 발송 기능을 테스트하기 위한 필수 도구 설치 (Ubuntu 기준)
+```bash
+sudo apt update && sudo apt install -y mailutils
+```
+
+### 2.2 실습 스크립트 분석 및 수정
+- **파일명:** `cron_task.sh`
+- **수정 사항:** 
+    - `LOG_FILE` 경로 확인 및 권한 체크
+    - `ADMIN_EMAIL` 변수를 본인의 테스트 이메일 주소로 수정
+- **수동 실행 테스트:**
+    ```bash
+    chmod +x docs/to-do-space/step1_automation/01_cron_alert/cron_task.sh
+    ./docs/to-do-space/step1_automation/01_cron_alert/cron_task.sh
+    ```
+
+### 2.3 크론탭(Crontab) 등록
+시스템 스케줄러에 작업 등록 및 로그 리다이렉션 설정
+```bash
+# 크론탭 편집기 실행
+crontab -e
+
+# 아래 내용 추가 (매 분마다 실행 예시)
+* * * * * /abs/path/to/cron_task.sh >> /var/log/cron_tasks.log 2>&1
+```
 
 ---
 
-## 🌿 3단계: 형상 관리 (Git)
-신규 설계 가이드 및 워크플로우 업데이트 내역 커밋
+## 🔍 3단계: 결과 검증 (Validation)
+1. **로그 확인:** `/var/log/cron_task.log` 파일에 타임스탬프와 함께 성공 메시지가 기록되는지 확인
+2. **실패 시뮬레이션:** 스크립트 내의 명령어를 의도적으로 틀리게 수정 후 알림(Mail 등)이 오는지 확인
+3. **웹 포털 연동:** 실습 결과 리포트를 작성하여 웹 사이트에 업데이트
 
-### [커밋 제안] Step 6 DB HA 클러스터 설계 반영 (Feature)
-- **대상:** `docs/PROJECT_WORKFLOW.md`, `docs/CURRENT_TASK_GUIDE.md`, `docs/to-do-space/step6_enterprise_ha/02_galera_cluster/README.md`
-- **커밋 메시지:**
-  ```text
-  feat: Step 6 DB HA(Galera Cluster) 아키텍처 설계 및 가이드 구축
+---
 
-  - MariaDB Galera Cluster 3-Node 멀티 마스터 아키텍처 수립
-  - 클러스터 구축을 위한 네트워크 포트 및 설정 가이드 작성
-  - Proxmox 기반 VM 프로비저닝 단계 가이드화
-  ```
+## 🌿 4단계: 실습 완료 처리 (Finalize)
+- **로드맵 업데이트:** `docs/to-do-list.md` 내 해당 항목 `[x]` 표시
+- **Git 커밋 제안:** `test: Step 1-1 크론탭 알림 시스템 구축 실습 완료`
