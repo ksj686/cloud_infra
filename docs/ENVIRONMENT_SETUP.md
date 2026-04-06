@@ -75,18 +75,46 @@
 
 ---
 
-## 3. MkDocs 웹 포털 가동
-구축된 가상 환경 내에서 문서화 사이트 실행
+## 3. MkDocs 웹 포털 가동 및 확장 기능 (Advanced)
+Material for MkDocs 테마를 기반으로 고도화된 UI/UX 기능 적용
 
-- **로컬 가동:**
+### 3.1 주요 활성 확장 기능 (mkdocs.yml)
+- **UI/UX 강화:**
+    - `navigation.footer`: 문서 하단 이전/다음 페이지 네비게이션 자동 생성
+    - `content.code.annotate`: 코드 블록 내 상세 설명(주석) 기능 활성화
+    - `content.tabs.link`: 페이지 내 탭 전환 상태 동기화
+- **Markdown 확장:**
+    - `pymdownx.arithmatex`: 수식(MathJax) 표현 지원
+    - `pymdownx.superfences`: Mermaid 다이어그램 및 중첩 코드 블록 지원
+    - `attr_list`: HTML 속성 부여 (그리드 카드 UI 구현용)
+
+### 3.2 로컬 가동 및 확인
+- **가동 명령어:**
     ```bash
     poetry run mkdocs serve
     ```
 - **접속:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- **UI 확인 포인트:** 메인 페이지(`index.md`)의 Phase별 그리드 카드 동작 확인
 
 ---
 
 ## 4. 트러블슈팅 및 관리 원칙
+
+### 4.1 한글 인코딩 깨짐 해결 (Windows PowerShell)
+Windows 환경의 PowerShell에서 한국어 문자가 포함된 파일 내용이나 명령어 결과가 깨지는 경우 다음 중 하나를 수행함.
+- **임시 해결:** 현재 터미널 세션에서 아래 명령어 실행
+    ```powershell
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8; $OutputEncoding = [System.Text.Encoding]::UTF8
+    ```
+- **영구 해결:** Windows 설정 > 시간 및 언어 > 언어 및 지역 > 관리 언어 설정 > 'Beta: 세계 언어 지원을 위해 Unicode UTF-8 사용' 옵션 활성화 후 재부팅 권장.
+- **Git 설정:** 파일명, 커밋 메시지, 로그 출력 깨짐 방지를 위해 아래 명령어 실행.
+    ```bash
+    git config --global core.quotepath false
+    git config --global i18n.commitEncoding utf-8
+    git config --global i18n.logOutputEncoding utf-8
+    ```
+
+### 4.2 일반 관리 원칙
 - **의존성 불일치 경고:** `pyproject.toml changed significantly...` 발생 시 `poetry lock` 명령어로 잠금 파일 갱신 필수
 - **.venv 푸시 금지:** 로컬 경로가 포함된 가상 환경 폴더는 절대 Git에 커밋하지 않음 (`.gitignore` 확인)
 - **명령어 미인식:** 시스템 환경 변수 등록 후 반드시 **터미널 재시작** 필수

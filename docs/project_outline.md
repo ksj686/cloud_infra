@@ -5,7 +5,7 @@
 
 ---
 
-## Phase 1: Foundation (기초 시스템 및 OS)
+## Phase 1: Foundation (기초 시스템 및 OS) {: #phase-1 }
 **목표:** OS 안정성 확보 및 시스템 보안 하드닝 기초 수립
 
 - **가상화 전략:**
@@ -20,7 +20,7 @@
 - **시스템 감사 (Audit):**
     - `auditd` 정책 수립: `/etc/passwd`, `/etc/shadow`, `/etc/sudoers` 등 핵심 설정 파일의 변경 및 민감 명령어 실행 추적성 확보
 
-## Phase 2: Perimeter (네트워크 및 경계 보안)
+## Phase 2: Perimeter (네트워크 및 경계 보안) {: #phase-2 }
 **목표:** 네트워크 세분화 및 트래픽 제어를 통한 외부 위협 차단
 
 - **부하 분산 및 가용성:**
@@ -33,7 +33,7 @@
 - **데이터 전송 보안:**
     - TLS 강제화: 모든 서비스 접점에 HSTS(HTTP Strict Transport Security) 및 TLS 1.3 기반 암호화 통신 적용
 
-## Phase 3: Persistence (데이터 및 스토리지 가용성)
+## Phase 3: Persistence (데이터 및 스토리지 가용성) {: #phase-3 }
 **목표:** 데이터 손실 방지 및 고가용 스토리지 체계 구축
 **관련 정책:** [백업 및 복구 정책](./policies/backup_policy.md)
 
@@ -46,7 +46,7 @@
     - **RPO(복구 시점 목표):** 주요 데이터의 일 단위 백업을 통한 유실 범위 제한
     - **RTO(복구 시간 목표):** 자동화 스크립트 및 스냅샷 기능을 활용한 수 시간 이내 서비스 복원 지향
 
-## Phase 4: Observability (운영 가시성 및 안정화)
+## Phase 4: Observability (운영 가시성 및 안정화) {: #phase-4 }
 **목표:** 실시간 모니터링 및 자동 장애 대응 체계 마련
 **관련 정책:** [로그 보존 및 관리 정책](./policies/log_policy.md)
 
@@ -60,7 +60,7 @@
     - `Logrotate`: 로그 로테이션 및 압축을 통한 디스크 풀(Full) 장애 예방
     - 서비스 튜닝: Nginx 정적 파일 캐싱 및 Gzip 압축 적용을 통한 최종 사용자 응답 지연 시간 최적화
 
-## Phase 5: Pipeline (보안 자동화 파이프라인)
+## Phase 5: Pipeline (보안 자동화 파이프라인) {: #phase-5 }
 **목표:** 코드 기반 검증을 통한 인프라 변경 신뢰성 확보
 
 - **로컬 보안 검증 (Local Security):**
@@ -71,7 +71,7 @@
 - **이미지 및 패키지 검사:**
     - `Trivy`: 컨테이너 이미지 아티팩트 및 OS 패키지의 보안 결함 분석 후 Slack 연동 통보
 
-## Phase 6: Scalability (IaC 및 확장성)
+## Phase 6: Scalability (IaC 및 확장성) {: #phase-6 }
 **목표:** 인적 실수 배제 및 인프라 프로비저닝 자동화
 
 - **인프라 프로비저닝 (IaC):**

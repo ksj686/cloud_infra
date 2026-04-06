@@ -57,12 +57,58 @@ graph TD
 - **[solutions/](./solutions/README.md):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
 
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
-- **Phase 1 (Foundation):** 시스템 기초, 하드닝 및 커널 최적화 수행
-- **Phase 2 (Perimeter):** 보안 경계 설정, 방화벽 및 네트워크 세분화 구현
-- **Phase 3 (Persistence):** 데이터 영속성 확보, 가용 스토리지 및 데이터 거버넌스 수립
-- **Phase 4 (Observability):** 운영 가시성 확보, 서비스 안정화 및 가용성 관리
-- **Phase 5 (Pipeline):** 자동화 워크플로우, 형상 관리 및 배포 자동화 구축
-- **Phase 6 (Scalability):** 코드형 인프라 완성, 대규모 환경 복제 및 확장성 확보
+
+<div class="grid cards" markdown="1">
+
+-   :material-linux:{ .lg .middle } **Phase 1: Foundation**
+
+    ---
+
+    시스템 기초, 하드닝 및 커널 최적화 수행.
+
+    [:octicons-arrow-right-24: 바로가기](project_outline.md#phase-1)
+
+-   :material-security:{ .lg .middle } **Phase 2: Perimeter**
+
+    ---
+
+    보안 경계 설정, 방화벽 및 네트워크 세분화 구현.
+
+    [:octicons-arrow-right-24: 바로가기](project_outline.md#phase-2)
+
+-   :material-database:{ .lg .middle } **Phase 3: Persistence**
+
+    ---
+
+    데이터 영속성 확보, 가용 스토리지 및 데이터 거버넌스 수립.
+
+    [:octicons-arrow-right-24: 바로가기](project_outline.md#phase-3)
+
+-   :material-monitor:{ .lg .middle } **Phase 4: Observability**
+
+    ---
+
+    운영 가시성 확보, 서비스 안정화 및 가용성 관리.
+
+    [:octicons-arrow-right-24: 바로가기](project_outline.md#phase-4)
+
+-   :material-pipe:{ .lg .middle } **Phase 5: Pipeline**
+
+    ---
+
+    자동화 워크플로우, 형상 관리 및 배포 자동화 구축.
+
+    [:octicons-arrow-right-24: 바로가기](project_outline.md#phase-5)
+
+-   :material-server:{ .lg .middle } **Phase 6: Scalability**
+
+    ---
+
+    코드형 인프라 완성, 대규모 환경 복제 및 확장성 확보.
+
+    [:octicons-arrow-right-24: 바로가기](project_outline.md#phase-6)
+
+</div>
 
 ## 5. 단계별 자동화 보안 도구 (Automated Security Tools)
 | 단계 (Phase) | 도구 (Tool) | 목적 |

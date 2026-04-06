@@ -19,6 +19,14 @@
 
 ---
 
+## [MkDocs UI/UX 고도화 및 그리드 UI 적용]
+| 날짜 | 분류 | 수정 내용 | 수정 파일 |
+| :--- | :--- | :--- | :--- |
+| 2026-04-06 | `🛠️ Fix` | 메인 페이지 카드 그리드와 기술 청사진(`project_outline.md`) 간의 앵커 링크(#phase-n) 불일치 해결 | `docs/project_outline.md` |
+| 2026-04-06 | `🚀 Feature` | Material 테마 최신 기능(Footer, Annotations, Tab Sync) 활성화 및 UI 편의성 강화 | `mkdocs.yml` |
+| 2026-04-06 | `🎨 Style` | 메인 페이지(`index.md`) 내 인프라 구축 단계(Phase 1-6) 시각적 그리드 카드 UI 도입 | `docs/index.md` |
+| 2026-04-06 | `📝 Docs` | MkDocs 확장 기능 및 UI 확인 포인트(그리드 카드 동작 등) 환경 설정 문서 반영 | `docs/ENVIRONMENT_SETUP.md` |
+
 ## [환경 구축 절차 고도화 및 도구 설치 편의성 개선]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
