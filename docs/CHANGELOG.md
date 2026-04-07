@@ -23,7 +23,8 @@
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
 | 2026-04-07 | `⚙️ Refactor` | `pre-commit` 연동을 통한 커밋 시 자동 줄맞춤(Prettier) 및 보안 스캔 강제화 | `.pre-commit-config.yaml`, `docs/ENVIRONMENT_SETUP.md` |
-| 2026-04-07 | `📝 Docs` | VS Code 저장 시 자동 줄맞춤 설정 및 트러블슈팅(인코딩 등) 지침 상세화 | `docs/ENVIRONMENT_SETUP.md` |
+| 2026-04-07 | `⚙️ Refactor` | `ShellCheck`(쉘 스크립트 진단), 대용량 파일 차단, 개인키 탐지 훅 추가로 품질 관리 강화 | `.pre-commit-config.yaml` |
+| 2026-04-07 | `📝 Docs` | VS Code 저장 시 자동 줄맞춤 연동 지침 및 트러블슈팅 가이드 보완 | `docs/ENVIRONMENT_SETUP.md` |
 
 ## [MkDocs UI/UX 고도화 및 그리드 UI 적용]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |

@@ -1,8 +1,8 @@
 # .pre-commit-config.yaml
-# 프로젝트 품질 및 보안 통합 관리 설정
+# 프로젝트 품질 및 보안 통합 관리 설정 (v2.0)
 
 repos:
-  # 1. 시크릿 유출 차단 (Gitleaks)
+  # 1. 시크릿 유출 차단 및 보안 강화
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.2
     hooks:
@@ -10,8 +10,28 @@ repos:
         name: "Gitleaks (Secret Scanning)"
         description: "소스 코드 내 민감 정보 유출 사전 탐지"
 
-  # 2. 코드 스타일 자동 포맷팅 (Prettier)
-  # 마크다운, YAML, JSON 등의 줄맞춤 및 스타일 자동 교정
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: detect-private-key # SSH/TLS 개인키 파일 탐지
+      - id: check-added-large-files # 대용량 파일(로그, 바이너리) 커밋 방지 (500KB)
+        args: ["--maxkb=500"]
+      - id: check-symlinks # 깨진 심볼릭 링크 확인
+      - id: check-yaml
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+
+  # 2. 쉘 스크립트 품질 진단 (ShellCheck)
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.6
+    hooks:
+      - id: shellcheck
+        name: "ShellCheck (Bash Linting)"
+        description: "쉘 스크립트 문법 오류 및 잠재적 버그 진단"
+
+  # 3. 문서 스타일 자동 포맷팅 (Prettier)
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.1.0
     hooks:
@@ -20,13 +40,3 @@ repos:
         types_or: [markdown, yaml, json]
         additional_dependencies:
           - prettier@3.1.0
-
-  # 3. 파일 무결성 및 품질 검사 (Official Hooks)
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
-      - id: check-yaml # YAML 구문 오류 확인
-      - id: check-json # JSON 구문 오류 확인
-      - id: end-of-file-fixer # 파일 끝 개행 문자 자동 추가
-      - id: trailing-whitespace # 줄 끝 불필요 공백 제거
-      - id: check-merge-conflict # 머지 충돌 마커 잔존 여부 확인
