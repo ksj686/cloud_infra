@@ -37,6 +37,8 @@
 에이전트는 프로젝트의 연속성 확보를 위해 다음 3대 문서를 상시 최신화하여 관리함.
 
 - **`docs/PROJECT_WORKFLOW.md` (전략):** 전체 진행 상황(Progress), 차기 과제(Next Steps), 주요 의사결정 이력(Decision Log) 관리
+- **`docs/CORE_FEATURE_EXPLAINER.md` (성과):** 프로젝트 핵심 기술적 차별성 및 보안 강점 상시 최신화
+- **`docs/presentation/` (발표):** 프로젝트 진척도에 따른 기술 구현 성과 및 시나리오별 발표 자료 동기화 유지
 - **`docs/to-do-list.md` (목표):** 실습 로드맵 및 학습 항목별 체크리스트 관리
 - **`docs/CURRENT_TASK_GUIDE.md` (전술):** 현재 활성화된 작업(Active Task)에 대한 초정밀 단계별 실행 매뉴얼 제공. 작업 완료 시 새로운 과업 내용으로 갱신
 
