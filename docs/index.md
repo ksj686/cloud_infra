@@ -42,6 +42,7 @@ graph TD
 
 ## 3. 문서 시스템 가이드 (Documentation Guide)
 - **[README.md](./index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
+- **[CORE_FEATURE_EXPLAINER.md](./CORE_FEATURE_EXPLAINER.md):** 프로젝트 핵심 기술적 차별성 및 보안 특장점 상세 설명
 - **[project_outline.md](./project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
 - **[SCENARIOS.md](./SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
 - **[playbooks/](./playbooks/ops/audit_system.md):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
