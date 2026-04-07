@@ -1,0 +1,32 @@
+# .pre-commit-config.yaml
+# 프로젝트 품질 및 보안 통합 관리 설정
+
+repos:
+  # 1. 시크릿 유출 차단 (Gitleaks)
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.2
+    hooks:
+      - id: gitleaks
+        name: "Gitleaks (Secret Scanning)"
+        description: "소스 코드 내 민감 정보 유출 사전 탐지"
+
+  # 2. 코드 스타일 자동 포맷팅 (Prettier)
+  # 마크다운, YAML, JSON 등의 줄맞춤 및 스타일 자동 교정
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        name: "Prettier (Auto Formatting)"
+        types_or: [markdown, yaml, json]
+        additional_dependencies:
+          - prettier@3.1.0
+
+  # 3. 파일 무결성 및 품질 검사 (Official Hooks)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml # YAML 구문 오류 확인
+      - id: check-json # JSON 구문 오류 확인
+      - id: end-of-file-fixer # 파일 끝 개행 문자 자동 추가
+      - id: trailing-whitespace # 줄 끝 불필요 공백 제거
+      - id: check-merge-conflict # 머지 충돌 마커 잔존 여부 확인

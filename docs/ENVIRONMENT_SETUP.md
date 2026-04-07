@@ -1,6 +1,6 @@
 # Project Environment Setup Guide
 
-본 문서는 프로젝트 가동을 위한 Python(Poetry), Node.js(nvm) 기반 개발 환경 구축 지침 및 가상 환경 관리 절차 정리
+본 문서는 프로젝트 가동을 위한 Python(Poetry), Node.js(nvm) 기반 개발 환경 구축 지침 및 품질 관리(pre-commit) 절차 정리
 
 ---
 
@@ -31,15 +31,9 @@
 ### 2.1 pyenv-win을 이용한 버전 동기화
 - **공식 PowerShell 설치 (권장):**
     ```powershell
-    # 1. 설치 스크립트 다운로드 및 실행 (설치 후 창이 닫힐 수 있으나 정상 설치됨)
     Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
-
-    # 2. (선택 사항) 창 종료를 원치 않는 경우 자식 셸에서 실행
-    powershell -NoProfile -Command "& {Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1' -OutFile './install-pyenv-win.ps1'; &'./install-pyenv-win.ps1'}"
     ```
-- **중요 사전 설정 (Windows 10/11 필수):**
-    - **앱 실행 별칭 비활성화:** 설정 > 앱 > 앱 실행 별칭(App Execution Aliases)에서 `python.exe` 및 `python3.exe` (Microsoft Store용) 항목을 모두 **'켬'에서 '끔'**으로 변경 (명령어 충돌 방지)
-- **환경 변수 반영:** 설치 완료 후 **반드시 모든 터미널 창을 닫고 다시 시작**해야 `pyenv` 명령어를 인식함.
+- **중요 사전 설정:** '앱 실행 별칭'에서 `python.exe`, `python3.exe`를 모두 **'끔'**으로 변경하여 명령어 충돌 방지
 - **버전 적용:**
     ```bash
     # .python-version 파일에 명시된 버전과 일치화
@@ -48,74 +42,64 @@
     ```
 
 ### 2.2 Poetry 설치 및 가상 환경 관리
-- **공식 PowerShell 설치:**
+- **Poetry 설치:**
     ```powershell
     (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
     ```
-- **PATH 등록 및 재시작 (중요):**
-    1. 설치 로그 하단 `Add ... to your PATH` 경로를 시스템 `Path` 최상단에 직접 등록
-    2. 일반적으로 `%AppData%\Python\Scripts` 또는 `%USERPROFILE%\AppData\Roaming\Python\Scripts`에 위치함
-    3. 환경 변수 등록 후 **터미널 재시작** 필수
+- **PATH 등록 (CRITICAL):** 설치 로그 하단의 **`Add ... to your PATH`** 뒤에 표시된 **절대 경로**를 시스템 환경 변수 `Path` 최상단에 직접 등록 필수
 - **프로젝트 내부 가상 환경 설정:**
     ```bash
     poetry config virtualenvs.in-project true
     ```
 
 ### 2.3 의존성 초기화 및 설치 (상황별 절차)
-
-#### Case A: 처음 프로젝트 환경을 구축할 때 (Initial Setup)
-1. **설정 파일 생성:** `poetry init` (대화형 가이드에 따라 작성)
-2. **패키지 추가:** `poetry add mkdocs-material mkdocs-mermaid2-plugin`
-3. **잠금 파일 생성:** `poetry lock` (의존성 그래프 확정)
-4. **실제 설치:** `poetry install` (.venv 생성 및 패키지 설치)
-
-#### Case B: 이미 구축된 환경에 참여할 때 (Joining Project)
-1. **의존성 설치:** `poetry install` (기존 `poetry.lock` 기반 완벽 동기화)
-    - **참고:** 설정이 바뀌어 경고 발생 시 `poetry lock` 후 `poetry install` 재실행
+- **Initial Setup:** `poetry init` 후 `poetry add mkdocs-material mkdocs-mermaid2-plugin` 실행
+- **Joining Project:** `poetry lock` (설정 변경 시) 후 `poetry install` 실행
 
 ---
 
-## 3. MkDocs 웹 포털 가동 및 확장 기능 (Advanced)
-Material for MkDocs 테마를 기반으로 고도화된 UI/UX 기능 적용
+## 3. 품질 및 보안 관리 (pre-commit)
+커밋 전 자동 줄맞춤(Prettier) 및 시크릿 유출 차단(Gitleaks) 강제화
 
-### 3.1 주요 활성 확장 기능 (mkdocs.yml)
-- **UI/UX 강화:**
-    - `navigation.footer`: 문서 하단 이전/다음 페이지 네비게이션 자동 생성
-    - `content.code.annotate`: 코드 블록 내 상세 설명(주석) 기능 활성화
-    - `content.tabs.link`: 페이지 내 탭 전환 상태 동기화
-- **Markdown 확장:**
-    - `pymdownx.arithmatex`: 수식(MathJax) 표현 지원
-    - `pymdownx.superfences`: Mermaid 다이어그램 및 중첩 코드 블록 지원
-    - `attr_list`: HTML 속성 부여 (그리드 카드 UI 구현용)
+### 3.1 설치 및 Hook 등록
+```bash
+# 1. 개발 의존성으로 툴 설치
+poetry add --group dev pre-commit
 
-### 3.2 로컬 가동 및 확인
-- **가동 명령어:**
+# 2. Git Hook 등록 (커밋 시 자동 실행 설정)
+poetry run pre-commit install
+```
+
+### 3.2 수동 실행 및 스타일 교정
+```bash
+# 모든 파일에 대해 즉시 줄맞춤 및 보안 검사 실행
+poetry run pre-commit run --all-files
+```
+
+### 3.3 에디터 연동 (VS Code 추천)
+- **저장 시 자동 줄맞춤:** `.vscode/settings.json`에 아래 설정 추가 권장
+    ```json
+    {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+    ```
+
+---
+
+## 4. MkDocs 웹 포털 가동 및 확장
+Material for MkDocs 테마 기반의 기술 문서 사이트 운영
+
+- **로컬 가동:**
     ```bash
     poetry run mkdocs serve
     ```
-- **접속:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
-- **UI 확인 포인트:** 메인 페이지(`index.md`)의 Phase별 그리드 카드 동작 확인
+- **주요 확장:** Mermaid 다이어그램, 코드 주석, 수식 표현 등 지원 (`mkdocs.yml` 참조)
 
 ---
 
-## 4. 트러블슈팅 및 관리 원칙
-
-### 4.1 한글 인코딩 깨짐 해결 (Windows PowerShell)
-Windows 환경의 PowerShell에서 한국어 문자가 포함된 파일 내용이나 명령어 결과가 깨지는 경우 다음 중 하나를 수행함.
-- **임시 해결:** 현재 터미널 세션에서 아래 명령어 실행
-    ```powershell
-    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8; $OutputEncoding = [System.Text.Encoding]::UTF8
-    ```
-- **영구 해결:** Windows 설정 > 시간 및 언어 > 언어 및 지역 > 관리 언어 설정 > 'Beta: 세계 언어 지원을 위해 Unicode UTF-8 사용' 옵션 활성화 후 재부팅 권장.
-- **Git 설정:** 파일명, 커밋 메시지, 로그 출력 깨짐 방지를 위해 아래 명령어 실행.
-    ```bash
-    git config --global core.quotepath false
-    git config --global i18n.commitEncoding utf-8
-    git config --global i18n.logOutputEncoding utf-8
-    ```
-
-### 4.2 일반 관리 원칙
-- **의존성 불일치 경고:** `pyproject.toml changed significantly...` 발생 시 `poetry lock` 명령어로 잠금 파일 갱신 필수
-- **.venv 푸시 금지:** 로컬 경로가 포함된 가상 환경 폴더는 절대 Git에 커밋하지 않음 (`.gitignore` 확인)
-- **명령어 미인식:** 시스템 환경 변수 등록 후 반드시 **터미널 재시작** 필수
-- **상시 업데이트:** 환경 관련 모든 특이 사항은 본 문서에 누적 기록하여 최신 상태 유지
+## 5. 트러블슈팅 및 관리 원칙
+- **한글 깨짐 (PowerShell):** `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8` 명령어로 인코딩 고정
+- **의존성 불일치:** `pyproject.toml` 변경 시 반드시 `poetry lock`으로 잠금 파일 동기화
+- **보안 준수:** `.venv` 및 민감 정보가 포함된 파일은 절대 Git 추적 금지 (`.gitignore` 확인)
+- **상시 업데이트:** 환경 관련 모든 사항은 본 문서에 누적 기록하여 최신 상태 유지
