@@ -25,7 +25,8 @@
 | 2026-04-07 | `📝 Docs` | 프로젝트 핵심 기술 및 보안 특장점 설명서(`CORE_FEATURE_EXPLAINER.md`) 신규 구축 | `docs/CORE_FEATURE_EXPLAINER.md` |
 | 2026-04-07 | `📝 Docs` | 발표 자료(`docs/presentation/`)를 Marp 형식으로 전면 재구성 및 발표자 스크립트 분리 | `docs/presentation/*` |
 | 2026-04-07 | `🚀 Feature` | 단일 PDF 변환을 위한 통합 발표 마스터 파일(`presentation.md`) 구축 | `docs/presentation/presentation.md` |
-| 2026-04-07 | `📝 Docs` | 논리적 서사 구조 기반의 프로젝트 발표 자료 체계(`docs/presentation/`) 구축 | `docs/presentation/*` |
+| 2026-04-07 | `📝 Docs` | 프로젝트 발표 자료 체계(`docs/presentation/`) 구축 및 개별 파일 보관 | `docs/presentation/*` |
+| 2026-04-07 | `⚙️ Refactor` | 웹 포털 내비게이션에서 발표 자료 섹션 제외 및 기술 가이드 중심의 메뉴 간소화 | `mkdocs.yml` |
 | 2026-04-07 | `📝 Docs` | 핵심 특장점 및 발표 자료의 상시 최신화를 위한 `GEMINI.md` 지침 개정 | `GEMINI.md` |
 | 2026-04-07 | `⚙️ Refactor` | `pre-commit` 및 ShellCheck 도입을 통한 스크립트 품질 진단 및 시크릿 유출 차단 자동화 | `.pre-commit-config.yaml`, `docs/ENVIRONMENT_SETUP.md` |
 | 2026-04-07 | `📝 Docs` | VS Code 저장 시 자동 줄맞춤 연동 지침 및 트러블슈팅 가이드 보완 | `docs/ENVIRONMENT_SETUP.md` |
