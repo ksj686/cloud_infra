@@ -60,6 +60,14 @@ nav:
       - Blueprint: project_outline.md
       - Features & Strengths: CORE_FEATURE_EXPLAINER.md
       - Scenarios: SCENARIOS.md
+  - Build-up Guide:
+      - Overview: build-up/README.md
+      - Phase 1 (Foundation): build-up/01_foundation/README.md
+      - Phase 2 (Perimeter): build-up/02_perimeter/README.md
+      - Phase 3 (Persistence): build-up/03_persistence/README.md
+      - Phase 4 (Observability): build-up/04_observability/README.md
+      - Phase 5 (Pipeline): build-up/05_pipeline/README.md
+      - Phase 6 (Scalability): build-up/06_scalability/README.md
   - Knowledge Base:
       - Overview: knowledge_base/analysis_and_improvement.md
       - Tech Guide: knowledge_base/advanced_tech_guide.md

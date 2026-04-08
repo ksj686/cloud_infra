@@ -50,6 +50,7 @@ graph TD
 - **[README.md](./docs/index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
 - **[CORE_FEATURE_EXPLAINER.md](./docs/CORE_FEATURE_EXPLAINER.md):** 프로젝트 핵심 기술적 차별성 및 보안 특장점 상세 설명
 - **[project_outline.md](./docs/project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
+- **[Build-up Guide](./docs/build-up/README.md):** 설계 구성안을 실제 환경에 구현하기 위한 단계별 기술 실행 절차
 - **[SCENARIOS.md](./docs/SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
 - **[playbooks/](./docs/playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
   - `ops/`: 일상 운영 및 온보딩 절차
