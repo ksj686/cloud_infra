@@ -22,6 +22,8 @@
 ## [프로젝트 가치 입증 및 품질 관리 자동화]
 | 날짜 | 분류 | 수정 내용 | 수정 파일 |
 | :--- | :--- | :--- | :--- |
+| 2026-04-07 | `📝 Docs` | 발표 자료(`docs/presentation/`)를 Marp 형식으로 전면 재구성 및 발표자 스크립트 분리 | `docs/presentation/*` |
+| 2026-04-07 | `🚀 Feature` | 단일 PDF 변환을 위한 통합 발표 마스터 파일(`presentation.md`) 구축 | `docs/presentation/presentation.md` |
 | 2026-04-07 | `📝 Docs` | 프로젝트 핵심 기술 및 보안 특장점 설명서(`CORE_FEATURE_EXPLAINER.md`) 신규 구축 | `docs/CORE_FEATURE_EXPLAINER.md` |
 | 2026-04-07 | `📝 Docs` | 발표 자료(`docs/presentation/`)를 Marp 형식으로 전면 재구성 및 발표자 스크립트 분리 | `docs/presentation/*` |
 | 2026-04-07 | `🚀 Feature` | 단일 PDF 변환을 위한 통합 발표 마스터 파일(`presentation.md`) 구축 | `docs/presentation/presentation.md` |

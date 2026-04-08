@@ -90,15 +90,28 @@ poetry run pre-commit run --all-files
 ## 4. MkDocs 웹 포털 가동 및 확장
 Material for MkDocs 테마 기반의 기술 문서 사이트 운영
 
-- **로컬 가동:**
-    ```bash
-    poetry run mkdocs serve
-    ```
+- **로컬 가동:** `poetry run mkdocs serve`
 - **주요 확장:** Mermaid 다이어그램, 코드 주석, 수식 표현 등 지원 (`mkdocs.yml` 참조)
 
 ---
 
-## 5. 트러블슈팅 및 관리 원칙
+## 5. 발표 자료 관리 및 PDF 변환 (Marp)
+마크다운 기반 장표 관리 및 표준 PDF 문서 생성 절차
+
+- **대상 파일:** `docs/presentation/presentation.md`
+- **PDF 변환 명령어:**
+    ```bash
+    # npx를 이용한 즉시 변환
+    npx @marp-team/marp-cli@latest docs/presentation/presentation.md --pdf
+    ```
+- **관리 원칙:** 
+    - 슬라이드 구분은 `---` 사용
+    - 발표자 전용 메모는 `<!-- 주석 -->` 활용
+    - 테마 및 페이지 설정은 파일 상단 YAML Frontmatter에서 조정
+
+---
+
+## 6. 트러블슈팅 및 관리 원칙
 - **한글 깨짐 (PowerShell):** `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8` 명령어로 인코딩 고정
 - **의존성 불일치:** `pyproject.toml` 변경 시 반드시 `poetry lock`으로 잠금 파일 동기화
 - **보안 준수:** `.venv` 및 민감 정보가 포함된 파일은 절대 Git 추적 금지 (`.gitignore` 확인)
