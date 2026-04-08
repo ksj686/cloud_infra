@@ -1,0 +1,12 @@
+# Git 줄바꿈 자동 관리 설정
+# 쉘 스크립트는 리눅스 실행을 위해 반드시 LF 강제
+*.sh text eol=lf
+*.bash text eol=lf
+
+# 마크다운 및 YAML 설정 파일도 가급적 LF 유지
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# 일반 텍스트 파일은 시스템 자동 설정에 따름
+* text=auto

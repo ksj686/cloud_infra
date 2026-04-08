@@ -22,12 +22,17 @@
 
 ## [태스크 관리 최적화 및 크로스 플랫폼 스크립트 구축]
 
-| 날짜       | 분류         | 수정 내용                                                                              | 수정 파일                   |
-| :--------- | :----------- | :------------------------------------------------------------------------------------- | :-------------------------- |
-| 2026-04-08 | `🚀 Feature` | 운영체제별 Marp PDF 변환 단축 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 구축               | `gen-pdf.ps1`, `gen-pdf.sh` |
-| 2026-04-08 | `📝 Docs`    | 프로젝트 규모에 따른 단계별 태스크 관리 전략(Script -> Poe -> Package) 수립            | `docs/PROJECT_WORKFLOW.md`  |
-| 2026-04-08 | `📝 Docs`    | 단축 스크립트 활용 PDF 변환 가이드 보완                                                | `docs/ENVIRONMENT_SETUP.md` |
-| 2026-04-08 | `📝 Docs`    | `pre-commit` 설정 절차를 최초 설정(Creator)과 신규 참여(Contributor)로 구분하여 정밀화 | `docs/ENVIRONMENT_SETUP.md` |
+| 날짜       | 분류     | 수정 내용                                                                             | 수정 파일                  |
+| :--------- | :------- | :------------------------------------------------------------------------------------ | :------------------------- |
+| 2026-04-08 | `🛠️ Fix` | `ShellCheck` 스타일 가이드(SC2181, SC2009 등) 준수를 위한 쉘 스크립트 전수 구조 개선  | `docs/to-do-space/**/*.sh` |
+| 2026-04-08 | `🛠️ Fix` | `check-yaml` 훅의 커스텀 태그 에러를 `--unsafe` 대신 `exclude` 방식으로 안전하게 해결 | `.pre-commit-config.yaml`  |
+| 2026-04-08 | `🛠️ Fix` | `.gitattributes` 도입을 통한 쉘 스크립트 줄바꿈(LF) 강제화 (ShellCheck 오류 해결)     | `.gitattributes`           |
+
+| 2026-04-08 | `🚀 Feature` | 운영체제별 Marp PDF 변환 단축 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 구축 | `gen-pdf.ps1`, `gen-pdf.sh` |
+
+| 2026-04-08 | `📝 Docs` | 프로젝트 규모에 따른 단계별 태스크 관리 전략(Script -> Poe -> Package) 수립 | `docs/PROJECT_WORKFLOW.md` |
+| 2026-04-08 | `📝 Docs` | 단축 스크립트 활용 PDF 변환 가이드 보완 | `docs/ENVIRONMENT_SETUP.md` |
+| 2026-04-08 | `📝 Docs` | `pre-commit` 설정 절차를 최초 설정(Creator)과 신규 참여(Contributor)로 구분하여 정밀화 | `docs/ENVIRONMENT_SETUP.md` |
 
 ## [프로젝트 가치 입증 및 품질 관리 자동화]
 
