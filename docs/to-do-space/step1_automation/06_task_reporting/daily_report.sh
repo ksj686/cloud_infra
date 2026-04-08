@@ -22,6 +22,7 @@ CRON_LIST=$(crontab -l 2>/dev/null)
 if [ -z "$CRON_LIST" ]; then
     REPORT+=" - 현재 등록된 Crontab 작업이 없습니다.\n"
 else
+    # shellcheck disable=SC2001
     REPORT+="$(echo "$CRON_LIST" | sed 's/^/  / ')\n"
 fi
 REPORT+="\n"
@@ -32,16 +33,18 @@ AT_LIST=$(atq 2>/dev/null)
 if [ -z "$AT_LIST" ]; then
     REPORT+=" - 예약된 At 작업이 없습니다.\n"
 else
+    # shellcheck disable=SC2001
     REPORT+="$(echo "$AT_LIST" | sed 's/^/  / ')\n"
 fi
 REPORT+="\n"
 
 # 3. 현재 실행 중인 주요 프로세스 (Active Processes)
-# 예: python, backup, nginx 등 주요 키워드로 필터링하여 수집
+# 상세 정보(USER, PID 등) 수집을 위해 ps aux 활용 (SC2009 예외 처리)
 REPORT+="### 3. 주요 활성 프로세스 (백업, 스크립트 등)\n"
-# 현재 실행 중인 스크립트(.sh, .py) 및 백업 관련 프로세스 조회
-# grep -v grep은 grep 명령어 자체를 결과에서 제외함
+# shellcheck disable=SC2009
 ACTIVE_PROCS=$(ps aux | grep -E ".sh|.py|backup|nginx" | grep -v grep | head -n 10)
+
+
 if [ -z "$ACTIVE_PROCS" ]; then
     REPORT+=" - 현재 실행 중인 주요 프로세스가 없습니다.\n"
 else

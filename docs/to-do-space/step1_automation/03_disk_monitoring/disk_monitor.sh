@@ -17,12 +17,12 @@ echo "Current disk usage for $PARTITION: $USAGE%"
 # Check if usage exceeds threshold
 if [ "$USAGE" -gt "$THRESHOLD" ]; then
     echo "Disk usage on $(hostname) has reached $USAGE%!"
-    
+
     # Send alert via mail
     # Note: requires 'mailutils' and configured MTA
     MESSAGE="CRITICAL: Disk usage on $(hostname) for partition '$PARTITION' has reached $USAGE% (Threshold: $THRESHOLD%). Please free up space immediately."
     echo "$MESSAGE" | mail -s "DISK ALERT: High Usage on $(hostname)" "$EMAIL"
-    
+
     # Alternatively, you could log this to a system log
     # logger "Disk usage on $PARTITION is critical: $USAGE%"
 fi

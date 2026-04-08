@@ -5,11 +5,13 @@ marp: true
 # 02. 다계층 보안 방어 체계 (Security Guardrails)
 
 ### 🛡️ Shift-Left 보안 전략
+
 - **Gitleaks:** 시크릿 유출 자동 차단
 - **ShellCheck:** 쉘 스크립트 문법 사전 진단
 - **Prettier:** 일관된 스타일 및 문서 구조 강제
 
 ### 🔒 공급망 보안 및 감사
+
 - **SCA (Dependency Audit):** 오픈소스 라이브러리 취약점 탐지
 - **auditd:** 커널 레벨의 파일 변조 및 명령어 이력 추적
 

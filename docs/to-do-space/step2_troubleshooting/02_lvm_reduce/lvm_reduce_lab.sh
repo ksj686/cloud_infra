@@ -24,7 +24,7 @@ sudo resize2fs /dev/$VG_NAME/$LV_NAME $TARGET_SIZE
 
 # 4. Shrink the Logical Volume
 echo "Reducing Logical Volume to $TARGET_SIZE..."
-# Use --force to skip confirmation if needed in automated scripts, 
+# Use --force to skip confirmation if needed in automated scripts,
 # but manual confirmation is safer.
 sudo lvreduce -L $TARGET_SIZE /dev/$VG_NAME/$LV_NAME
 

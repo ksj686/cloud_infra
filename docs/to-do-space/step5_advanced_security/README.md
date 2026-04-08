@@ -3,6 +3,7 @@
 본 단계에서는 프로젝트의 핵심인 보안 표준 환경(Starter Kit) 구축을 위한 고도화 작업을 수행함
 
 ## 실습 항목
+
 - [01. auditd 시스템 감사 설정](./01_auditd_setup/README.md)
 - [02. Nginx 로드 밸런싱](./02_nginx_load_balancing/README.md)
 - [03. 서비스 셀프 힐링 구현](./03_self_healing/README.md)

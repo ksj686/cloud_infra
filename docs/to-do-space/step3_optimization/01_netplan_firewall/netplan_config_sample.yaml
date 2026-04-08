@@ -2,7 +2,7 @@ network:
   version: 2
   renderer: networkd
   ethernets:
-    ens32:                # Your interface name (check with 'ip a')
+    ens32: # Your interface name (check with 'ip a')
       dhcp4: no
       addresses:
         - 192.168.111.129/24 # Static IP and Subnet mask

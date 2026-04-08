@@ -16,22 +16,18 @@ log_message "Starting $TASK_NAME..."
 
 # --- PERFORM THE TASK HERE ---
 # Example: Try to list a directory that might not exist to simulate failure
-# ls /non_existent_directory
-# -----------------------------
-
-# Check if the last command succeeded
-if [ $? -eq 0 ]; then
+if ls /non_existent_directory; then
     log_message "SUCCESS: $TASK_NAME completed successfully."
 else
     log_message "ERROR: $TASK_NAME failed."
-    
+
     # Send an alert via mail
     # Note: requires 'mailutils' and a configured MTA (like Postfix or Exim)
     SUBJECT="CRON ALERT: $TASK_NAME FAILED on $(hostname)"
     BODY="The scheduled task '$TASK_NAME' failed at $(date). Please check $LOG_FILE for details."
-    
+
     echo "$BODY" | mail -s "$SUBJECT" "$ADMIN_EMAIL"
-    
+
     # Alternatively, you could log to a specific error log or send to a webhook
     exit 1
 fi

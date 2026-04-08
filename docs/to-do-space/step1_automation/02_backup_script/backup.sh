@@ -14,17 +14,15 @@ BACKUP_FILE="backup_$DATE.tar.gz"
 # Ensure backup directory exists
 mkdir -p "$BACKUP_DIR"
 
-# Step 1: Create the backup
+# Step 1 & 2: Create the backup and check success
 echo "Starting backup of $SOURCE_DIR..."
-tar -czf "$BACKUP_DIR/$BACKUP_FILE" "$SOURCE_DIR"
-
-# Step 2: Check if backup was successful
-if [ $? -eq 0 ]; then
+if tar -czf "$BACKUP_DIR/$BACKUP_FILE" "$SOURCE_DIR"; then
     echo "Backup completed successfully: $BACKUP_DIR/$BACKUP_FILE"
 else
     echo "ERROR: Backup failed."
     exit 1
 fi
+
 
 # Step 3: Remove backups older than $RETENTION_DAYS
 echo "Deleting backups older than $RETENTION_DAYS days..."

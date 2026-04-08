@@ -5,10 +5,12 @@ marp: true
 # 03. 무중단 가용성 아키텍처 (High Availability)
 
 ### ⚖️ 서비스 연속성 확보
+
 - **DB HA (Galera Cluster):** 3노드 멀티 마스터, 무중단 서비스
 - **하이퍼바이저 HA (Proxmox):** 자동 이동(Migration) 및 복구
 
 ### 📂 데이터 가용성 고도화
+
 - **분산 스토리지 (Ceph):** 네트워크 기반 삼중화 저장
 - **ProxySQL:** 지능형 부하 분산 및 최적화
 

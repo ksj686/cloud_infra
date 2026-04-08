@@ -32,11 +32,11 @@ send_alert() {
 # 추후 타 솔루션 도입 시 이 섹션의 명령어만 교체하여 추상화 유지
 run_security_scan() {
     log_event "INFO" "보안 스캔 시작 (Target: $SCAN_TARGET)"
-    
+
     # ClamAV 기반 스캔 및 자동 격리 (--move)
     # --move 옵션을 통해 위협 요소를 QUARANTINE_PATH로 즉시 분리
     clamscan -r --move="$QUARANTINE_PATH" "$SCAN_TARGET" >> "$LOG_PATH" 2>&1
-    
+
     return $?
 }
 
@@ -52,7 +52,7 @@ if [ $SCAN_RESULT -eq 0 ]; then
 elif [ $SCAN_RESULT -eq 1 ]; then
     DETECTED_COUNT=$(grep "Infected files:" "$LOG_PATH" | tail -1 | awk '{print $3}')
     ALERT_MSG="[위험] 서버 내 보안 위협 탐지 및 격리 완료 (탐지 수: $DETECTED_COUNT). 로그 파일($LOG_PATH)을 확인하시오."
-    
+
     log_event "WARN" "$ALERT_MSG"
     send_alert "$ALERT_MSG"
 else

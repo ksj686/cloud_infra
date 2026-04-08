@@ -15,10 +15,10 @@ if systemctl is-active --quiet $SERVICE_NAME; then
 else
     # 서비스 중단 감지
     echo "[$(date)] ALERT: $SERVICE_NAME is down! Attempting to restart..." >> $LOG_FILE
-    
+
     # 2. 서비스 재시작 시도
     $RESTART_CMD
-    
+
     # 3. 재시작 결과 확인 및 알림 (필요 시)
     if systemctl is-active --quiet $SERVICE_NAME; then
         echo "[$(date)] SUCCESS: $SERVICE_NAME has been restarted." >> $LOG_FILE

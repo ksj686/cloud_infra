@@ -15,9 +15,7 @@ if [ ! -d "$NEW_VERSION_DIR" ]; then
 fi
 
 echo "Updating symlink '$APP_LINK' to point to '$NEW_VERSION_DIR'..."
-ln -sfn "$NEW_VERSION_DIR" "$APP_LINK"
-
-if [ $? -eq 0 ]; then
+if ln -sfn "$NEW_VERSION_DIR" "$APP_LINK"; then
     echo "Symlink updated successfully."
     ls -l "$APP_LINK"
 else
