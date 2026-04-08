@@ -1,0 +1,258 @@
+어플리케이션 성능 분석하고 튜닝할 수 있는 능력 - 애플리케이션 프로파일링
+
+1 원인 분석
+
+  가장 먼저 해야 할 일은 왜 Throttling이 발생했는지 파악하는 것입니다.
+
+   * 애플리케이션 프로파일링: APM(Application Performance Monitoring) 도구(예: Pinpoint, Scouter, New Relic)를
+      사용하거나, 프로파일링 도구(예: perf, jprofiler)를 사용하여 애플리케이션의 어느 부분에서 CPU를 많이
+     사용하는지 분석합니다.
+       * 특정 요청이 급증했는가?
+       * 비효율적인 알고리즘이나 무한 루프가 있는가?
+       * 백그라운드 작업이 과도하게 실행되고 있는가?
+   * 리소스 사용량 분석: docker stats 명령어나 모니터링 대시보드를 통해 해당 컨테이너의 CPU 사용량 추이를
+     확인합니다. 특정 시간대에 CPU 사용량이 급증하는 패턴이 있는지 확인합니다.
+
+  2 해결 조치
+  원인 분석이 끝나면, 다음과 같은 조치를 취할 수 있습니다.
+
+   * CPU 할당량 상향 조정:
+    가장 간단한 해결책입니다. 애플리케이션이 정상적으로 더 많은 CPU를 필요로 하는 경우, 컨테이너에 할당된 CPU를 늘려줍니다.
+     * Docker: docker update --cpus="1.5" <container_id>
+     * 주의: 무작정 리소스를 늘리는 것은 근본적인 해결책이 아닐 수 있습니다. 비용 증가와 다른 컨테이너에 대한 영향을 고려해야 합니다.
+
+   * 애플리케이션 코드 최적화:
+    근본적인 해결책입니다. 프로파일링을 통해 발견된 병목 지점을 개선합니다.
+     * 비효율적인 알고리즘을 개선합니다.
+     * 불필요한 루프나 재귀 호출을 제거합니다.
+     * 캐싱을 적용하여 반복적인 연산을 줄입니다.
+     * I/O 대기 시간을 줄여 CPU가 대기하는 시간을 최소화합니다.
+
+   * Scale-Out (수평 확장):
+    단일 컨테이너의 부하를 줄이기 위해 컨테이너 인스턴스 수를 늘리는 방법입니다. 로드 밸런서를 사용하여
+  트래픽을 여러 컨테이너로 분산시킵니다.
+     * Docker Swarm: docker service scale <service_name>=3
+     * Kubernetes: kubectl scale deployment <deployment_name> --replicas=3
+     * 이 방법은 stateless 애플리케이션에 적합합니다.
+
+   * CPU 선호도(Affinity) 설정:
+    특정 CPU 코어를 특정 컨테이너에 할당하여 다른 프로세스와의 간섭을 줄일 수 있습니다. --cpuset-cpus 옵션을 사용합니다.
+     * 예: docker run -d --cpuset-cpus="0,1" my-app (CPU 0번과 1번 코어만 사용)
+     * 이 방법은 CPU 캐시 효율을 높여 성능을 향상시킬 수 있지만, 유연성이 떨어지므로 신중하게 사용해야 합니다.
+
+---
+
+docker commit \
+  -a "작성자정보" \
+  -m "커밋 메시지 my first commit message" \
+  commit_test \
+  commit_test:first
+
+---
+
+docker MacVLAN
+```
+docker network create -d macvlan \
+  --subnet=172.16.31.0/24 \
+  --gateway=172.16.31.1 \
+  -o parent=eth0 \
+  macvlan_net
+```
+
+---
+
+로그 호스트 장비와 타임존 맞추기
+```
+#host 장비와 컨테이너의 시간을 동일하게 하는 방법
+docker run -d \
+  --name mysql \
+  -e MYSQL_ROOT_PASSWORD=1234 \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /etc/timezone:/etc/timezone:ro \
+  mysql:5.7
+# --log_timestamps=SYSTEM  추가적으로 붙여야될지는 아직 안해봄
+
+#timezone을 서울로 변경
+sudo timedatectl set-timezone Asia/Seoul
+```
+---
+
+stress 를 활용한 부하 테스트
+```
+# 컨테이너 cpu에 부하 명령(stress)
+# stress 도구가 포함된 커스텀 Docker 이미지를 생성하는 방법
+#
+#1단계: 작업 디렉토리 및 Dockerfile 생성, Dockerfile을 저장할 디렉토리 생성
+    mkdir stress-image
+    cd stress-image
+
+#  stress-image 디렉토리 안에 Dockerfile이라는 이름의 파일을 생성하고 다음 내용을 추가
+
+cat <<EOF > Dockerfile
+# 1. 기본 이미지 선택
+# Ubuntu 24.04를 기반으로 이미지를 생성합니다.
+FROM ubuntu:24.04
+  # 2. 패키지 목록 업데이트 및 stress 설치
+# RUN 명령어는 셸 명령을 실행합니다.
+# apt-get update: 패키지 목록을 최신 상태로 업데이트합니다.
+# apt-get install -y stress: 'stress' 패키지를 설치합니다. '-y' 옵션은 모든 프롬프트에 자동으로 'yes'를 입력합니다.
+# && apt-get clean: 설치 후 불필요한 파일을 정리하여 이미지 크기를 줄입니다.
+RUN apt-get update && \
+    apt-get install -y stress && \
+    apt-get clean
+EOF
+
+#2단계: Docker 이미지 빌드
+
+#이제 Dockerfile이 있는 디렉토리에서 docker build 명령어를 사용하여 이미지를 생성합니다.
+
+# -t my-stress-image: 생성될 이미지의 이름을 'my-stress-image'로 태그합니다.
+# .: 현재 디렉토리의 Dockerfile을 사용하라는 의미입니다.
+docker build -t my-stress-image .
+# 위와 같이 생성하면 latest로 생성되고 아래와 같이 버전도 정의해줄 수 있음
+docker build -t my-stress-image:1.0 .
+
+#빌드가 완료되면, docker images 명령어로 생성된 이미지를 확인할 수 있습니다.
+
+docker images
+
+#3단계: 생성된 이미지로 컨테이너 실행
+#
+# 이제 my-stress-image를 사용하여 stress 명령을 실행할 수 있음
+#
+# 예시 1: CPU 1개에 부하 주기(매우 중요 필수 : 가상 머신 cpu 개수 1, 2, 4)
+# 1개 100%
+docker run -d --name my-stress my-stress-image stress --cpu 1
+# 아래 두 명령을 한번에 실행한것과 위의 명령이 같다
+docker run -d --name my-stress my-stress-image
+docker exec my-stress stress --cpu 1
+
+#host 에서 장비에서 cpu 사용율 확인
+ps aux | grep stress
+
+# 작업종료
+docker stop my-stress
+# 무한 루프 돌던 중 stop 받은 꼴이기 때문에 종료 시간이 좀 걸림
+
+#
+#예시 2: CPU 1개에 30초 동안 부하 주기(30초 후 자동 종료)(매우 중요 필수 : 가상 머신 cpu 개수 1)
+#
+docker run -d --rm my-stress-image stress --cpu 1 --timeout 30s
+
+#host 에서 장비에서 cpu 사용율 확인
+ps aux | grep stress
+
+#
+#예시 3: CPU 2개, 메모리 512MB에 1분 동안 부하 주기
+#
+docker run -d --rm my-stress-image stress --cpu 2 --vm 1 --vm-bytes 512M --timeout 60s
+
+#host 에서 장비에서 cpu 사용율 확인
+ps aux | grep stress
+
+#
+#예시 4: CPU 1개, cpu-shares 512(50%) 사용 할 수 있게 제한 (매우 중요 필수 : 가상 머신 cpu 개수 1)
+#
+docker run -d --name cpu_512 --cpu-shares 512 my-stress-image stress --cpu 1
+
+#host 에서 장비에서 cpu 사용율 확인(1024:512 = 2:1) 비율로 실행
+ps aux | grep stress
+
+#
+#예시 4: CPU 1개, 1개의 cpu 사용율 50% 사용 할 수 있게 제한 (매우 중요 필수 : 가상 머신 cpu 개수 1)
+#
+docker run -d --name cpu-05 --cpus="0.5" my-stress-image stress --cpu 1
+```
+
+---
+
+이미지 커밋 하면 새로운 이미지 생성되고 기존 이미지의 레이어를 상속?(참조?). 그리고 이미지 명이 계정명으로 시작하면 도커 허브에 이미지 push 할 수 있음.
+```
+docker commit \
+  -a "작성자정보" \
+  -m "커밋 메시지 my first commit message" \
+  commit_test \
+  commit_test:first
+```
+
+---
+
+도커 이미지 tar 파일로 저장/로드
+```
+#도커 이미지 추출 / 로드(tar 파일로 저장/로드)
+#ubuntu:24.04이미지를 ubuntu_24_04.tar 이름으로 저장한다
+#단점: 레이어가 깨진다.
+docker save -o ubuntu_24_04.tar ubuntu:24.04
+
+#commit_test 컨터이너를 rootFS.tar 파일로 저장(추천하지않음, 레이어가 1개로 변경됨)
+docker export -o rootFS.tar  commit_test
+
+#rootFS.tar 파일을 commit_test이미지로 로딩함 (추천하지않음, 레이어가 1개로 변경됨)
+#tag 생략하면 자동으로 latest로 됨
+docker import rootFS.tar  commit_test
+```
+
+---
+
+도커 허브로 이미지 배포
+```
+docker commit commit_container1 my-images-name:0.0
+docker tag my-images-name:0.0 [계정명]/my-images-name:0.0
+docker push  [계정명]/my-images-name:0.0
+docker rmi [계정명]/my-images-name:0.0
+docker pull  [계정명]/my-images-name:0.0
+```
+
+---
+
+사설 저장소 활용 - 수업때는 http로 사내망이라는 가정 하에 설정 후 진행. 실습으로 https 설정이 오래걸리거나 어렵다면 생략, 간단하다면 https로 진행해보고 싶음
+
+```
+#도커 사설 레지스트리
+#사설 레지스트리 컨테이너 생성 <= 여기 저장
+docker run -d --name myregistry \
+  -p 5000:5000 \
+  --restart=always \
+  registry
+
+#사설 레지스트리 컨테이너 정상 동작하는 확인하는 방법
+curl http://localhost:5000/v2/
+
+#사설 레지스트리에 push 하기 위해서 저장소 명 앞에 (사설 레지스트리 서버주소):5000을 붙여야 한다
+#저장소명 변경
+docker tag my-images-name:0.0 ip주소:5000/my-images-name:0.0
+
+#사설 레지스트리에 push 를 한다(https 오류 발생함)
+docker push ip주소:5000/my-images-name:0.0
+
+# HTTPS가 아닌 HTTP를 사용하는 사설 Docker 레지스트리에 접근할 수 있도록 허용하는 방법
+#1. /etc/docker/daemon.json에  "insecure-registries": ["192.168.1.3:5000"] 하기
+sudo vi  /etc/docker/daemon.json
+{
+  "insecure-registries": ["192.168.1.3:5000"]
+}
+
+#2. Docker 데몬 재시작
+sudo systemctl restart docker
+
+#3. 설정 확인(Insecure Registries: 아래에 192.168.1.3:5000 있는지 확인)한다
+docker info
+
+#4. 사설 레지스트리에 push 를 한다(정상 실행 된다)
+docker push ip주소:5000/my-images-name:0.0
+
+#5. 사설 레지스트리에 있는 모든 이미지(정확히는 "리포지토리")의 목록을 보려면 _catalog
+curl ip주소:5000/v2/_catalog
+# 특정 이미지의 버전(0.0 등) 확인
+curl 172.16.31.145:5000/v2/my-images-name/tags/list
+
+#6. 로컬 저장소에 등록된 my-images-name:0.0를 삭제하고 사설 저장소에 저장된 이미지 내려받기
+#로컬 저장소 이미지 목록 확인
+docker images -a
+
+#my-images-name:0.0 이미지 삭제
+docker rmi ip주소:5000/my-images-name:0.0
+
+#사설 저장소에서 my-images-name:0.0 내려 받기
+docker pull ip주소:5000/my-images-name:0.0
+```

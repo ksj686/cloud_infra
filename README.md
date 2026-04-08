@@ -16,7 +16,7 @@ graph TD
     S3 --> S4[Step 4: Expansion]
     S4 --> S5[Step 5: Advanced Security]
     end
-    subgraph "Phase 6-7: Enterprise & AI"
+    subgraph "Phase 6-7: Enterprise & HA"
     S5 --> S6[Step 6: Enterprise HA]
     S6 --> S7[Step 7: Cloud Native AI]
     end
@@ -29,18 +29,21 @@ graph TD
 
 - **목적:** 안정적이고 보안이 강화된 리눅스 기반 인프라 아키텍처 설계 및 운영 표준 정립
 - **핵심 원칙:**
-  - **Security:** SSH 키 기반 인증, 방화벽 최적화, 정기 보안 감사 수행
-  - **Availability:** RAID/LVM 기반 스토리지 설계, 자동 백업 및 복구 체계 구축
-  - **Automation:** Bash 쉘 스크립트 및 IaC(Ansible) 기반 운영 자동화 구현
+  - **Security:** SSH 키 기반 인증, 사설 레지스트리(Harbor) 운용, 정기 보안 감사 수행
+  - **Availability:** RAID/LVM/Ceph 기반 스토리지 설계, 멀티 마스터 DB 클러스터 구축
+  - **Automation:** IaC(Ansible/Terraform) 및 GitOps 기반 운영 자동화 구현
+  - **Optimization:** APM 및 Stress 테스트 기반의 애플리케이션/시스템 성능 튜닝
 
 ## 2. 기술 스택 (Tech Stack)
 
 - **Virtualization:** Proxmox VE (Primary), VMware (Sandbox)
 - **OS:** Ubuntu Server 24.04 LTS, Alpine Linux
 - **Web/Proxy:** Nginx
-- **Storage:** RAID 1/5, ZFS, LVM, Ceph (Advanced)
+- **Container:** Docker (MacVLAN, Bridge, Named Volumes)
+- **Registry:** Harbor (Enterprise Private Registry)
+- **Storage:** RAID 1/5, ZFS, LVM, Ceph (Distributed)
 - **Automation:** Bash Shell, Ansible, Terraform
-- **Monitoring:** Prometheus, Grafana, Thanos (Multi-cluster), Loki
+- **Monitoring/APM:** Prometheus, Grafana, Thanos, Loki, Pinpoint/Scouter
 
 ## 3. 문서 시스템 가이드 (Documentation Guide)
 
@@ -56,32 +59,32 @@ graph TD
 - **[Management Docs]:**
   - [Workflow](./docs/PROJECT_WORKFLOW.md): 프로젝트 실행 공정 및 대화 기반 의사결정 로그
   - [Task Guide](./docs/CURRENT_TASK_GUIDE.md): 현재 진행 중인 활성 작업 실행 매뉴얼
-  - [Env Setup](./docs/ENVIRONMENT_SETUP.md): MkDocs 가동 및 초기 환경 구축 영구 지침
+  - [Env Setup](./docs/ENVIRONMENT_SETUP.md): 개발 환경 구축 및 품질 관리(pre-commit) 영구 지침
 - **[to-do-list.md](./docs/to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
 - **[to-do-space/](./docs/to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
-- **[solutions/](./docs/solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Vault 등) 구축 가이드
+- **[solutions/](./docs/solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Harbor 등) 구축 가이드
 
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
 
 - **Phase 1 (Foundation):** 시스템 기초, 하드닝 및 커널 최적화 수행
-- **Phase 2 (Perimeter):** 보안 경계 설정, 방화벽 및 네트워크 세분화 구현
-- **Phase 3 (Persistence):** 데이터 영속성 확보, 가용 스토리지 및 데이터 거버넌스 수립
-- **Phase 4 (Observability):** 운영 가시성 확보, 서비스 안정화 및 가용성 관리
-- **Phase 5 (Pipeline):** 자동화 워크플로우, 형상 관리 및 배포 자동화 구축
-- **Phase 6 (Scalability):** 코드형 인프라 완성, 대규모 환경 복제 및 확장성 확보
+- **Phase 2 (Perimeter):** 보안 경계 설정, 방화벽 및 MacVLAN 기반 네트워크 세분화 구현
+- **Phase 3 (Persistence):** 데이터 영속성(Named Volume) 확보 및 Ceph 분산 스토리지 구축
+- **Phase 4 (Observability):** 운영 가시성 확보, APM 기반 성능 분석 및 서비스 가용성 튜닝
+- **Phase 5 (Pipeline):** 사설 레지스트리(Harbor) 연동, 형상 관리 및 보안 파이프라인 구축
+- **Phase 6 (Scalability):** 코드형 인프라(IaC) 완성, 대규모 환경 복제 및 하이브리드 확장
 
 ## 5. 단계별 자동화 보안 도구 (Automated Security Tools)
 
-| 단계 (Phase)          | 도구 (Tool)                       | 목적                                          |
-| :-------------------- | :-------------------------------- | :-------------------------------------------- |
-| **Phase 1: Local**    | `pre-commit`, `Gitleaks`          | 커밋 전 민감 정보 유출 차단 및 코드 품질 검사 |
-| **Phase 2: CI**       | `CodeQL`, `Semgrep`, `pnpm audit` | SAST 및 오픈소스 라이브러리 취약점 심층 분석  |
-| **Phase 3: Artifact** | `Trivy`                           | Docker 이미지 OS 및 패키지 취약점 스캔        |
-| **Phase 4: Alert**    | `Slack`, `SMTP`, `Webhook`        | 파이프라인 실패 및 보안 이벤트 실시간 알림    |
+| 단계 (Phase)          | 도구 (Tool)                            | 목적                                                         |
+| :-------------------- | :------------------------------------- | :----------------------------------------------------------- |
+| **Phase 1: Local**    | `pre-commit`, `Gitleaks`, `ShellCheck` | 커밋 전 민감 정보 유출 차단 및 스크립트 품질 검사            |
+| **Phase 2: CI**       | `CodeQL`, `Semgrep`, `pnpm audit`      | SAST 및 오픈소스 라이브러리 취약점(SCA) 심층 분석            |
+| **Phase 3: Artifact** | `Trivy`, `Harbor Scan`                 | Docker 이미지 OS/패키지 취약점 및 저장소 내 이미지 상시 스캔 |
+| **Phase 4: Alert**    | `Slack`, `SMTP`, `Webhook`             | 파이프라인 실패 및 시스템 보안 이벤트 실시간 알림            |
 
 ## 6. 프로젝트 비전: 보안 필수 체계가 완비된 표준 환경 (Starter Kit)
 
-단순 실습을 넘어, 어떤 클라우드/온프레미스 환경에서도 **적용 가능한 보안 표준 기반** 제공 목표. 최소한의 설정만으로도 검증된 보안 인프라 신속 구축 가능.
+단순 실습을 넘어, 어떤 환경에서도 **적용 가능한 보안 표준 기반** 제공 목표. 성능 튜닝 지침과 기업용 이미지 관리 체계가 포함된 검증된 인프라 신속 구축 지원.
 
 ## 7. 유사 사례 및 참고 프로젝트 (Benchmarking)
 

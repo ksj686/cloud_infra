@@ -22,13 +22,18 @@
 
 ## [태스크 관리 최적화 및 크로스 플랫폼 스크립트 구축]
 
-| 날짜       | 분류     | 수정 내용                                                                             | 수정 파일                  |
-| :--------- | :------- | :------------------------------------------------------------------------------------ | :------------------------- |
-| 2026-04-08 | `🛠️ Fix` | `ShellCheck` 스타일 가이드(SC2181, SC2009 등) 준수를 위한 쉘 스크립트 전수 구조 개선  | `docs/to-do-space/**/*.sh` |
-| 2026-04-08 | `🛠️ Fix` | `check-yaml` 훅의 커스텀 태그 에러를 `--unsafe` 대신 `exclude` 방식으로 안전하게 해결 | `.pre-commit-config.yaml`  |
-| 2026-04-08 | `🛠️ Fix` | `.gitattributes` 도입을 통한 쉘 스크립트 줄바꿈(LF) 강제화 (ShellCheck 오류 해결)     | `.gitattributes`           |
+| 날짜       | 분류      | 수정 내용                                                                             | 수정 파일                  |
+| :--------- | :-------- | :------------------------------------------------------------------------------------ | :------------------------- |
+| 2026-04-08 | `📝 Docs` | 핵심 기술 용어에 대한 한국어(영어) 병기 지침 수립 및 `GEMINI.md` 반영                 | `GEMINI.md`                |
+| 2026-04-08 | `📝 Docs` | SPoF 및 HA 핵심 기술 개념을 포함한 발표 자료(03_high_availability.md) 정교화          | `docs/presentation/*`      |
+| 2026-04-08 | `🛠️ Fix`  | `ShellCheck` 스타일 가이드(SC2181, SC2009 등) 준수를 위한 쉘 스크립트 전수 구조 개선  | `docs/to-do-space/**/*.sh` |
+| 2026-04-08 | `🛠️ Fix`  | `check-yaml` 훅의 커스텀 태그 에러를 `--unsafe` 대신 `exclude` 방식으로 안전하게 해결 | `.pre-commit-config.yaml`  |
+| 2026-04-08 | `🛠️ Fix`  | `.gitattributes` 도입을 통한 쉘 스크립트 줄바꿈(LF) 강제화 (ShellCheck 오류 해결)     | `.gitattributes`           |
 
 | 2026-04-08 | `🚀 Feature` | 운영체제별 Marp PDF 변환 단축 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 구축 | `gen-pdf.ps1`, `gen-pdf.sh` |
+| 2026-04-08 | `🚀 Feature` | 기업용 사설 레지스트리(Harbor) 및 애플리케이션 성능 튜닝 전략 설계 반영 | `docs/to-do-list.md`, `docs/CORE_FEATURE_EXPLAINER.md` |
+| 2026-04-08 | `🚀 Feature` | MacVLAN 네트워크 설계 및 호스트-컨테이너 타임존 동기화 지침 수립 | `docs/to-do-list.md`, `docs/presentation/*` |
+| 2026-04-08 | `🧪 Test` | stress 도구를 이용한 부하 테스트 및 자원 제한 실습 항목 로드맵 추가 | `docs/to-do-list.md` |
 
 | 2026-04-08 | `📝 Docs` | 프로젝트 규모에 따른 단계별 태스크 관리 전략(Script -> Poe -> Package) 수립 | `docs/PROJECT_WORKFLOW.md` |
 | 2026-04-08 | `📝 Docs` | 단축 스크립트 활용 PDF 변환 가이드 보완 | `docs/ENVIRONMENT_SETUP.md` |
