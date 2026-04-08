@@ -101,7 +101,11 @@ Material for MkDocs 테마 기반의 기술 문서 사이트 운영
 - **대상 파일:** `docs/presentation/presentation.md`
 - **PDF 변환 명령어:**
     ```bash
-    # npx를 이용한 즉시 변환
+    # 방법 A: 단축 스크립트 이용 (추천)
+    ./gen-pdf.ps1  # Windows
+    ./gen-pdf.sh   # macOS/Linux (chmod +x 필수)
+
+    # 방법 B: npx 직접 실행
     npx @marp-team/marp-cli@latest docs/presentation/presentation.md --pdf
     ```
 - **관리 원칙:** 
