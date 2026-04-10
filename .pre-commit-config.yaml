@@ -4,14 +4,14 @@
 repos:
   # 1. 시크릿 유출 차단 및 보안 강화
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.2
+    rev: v8.30.0
     hooks:
       - id: gitleaks
         name: "Gitleaks (Secret Scanning)"
         description: "소스 코드 내 민감 정보 유출 사전 탐지"
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v6.0.0
     hooks:
       - id: detect-private-key # SSH/TLS 개인키 파일 탐지
       - id: check-added-large-files # 대용량 파일(로그, 바이너리) 커밋 방지 (500KB)
@@ -26,7 +26,7 @@ repos:
 
   # 2. 쉘 스크립트 품질 진단 (ShellCheck)
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.9.0.6
+    rev: v0.11.0.1
     hooks:
       - id: shellcheck
         name: "ShellCheck (Bash Linting)"
@@ -34,7 +34,7 @@ repos:
 
   # 3. 문서 스타일 자동 포맷팅 (Prettier)
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.1.0
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
         name: "Prettier (Auto Formatting)"
