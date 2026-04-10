@@ -69,9 +69,11 @@ nav:
       - Phase 5 (Pipeline): build-up/05_pipeline/README.md
       - Phase 6 (Scalability): build-up/06_scalability/README.md
   - Knowledge Base:
-      - Overview: knowledge_base/analysis_and_improvement.md
+      - Core Elements: knowledge_base/common_infra_elements.md
+      - Project Taxonomy: knowledge_base/infra_project_taxonomy.md
       - Asset Mgmt: knowledge_base/infra_inventory_management.md
       - Tech Guide: knowledge_base/advanced_tech_guide.md
+      - Analysis: knowledge_base/analysis_and_improvement.md
       - Checklist: knowledge_base/full_tech_checklist.md
   - Playbooks:
       - Ops:
