@@ -70,6 +70,7 @@ nav:
       - Phase 6 (Scalability): build-up/06_scalability/README.md
   - Knowledge Base:
       - Overview: knowledge_base/analysis_and_improvement.md
+      - Asset Mgmt: knowledge_base/infra_inventory_management.md
       - Tech Guide: knowledge_base/advanced_tech_guide.md
       - Checklist: knowledge_base/full_tech_checklist.md
   - Playbooks:

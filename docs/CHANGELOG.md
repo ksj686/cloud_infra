@@ -20,17 +20,26 @@
 
 ---
 
+## [인프라 자산 관리 전략 수립 및 지식 베이스 확장]
+
+| 날짜       | 분류      | 수정 내용                                                                                               | 수정 파일               |
+| :--------- | :-------- | :------------------------------------------------------------------------------------------------------ | :---------------------- |
+| 2026-04-10 | `📝 Docs` | 엔터프라이즈 인프라 자산 관리 전략(NetBox, GitOps 등) 지식 베이스(`infra_inventory_management.md`) 구축 | `docs/knowledge_base/*` |
+
 ## [단계별 구축 가이드 수립 및 태스크 관리 최적화]
 
-| 날짜       | 분류         | 수정 내용                                                                             | 수정 파일                   |
-| :--------- | :----------- | :------------------------------------------------------------------------------------ | :-------------------------- |
-| 2026-04-08 | `📝 Docs`    | Phase 1-6 설계안 기반의 단계별 기술 구축 가이드(`docs/build-up/`) 체계 신규 수립      | `docs/build-up/*`           |
-| 2026-04-08 | `🚀 Feature` | 운영체제별 Marp PDF 변환 단축 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 구축              | `gen-pdf.ps1`, `gen-pdf.sh` |
-| 2026-04-08 | `📝 Docs`    | 핵심 기술 용어에 대한 한국어(영어) 병기 지침 수립 및 `GEMINI.md` 반영                 | `GEMINI.md`                 |
-| 2026-04-08 | `📝 Docs`    | SPoF 및 HA 핵심 기술 개념을 포함한 발표 자료(03_high_availability.md) 정교화          | `docs/presentation/*`       |
-| 2026-04-08 | `🛠️ Fix`     | `ShellCheck` 스타일 가이드(SC2181, SC2009 등) 준수를 위한 쉘 스크립트 전수 구조 개선  | `docs/to-do-space/**/*.sh`  |
-| 2026-04-08 | `🛠️ Fix`     | `check-yaml` 훅의 커스텀 태그 에러를 `--unsafe` 대신 `exclude` 방식으로 안전하게 해결 | `.pre-commit-config.yaml`   |
-| 2026-04-08 | `🛠️ Fix`     | `.gitattributes` 도입을 통한 쉘 스크립트 줄바꿈(LF) 강제화 (ShellCheck 오류 해결)     | `.gitattributes`            |
+| 날짜       | 분류         | 수정 내용                                                                                | 수정 파일                                    |
+| :--------- | :----------- | :--------------------------------------------------------------------------------------- | :------------------------------------------- |
+| 2026-04-08 | `📝 Docs`    | Phase 1-6 설계안 기반의 단계별 기술 구축 가이드(`docs/build-up/`) 체계 신규 수립         | `docs/build-up/*`                            |
+| 2026-04-08 | `🚀 Feature` | 운영체제별 Marp PDF 변환 단축 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 구축                 | `gen-pdf.ps1`, `gen-pdf.sh`                  |
+| 2026-04-08 | `📝 Docs`    | 핵심 기술 용어에 대한 한국어(영어) 병기 지침 수립 및 `GEMINI.md` 반영                    | `GEMINI.md`                                  |
+| 2026-04-08 | `📝 Docs`    | SPoF 및 HA 핵심 기술 개념을 포함한 발표 자료(03_high_availability.md) 정교화             | `docs/presentation/*`                        |
+| 2026-04-08 | `📝 Docs`    | 클라우드 인프라 6대 공통 표준 요소(`common_infra_elements.md`) 정의 및 팀 협업 규약 추가 | `docs/knowledge_base/*`                      |
+| 2026-04-08 | `📝 Docs`    | 인프라 프로젝트 유형 분류(`infra_project_taxonomy.md`) 및 단계별 확장 로드맵 수립        | `docs/knowledge_base/*`                      |
+| 2026-04-08 | `🛠️ Fix`     | Phase별 상세 구축 기록(AS_BUILT) 체계 수립 및 트러블슈팅 로그 보완                       | `docs/build-up/*`, `docs/INFRA_INVENTORY.md` |
+
+| 2026-04-08 | `🛠️ Fix` | `check-yaml` 훅의 커스텀 태그 에러를 `--unsafe` 대신 `exclude` 방식으로 안전하게 해결 | `.pre-commit-config.yaml` |
+| 2026-04-08 | `🛠️ Fix` | `.gitattributes` 도입을 통한 쉘 스크립트 줄바꿈(LF) 강제화 (ShellCheck 오류 해결) | `.gitattributes` |
 
 | 2026-04-08 | `🚀 Feature` | 운영체제별 Marp PDF 변환 단축 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 구축 | `gen-pdf.ps1`, `gen-pdf.sh` |
 | 2026-04-08 | `🚀 Feature` | 기업용 사설 레지스트리(Harbor) 및 애플리케이션 성능 튜닝 전략 설계 반영 | `docs/to-do-list.md`, `docs/CORE_FEATURE_EXPLAINER.md` |
