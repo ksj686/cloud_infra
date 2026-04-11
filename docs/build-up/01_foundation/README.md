@@ -48,3 +48,19 @@
   - **권한 상승 시도 추적:** `/etc/sudoers` 파일 변조 및 특권 획득 시도 추적 (`-w /etc/sudoers -p wa -k priv_esc`)
   - **명령어 실행 이력 전수 기록:** `execve` 시스템 호출(Syscall) 감시를 통한 모든 명령어 실행 이력 확보 (`-a always,exit -F arch=b64 -S execve -k cmd_history`)
 - **보안 리포트 프로세스:** `aureport` 명령어를 활용하여 시스템 가동 시간, 실패한 프로세스, 보안 이벤트를 요약한 일일 보고서 검토 환경 마련
+
+## 4. 서버 측 Docker 보안 및 편의 설정
+
+인프라 노드 내 Docker 엔진 안정성 및 기밀성 확보
+
+- **자격 증명 암호화 (Credential Helper):**
+  - **목적:** `~/.docker/config.json` 내 비밀번호 평문(Base64) 저장에 따른 보안 경고 해결 및 암호화 보관
+  - **설치 명령어:** `sudo apt update && sudo apt install pass golang-docker-credential-helpers -y`
+  - **설정 절차:**
+    1. GPG 키 생성: `gpg --generate-key` (이름/이메일 입력 후 ID 확인)
+    2. Pass 초기화: `pass init <GPG-ID_또는_이메일>`
+    3. Docker 연동: `~/.docker/config.json` 파일 내 `"credsStore": "pass"` 항목 추가
+- **cloud-init 기반 호스트 정보 영구 고정:**
+  - **대상:** Proxmox 클라우드 템플릿 기반으로 생성된 모든 인프라 노드
+  - **해결:** cloud-init이 부팅 시 `/etc/hosts`를 초기화하는 현상 방지
+  - **조치:** `/etc/cloud/templates/hosts.ubuntu.tmpl` 파일 최하단에 `127.0.0.1 api.kosa.kr hub.kosa.kr` 등 필요한 도메인 명시적 추가
