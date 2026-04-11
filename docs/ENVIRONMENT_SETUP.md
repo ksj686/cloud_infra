@@ -102,15 +102,24 @@ poetry run pre-commit install
 poetry run pre-commit run --all-files
 ```
 
-### 3.3 에디터 연동 (VS Code 추천)
+### 3.3 에디터 연동 및 포맷팅 일치화 (VS Code)
 
-- **저장 시 자동 줄맞춤:** `.vscode/settings.json`에 아래 설정 추가 권장
+로컬 에디터와 `pre-commit` 간의 자동 줄맞춤 결과 불일치 방지
+
+- **설정 파일 준수:** 프로젝트 루트의 `.prettierrc` 및 `.gitattributes`(LF 강제) 설정을 최우선으로 참조.
+- **VS Code 권장 설정 (`.vscode/settings.json`):**
   ```json
   {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.configPath": ".prettierrc",
+    "prettier.requireConfig": true,
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true
   }
   ```
+- **주의 사항:** 프로젝트 외부 전역(Global) 설정보다 프로젝트 내 설정이 우선 적용되도록 관리 필수.
 
 ---
 
