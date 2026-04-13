@@ -83,6 +83,7 @@ nav:
   - Knowledge Base:
       - Core Elements: knowledge_base/common_infra_elements.md
       - Project Taxonomy: knowledge_base/infra_project_taxonomy.md
+      - Ceph Storage: knowledge_base/ceph_storage_deep_dive.md
       - Asset Mgmt: knowledge_base/infra_inventory_management.md
       - Tech Guide: knowledge_base/advanced_tech_guide.md
       - Analysis: knowledge_base/analysis_and_improvement.md
