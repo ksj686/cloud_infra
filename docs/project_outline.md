@@ -79,7 +79,7 @@
   - `pre-commit`/`Gitleaks`: 로컬 스테이징 단계에서 API Key, Secret Token 등 민감 정보 유출 사전 차단
 - **지속적 통합 보안 (CI Security):**
   - `Semgrep`: SAST 기반의 소스 코드 내 보안 취약점(Insecure Patterns) 탐지 자동화
-  - `pnpm audit`: 프로젝트 종속성 라이브러리의 알려진 취약점(CVE) 스캔 및 업그레이드 유도
+  - `pnpm audit` / `pip-audit`: 프로젝트 종속성 라이브러리(Node.js, Python)의 알려진 취약점(CVE) 스캔 및 업그레이드 유도
 - **기업형 이미지 관리:**
   - **Harbor Registry:** 사설 저장소 구축을 통한 이미지 권한 관리 및 내장 엔진 기반 취약점 자동 스캔 연동
 - **패키지 검사:**
