@@ -62,12 +62,24 @@ nav:
       - Scenarios: SCENARIOS.md
   - Build-up Guide:
       - Overview: build-up/README.md
-      - Phase 1 (Foundation): build-up/01_foundation/README.md
-      - Phase 2 (Perimeter): build-up/02_perimeter/README.md
-      - Phase 3 (Persistence): build-up/03_persistence/README.md
-      - Phase 4 (Observability): build-up/04_observability/README.md
-      - Phase 5 (Pipeline): build-up/05_pipeline/README.md
-      - Phase 6 (Scalability): build-up/06_scalability/README.md
+      - Phase 1 (Foundation):
+          - Guide: build-up/01_foundation/README.md
+          - As-built: build-up/01_foundation/AS_BUILT.md
+      - Phase 2 (Perimeter):
+          - Guide: build-up/02_perimeter/README.md
+          - As-built: build-up/02_perimeter/AS_BUILT.md
+      - Phase 3 (Persistence):
+          - Guide: build-up/03_persistence/README.md
+          - As-built: build-up/03_persistence/AS_BUILT.md
+      - Phase 4 (Observability):
+          - Guide: build-up/04_observability/README.md
+          - As-built: build-up/04_observability/AS_BUILT.md
+      - Phase 5 (Pipeline):
+          - Guide: build-up/05_pipeline/README.md
+          - As-built: build-up/05_pipeline/AS_BUILT.md
+      - Phase 6 (Scalability):
+          - Guide: build-up/06_scalability/README.md
+          - As-built: build-up/06_scalability/AS_BUILT.md
   - Knowledge Base:
       - Core Elements: knowledge_base/common_infra_elements.md
       - Project Taxonomy: knowledge_base/infra_project_taxonomy.md
