@@ -1,30 +1,40 @@
-# Project Environment Setup Guide
+# Project Environment Setup Guide (Local Host)
 
-본 문서는 프로젝트 가동을 위한 Python(Poetry), Node.js(nvm) 기반 개발 환경 구축 지침 및 품질 관리(pre-commit) 절차 정리
+본 문서는 프로젝트 가동을 위한 로컬 개발 환경(Python, Node.js) 구축 지침 및 품질 관리 절차 정리.
+**※ 주의:** 본 문서는 사용자 로컬 PC(Host) 설정 전용이며, 인프라 서버(Server) 내부 설정은 `docs/build-up/` 가이드를 참조.
 
 ---
 
-## 1. Node.js 환경 구축 (nvm)
+## 1. Node.js 및 패키지 관리 환경 (nvm & pnpm)
 
-버전 파편화 방지 및 Gemini CLI 구동을 위한 표준 런타임 구성
+버전 파편화 방지 및 도구 버전 고정을 위한 런타임 환경 구성
 
-### 1.1 기존 Node.js 삭제 (주의 사항)
+### 1.1 Node.js 환경 구축 (nvm)
 
-- **전수 삭제:** `nvm` 설치 전 제어판에서 기존 모든 Node.js 버전 삭제 필수 (경로 충돌 예방)
-- **잔여물 정리:** `C:\Program Files\nodejs` 및 `%AppData%\npm` 폴더 수동 삭제 권장
-
-### 1.2 nvm-windows 설치 및 설정
-
-- **설치:** [nvm-windows](https://github.com/coreybutler/nvm-windows/releases)에서 `nvm-setup.exe` 다운로드 및 설치
-- **Node.js LTS 설치:**
-  ```bash
+- **기존 Node.js 삭제:** `nvm` 설치 전 제어판에서 기존 모든 Node.js 버전 삭제 및 `%AppData%\npm` 폴더 잔여물 정리 필수.
+- **nvm-windows 설치:** [Releases](https://github.com/coreybutler/nvm-windows/releases)에서 `nvm-setup.exe` 다운로드 및 설치.
+- **Node.js LTS 설치 및 적용:**
+  ```powershell
   nvm install lts
   nvm use lts
   ```
-- **Gemini CLI 설치:**
-  ```bash
-  npm install -g @google/gemini-cli
+
+### 1.2 전역 도구 설치 (Global Tools)
+
+- **패키지 매니저 설치:** `npm install -g pnpm`
+- **Gemini CLI 설치:** `npm install -g @google/gemini-cli`
+
+### 1.3 프로젝트 로컬 의존성 및 버전 고정 (Prettier)
+
+에디터(VS Code)와 `pre-commit` 간의 포맷팅 버전 불일치 원천 차단
+
+- **프로젝트 초기화:** `package.json`이 없는 경우 수행 (`pnpm init`)
+- **Prettier 버전 명시적 설치:**
+  ```powershell
+  # pre-commit에 설정된 버전(예: 3.7.4)과 일치시켜 로컬 설치
+  pnpm add -D prettier@3.7.4
   ```
+- **팀 협업 적용:** 신규 참여자는 `pnpm install` 실행만으로 고정된 버전의 도구 즉시 확보.
 
 ---
 
@@ -34,7 +44,7 @@
 
 ### 2.1 pyenv-win을 이용한 버전 동기화
 
-- **공식 PowerShell 설치 (권장):**
+- **설치 스크립트:**
   ```powershell
   Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
   ```
@@ -87,13 +97,15 @@ poetry run pre-commit install
 
 패키지 설치 후 **로컬 Git 훅 활성화**를 위해 반드시 수행
 
-```bash
+````bash
+### 3.1 설치 및 Hook 등록
+```powershell
 # 1. 의존성 설치 (pre-commit 포함)
 poetry install
 
-# 2. Git Hook 등록 (중요: 클론한 환경마다 개별 실행 필요)
+# 2. Git Hook 등록 (로컬 .git 설정에 반영)
 poetry run pre-commit install
-```
+````
 
 ### 3.2 수동 실행 및 스타일 교정
 
@@ -102,24 +114,18 @@ poetry run pre-commit install
 poetry run pre-commit run --all-files
 ```
 
-### 3.3 에디터 연동 및 포맷팅 일치화 (VS Code)
+### 3.3 에디터 연동 및 포맷팅 동기화 (VS Code)
 
-로컬 에디터와 `pre-commit` 간의 자동 줄맞춤 결과 불일치 방지
+로컬 `node_modules`에 고정된 Prettier를 사용하여 일관성 확보
 
-- **설정 파일 준수:** 프로젝트 루트의 `.prettierrc` 및 `.gitattributes`(LF 강제) 설정을 최우선으로 참조.
 - **VS Code 권장 설정 (`.vscode/settings.json`):**
   ```json
   {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "prettier.configPath": ".prettierrc",
-    "prettier.requireConfig": true,
-    "files.eol": "\n",
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
   ```
-- **주의 사항:** 프로젝트 외부 전역(Global) 설정보다 프로젝트 내 설정이 우선 적용되도록 관리 필수.
+- **작동 원리:** 프로젝트 로컬에 설치된 `prettier` 패키지 버전을 자동으로 참조하여 포맷팅 수행.
 
 ---
 
@@ -128,7 +134,7 @@ poetry run pre-commit run --all-files
 Material for MkDocs 테마 기반의 기술 문서 사이트 운영
 
 - **로컬 가동:** `poetry run mkdocs serve`
-- **주요 확장:** Mermaid 다이어그램, 코드 주석, 수식 표현 등 지원 (`mkdocs.yml` 참조)
+- **주요 확장:** Mermaid 다이어그램, 코드 주석, 수식 표현 등 지원 (`mkdocs.yml` 참조).
 
 ---
 
@@ -138,26 +144,15 @@ Material for MkDocs 테마 기반의 기술 문서 사이트 운영
 
 - **대상 파일:** `docs/presentation/presentation.md`
 - **PDF 변환 명령어:**
-
-  ```bash
-  # 방법 A: 단축 스크립트 이용 (추천)
-  ./gen-pdf.ps1  # Windows
-  ./gen-pdf.sh   # macOS/Linux (chmod +x 필수)
-
-  # 방법 B: npx 직접 실행
-  npx @marp-team/marp-cli@latest docs/presentation/presentation.md --pdf
-  ```
-
-- **관리 원칙:**
-  - 슬라이드 구분은 `---` 사용
-  - 발표자 전용 메모는 `<!-- 주석 -->` 활용
-  - 테마 및 페이지 설정은 파일 상단 YAML Frontmatter에서 조정
+  - **단축 스크립트 이용 (추천):** `./gen-pdf.ps1` (Windows), `./gen-pdf.sh` (macOS/Linux)
+  - **직접 실행:** `npx @marp-team/marp-cli@latest docs/presentation/presentation.md --pdf`
+- **관리 원칙:** 슬라이드 구분(`---`), 발표자 전용 메모(`<!-- 주석 -->`) 및 YAML Frontmatter 조정 지침 준수.
 
 ---
 
 ## 6. 트러블슈팅 및 관리 원칙
 
-- **한글 깨짐 (PowerShell):** `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8` 명령어로 인코딩 고정
-- **의존성 불일치:** `pyproject.toml` 변경 시 반드시 `poetry lock`으로 잠금 파일 동기화
-- **보안 준수:** `.venv` 및 민감 정보가 포함된 파일은 절대 Git 추적 금지 (`.gitignore` 확인)
-- **상시 업데이트:** 환경 관련 모든 사항은 본 문서에 누적 기록하여 최신 상태 유지
+- **한글 깨짐 (PowerShell):** `$env:PYTHONUTF8=1` 또는 인코딩 고정 명령 사용.
+- **의존성 불일치:** `pyproject.toml` 변경 시 반드시 `poetry lock`으로 잠금 파일 동기화.
+- **보안 준수:** `.venv`, `node_modules`, 민감 정보 파일은 절대 Git 추적 금지 (`.gitignore` 확인).
+- **상시 업데이트:** 환경 관련 모든 변경 사항은 본 문서에 즉시 기록하여 최신 상태 유지.

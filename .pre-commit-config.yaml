@@ -39,5 +39,11 @@ repos:
       - id: prettier
         name: "Prettier (Auto Formatting)"
         types_or: [markdown, yaml, json]
+        exclude: |
+          (?x)^(
+            pnpm-lock\.yaml|
+            package-lock\.json|
+            poetry\.lock
+          )$
         additional_dependencies:
           - prettier@3.7.4

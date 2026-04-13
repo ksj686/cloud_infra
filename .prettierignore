@@ -1,0 +1,15 @@
+# Prettier 제외 대상 설정
+
+# 패키지 매니저 관리 파일 (기계 생성)
+pnpm-lock.yaml
+package-lock.json
+poetry.lock
+
+# 의존성 폴더
+node_modules/
+.venv/
+
+# 빌드 및 임시 파일
+dist/
+build/
+*.pdf
