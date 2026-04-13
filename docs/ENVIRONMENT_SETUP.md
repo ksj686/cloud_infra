@@ -107,12 +107,14 @@ poetry install
 poetry run pre-commit install
 ````
 
-### 3.2 수동 실행 및 스타일 교정
+### 3.2 수동 실행 및 보안 검사
 
-```bash
-# 모든 파일에 대해 즉시 줄맞춤 및 보안 검사 실행
-poetry run pre-commit run --all-files
-```
+로컬 환경에서의 즉각적인 품질 진단 및 취약점 스캔
+
+- **전수 스타일 교정:** `poetry run pre-commit run --all-files` 명령으로 즉시 스타일 교정 및 보안 검사 실행.
+- **Python 의존성 감사 (SCA):**
+  - **설치:** `poetry add --group dev pip-audit`
+  - **실행:** `poetry run pip-audit` 명령어를 통해 `poetry.lock` 및 현재 환경의 취약점 실시간 진단.
 
 ### 3.3 에디터 연동 및 포맷팅 동기화 (VS Code)
 

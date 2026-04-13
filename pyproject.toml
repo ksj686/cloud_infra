@@ -6,7 +6,7 @@ authors = [
     {name = "ksj686", email = "kim_se_joon@naver.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<4.0"
 dependencies = [
     "mkdocs-material>=9.7.6",
     "mkdocs-mermaid2-plugin>=1.2.3"
@@ -21,5 +21,6 @@ build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
 dev = [
-    "pre-commit (>=4.5.1,<5.0.0)"
+    "pre-commit (>=4.5.1,<5.0.0)",
+    "pip-audit (>=2.10.0,<3.0.0)"
 ]

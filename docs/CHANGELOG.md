@@ -26,6 +26,7 @@
 | :--------- | :------------ | :------------------------------------------------------------------------------------------- | :------------------------------------------------------- |
 | 2026-04-13 | `🎨 Style`    | MkDocs 내비게이션에 `Build-up Guide`의 모든 Phase별 실구축 명세(AS_BUILT) 등록 및 구조화     | `mkdocs.yml`                                             |
 | 2026-04-13 | `🔒 Security` | Python 의존성 보안 도구(`pip-audit`) 도입 및 SCA 보안 가드레일 강제화(자동 차단 로직) 상세화 | `docs/build-up/05_pipeline/*`, `docs/project_outline.md` |
+| 2026-04-13 | `📝 Docs`     | `ENVIRONMENT_SETUP.md` 내 `pip-audit` 설치 및 수동 실행 지침 추가                            | `docs/ENVIRONMENT_SETUP.md`                              |
 | 2026-04-13 | `⚙️ Refactor` | MkDocs 로컬 가동 포트 변경(8000 -> 8008)을 통한 파이썬 서버와의 충돌 방지                    | `docs/ENVIRONMENT_SETUP.md`                              |
 
 | 2026-04-13 | `⚙️ Refactor` | `pnpm` 기반 Prettier 버전 고정(v3.7.4) 및 `.prettierignore` 도입을 통한 포맷팅 일관성 확보 | `.prettierignore`, `package.json`, `.pre-commit-config.yaml` |
