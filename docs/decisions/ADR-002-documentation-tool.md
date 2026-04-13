@@ -6,15 +6,22 @@
 
 ## Context (배경)
 
-- 프로젝트의 진행 상황, 설계도, 실습 가이드를 효율적으로 공유하고 관리할 시각적인 문서 플랫폼이 필요함.
-- 엔지니어링 중심의 깔끔한 디자인과 마크다운(Markdown) 기반의 편집 편의성이 중요함.
+- 프로젝트의 아키텍처, 트러블슈팅 이력, 실습 가이드를 체계적으로 자산화할 플랫폼이 필요함.
+- 코드와 문서의 이격(Drift)을 방지하기 위해 'Docs as Code' 원칙을 준수해야 함.
+
+## Alternatives Considered (대안 분석)
+
+1. **Wiki (Notion, Confluence):** 사용은 편리하나 Git 기반의 버전 관리와 통합이 어렵고, 오프라인 접근성이 떨어짐.
+2. **Static Site Generators (Hugo, Jekyll):** 성능은 우수하나 설정이 복잡하고 엔지니어링 문서 특유의 '검색 및 기술 가이드' UI를 구성하는 데 공수가 많이 듦.
 
 ## Decision (결정)
 
-- **MkDocs**와 **Material for MkDocs** 테마를 프로젝트 표준 문서화 도구로 채택함.
-- 검색 기능, 태그, 카드 그리드 UI 등을 적극 활용하여 가독성을 극대화함.
+- **MkDocs**와 **Material for MkDocs** 테마를 채택함.
+- **이유:** 마크다운(Markdown) 기반의 단순함, 강력한 로컬 검색 엔진, 그리고 엔지니어링 문서에 최적화된 UI(Admonitions, Code Blocks 등)를 제공함.
 
 ## Consequences (결과)
 
-- **이득:** 정적 사이트 생성을 통해 문서 검색 및 접근성이 향상되며, 엔지니어링 톤앤매너 유지 가능.
-- **비용:** 로컬 빌드 환경(Python, mkdocs) 구축 및 설정 관리 필요.
+- **이득:**
+  - Git Flow와 연동된 문서 업데이트 체계 구축 가능 (Docs as Code).
+  - 테마 내장 기능(Grid UI, Tabbed blocks)을 통한 시각적 정보 전달력 향상.
+- **비용:** 로컬 빌드를 위한 Python 환경 유지 및 `mkdocs.yml` 설정 관리가 필요함.
