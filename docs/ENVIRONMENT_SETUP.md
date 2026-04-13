@@ -133,7 +133,8 @@ poetry run pre-commit run --all-files
 
 Material for MkDocs 테마 기반의 기술 문서 사이트 운영
 
-- **로컬 가동:** `poetry run mkdocs serve`
+- **로컬 가동:** `poetry run mkdocs serve -a localhost:8008`
+- **포트 지정:** 파이썬 애플리케이션 서버(8000)와의 포트 충돌 방지를 위해 `8008` 포트 사용 권장.
 - **주요 확장:** Mermaid 다이어그램, 코드 주석, 수식 표현 등 지원 (`mkdocs.yml` 참조).
 
 ---
