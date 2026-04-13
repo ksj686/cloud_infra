@@ -50,15 +50,12 @@
 
 ---
 
-## 4. 대화 기반 의사결정 기록 (Decision Log)
+## 4. 아키텍처 의사결정 기록 (ADR)
 
-- **[2026-03-31] DB 구축 방식:** 직접 구축(Self-managed) 방식 채택 (학습 깊이 우선)
-- **[2026-03-31] 문서화 도구:** MkDocs Material 도입 (엔지니어링 톤 유지)
-- **[2026-04-01] 소스 관리 전략:** 분석용 소스(`lecture/`)를 `docs/` 하위에 두되 웹 메뉴에서는 제외하여 루트를 정결하게 유지
-- **[2026-04-06] 데이터 보존 전략:** 컨테이너 데이터 유실 방지 및 백업 가시성 확보를 위해 호스트 물리 귀속(Bind Mount) 방식 필수 원칙 수립
-- **[2026-04-07] 품질 관리 자동화:** 커밋 전 자동 줄맞춤(Prettier) 및 보안 스캔(Gitleaks)을 위한 `pre-commit` 프레임워크 전면 도입 결정
-- **[2026-04-08] 태스크 관리 전략:**
-  - **현재:** 관리 효율을 위해 운영체제별 전용 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 사용
-  - **중기:** 명령어 증가 시 `pyproject.toml` 내 `poethepoet` 도입 검토
-  - **장기:** pnpm 등 복잡한 의존성 필요 시 `package.json` 도입 고려
-- **[2026-04-13] HA 전략 수립:** 인프라 계층(Proxmox)과 앱 계층(K8s/Swarm)의 역할을 명확히 구분하고, 하부 인프라의 안정성을 기반으로 한 '계층형 가용성(Layered Availability)' 아키텍처를 표준으로 채택함
+본 프로젝트의 모든 주요 기술적 의사결정은 `docs/decisions/` 디렉토리에 **ADR (Architecture Decision Records)** 형식으로 관리함.
+
+- **전체 이력 확인:** [ADR Index (README.md)](decisions/README.md)
+- **최신 주요 결정:**
+  - [ADR-007: HA 계층형 가용성 전략 채택](decisions/ADR-007-ha-layered-strategy.md)
+  - [ADR-006: 태스크 관리 도구 확장 전략](decisions/ADR-006-task-management-strategy.md)
+  - [ADR-005: pre-commit 프레임워크 전면 도입](decisions/ADR-005-quality-automation.md)
