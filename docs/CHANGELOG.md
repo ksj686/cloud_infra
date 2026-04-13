@@ -25,6 +25,7 @@
 | 날짜       | 분류       | 수정 내용                                                                                | 수정 파일               |
 | :--------- | :--------- | :--------------------------------------------------------------------------------------- | :---------------------- |
 | 2026-04-13 | `📝 Docs`  | 엔터프라이즈 분산 스토리지 Ceph 기술 분석 및 가이드(`ceph_storage_deep_dive.md`) 구축    | `docs/knowledge_base/*` |
+| 2026-04-13 | `📝 Docs`  | 인프라(Proxmox) vs 앱(K8s/Swarm) HA 계층형 가용성 전략 분석 문서 구축                    | `docs/knowledge_base/*` |
 | 2026-04-13 | `🎨 Style` | MkDocs 내비게이션에 `Build-up Guide`의 모든 Phase별 실구축 명세(AS_BUILT) 등록 및 구조화 | `mkdocs.yml`            |
 
 | 2026-04-13 | `🔒 Security` | Python 의존성 보안 도구(`pip-audit`) 도입 및 SCA 보안 가드레일 강제화(자동 차단 로직) 상세화 | `docs/build-up/05_pipeline/*`, `docs/project_outline.md` |

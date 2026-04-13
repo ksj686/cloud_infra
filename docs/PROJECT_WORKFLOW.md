@@ -61,3 +61,4 @@
   - **현재:** 관리 효율을 위해 운영체제별 전용 스크립트(`gen-pdf.ps1`, `gen-pdf.sh`) 사용
   - **중기:** 명령어 증가 시 `pyproject.toml` 내 `poethepoet` 도입 검토
   - **장기:** pnpm 등 복잡한 의존성 필요 시 `package.json` 도입 고려
+- **[2026-04-13] HA 전략 수립:** 인프라 계층(Proxmox)과 앱 계층(K8s/Swarm)의 역할을 명확히 구분하고, 하부 인프라의 안정성을 기반으로 한 '계층형 가용성(Layered Availability)' 아키텍처를 표준으로 채택함
