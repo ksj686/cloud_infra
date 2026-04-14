@@ -12,7 +12,6 @@
   **서비스 프로그램**은 컴퓨터가 전원이 켜지면 부팅 후 자동으로 실행되는 프로그램. **백그라운드 프로그램**이라고도 한다.
 
   **서비스 프로그램 관리 방법 - alpine linux는 systemctl 관련 명령어 없음**
-
   1. 컴퓨터 전원이 켜지면 자동 실행
      sudo systemctl enable 서비스명
   2. 서비스 프로그램을 실행 중 종료할 수 있음
@@ -38,9 +37,7 @@
   loaded 부팅시 실행여부. enabled는 실행된다는 뜻.
 
   Active는 현재 실행중인지
-
   - nginx설치
-
     - 우분투에 설치
 
       sudo apt install nginx

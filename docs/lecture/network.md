@@ -46,7 +46,6 @@ ifup/ifdown
 
 - 사용 도구: Netplan
 - 내부적으로 호출:
-
   - systemd-networkd
   - NetworkManager
 
