@@ -85,6 +85,7 @@ nav:
       - Project Taxonomy: knowledge_base/infra_project_taxonomy.md
       - Ceph Storage: knowledge_base/ceph_storage_deep_dive.md
       - Asset Mgmt: knowledge_base/infra_inventory_management.md
+      - uv Migration: knowledge_base/poetry_to_uv_migration.md
       - Tech Guide: knowledge_base/advanced_tech_guide.md
       - Analysis: knowledge_base/analysis_and_improvement.md
       - Checklist: knowledge_base/full_tech_checklist.md
