@@ -59,6 +59,9 @@
   # 가상 환경 생성 및 pyproject.toml 기반 의존성 자동 설치
   uv sync
   ```
+- **설정 최적화 (pyproject.toml):**
+  - **빌드 시스템 제거:** 본 프로젝트는 라이브러리 배포 목적이 아니므로 `[build-system]` 섹션 제거를 통한 단순화 유지.
+  - **표준 문법 준수:** `[dependency-groups]` 내 버전 표기 시 `uv` 및 PEP 표준 스타일(`>=`, `<`) 사용 필수.
 - **의존성 추가:**
   - 일반 패키지: `uv add <package_name>`
   - 개발용 패키지: `uv add --dev <package_name>`

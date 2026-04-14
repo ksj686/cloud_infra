@@ -12,15 +12,8 @@ dependencies = [
     "mkdocs-mermaid2-plugin>=1.2.3"
 ]
 
-[tool.poetry]
-package-mode = false
-
-[build-system]
-requires = ["poetry-core>=2.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [dependency-groups]
 dev = [
-    "pre-commit (>=4.5.1,<5.0.0)",
-    "pip-audit (>=2.10.0,<3.0.0)"
+    "pre-commit>=4.5.1,<5.0.0",
+    "pip-audit>=2.10.0,<3.0.0"
 ]
