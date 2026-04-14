@@ -102,7 +102,10 @@ nav:
   - Policies:
       - Backup Policy: policies/backup_policy.md
       - Log Policy: policies/log_policy.md
-  - Case Studies: case_studies/20260321_github_push_protection.md
+  - Case Studies:
+      - Git Push Protection: case_studies/20260321_github_push_protection.md
+      - pre-commit Encoding: case_studies/20260408_precommit_troubleshooting.md
+      - Win Env & Antivirus: case_studies/20260414_windows_env_troubleshooting.md
   - Solutions:
       - Overview: solutions/README.md
       - Airflow: solutions/01_airflow/README.md
