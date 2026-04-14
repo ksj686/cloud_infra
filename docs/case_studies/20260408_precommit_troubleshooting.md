@@ -7,7 +7,8 @@
 
 ## 1. 문제 상황 (Problem)
 
-- **현상:** `poetry run pre-commit run --all-files` 실행 시 `check-yaml` 및 `ShellCheck` 단계에서 대량의 Failed 발생
+- **현상:** `uv run pre-commit run --all-files` 실행 시 `check-yaml` 및 `ShellCheck` 단계에서 대량의 Failed 발생
+
 - **에러 메시지 1:** `could not determine a constructor for the tag 'tag:yaml.org,2002:python/name...'`
 - **에러 메시지 2:** `SC1017 (error): Literal carriage return. Run script through tr -d '\r' .`
 

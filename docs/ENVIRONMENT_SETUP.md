@@ -11,9 +11,9 @@
 
 ### 1.1 Node.js 환경 구축 (nvm)
 
-- **기존 Node.js 삭제:** `nvm` 설치 전 제어판에서 기존 모든 Node.js 버전 삭제 및 `%AppData%\npm` 폴더 잔여물 정리 필수.
+- **기존 버전 삭제:** `nvm` 설치 전 제어판에서 기존 모든 Node.js 버전 삭제 및 `%AppData%\npm` 폴더 잔여물 정리 필수.
 - **nvm-windows 설치:** [Releases](https://github.com/coreybutler/nvm-windows/releases)에서 `nvm-setup.exe` 다운로드 및 설치.
-- **Node.js LTS 설치 및 적용:**
+- **Node.js LTS 적용:**
   ```powershell
   nvm install lts
   nvm use lts
@@ -38,40 +38,30 @@
 
 ---
 
-## 2. Python 환경 구축 (pyenv & Poetry)
+## 2. Python 환경 구축 (uv)
 
-프로젝트별 독립된 가상 환경 및 의존성 버전 고정 체계 수립
+고성능 리졸버 및 파이썬 버전 관리 통합 도구인 **`uv`** 기반의 환경 구축
 
-### 2.1 pyenv-win을 이용한 버전 동기화
+### 2.1 uv 설치 및 파이썬 버전 관리
 
-- **설치 스크립트:**
+- **uv 설치 (Windows PowerShell):**
   ```powershell
-  Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
+  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
   ```
-- **중요 사전 설정:** '앱 실행 별칭'에서 `python.exe`, `python3.exe`를 모두 **'끔'**으로 변경하여 명령어 충돌 방지
-- **버전 적용:**
-  ```bash
-  # .python-version 파일에 명시된 버전과 일치화
-  pyenv install 3.12.8
-  pyenv local 3.12.8
-  ```
+- **파이썬 설치 및 고정:**
+  - `uv`는 별도의 `pyenv` 없이 프로젝트의 `.python-version`을 참조하여 파이썬 자동 설치 지원.
+  - **수동 설치 (필요 시):** `uv python install 3.12.8`
 
-### 2.2 Poetry 설치 및 가상 환경 관리
+### 2.2 가상 환경 및 의존성 관리
 
-- **Poetry 설치:**
+- **환경 초기화 및 싱크:**
   ```powershell
-  (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+  # 가상 환경 생성 및 pyproject.toml 기반 의존성 자동 설치
+  uv sync
   ```
-- **PATH 등록 (CRITICAL):** 설치 로그 하단의 **`Add ... to your PATH`** 뒤에 표시된 **절대 경로**를 시스템 환경 변수 `Path` 최상단에 직접 등록 필수
-- **프로젝트 내부 가상 환경 설정:**
-  ```bash
-  poetry config virtualenvs.in-project true
-  ```
-
-### 2.3 의존성 초기화 및 설치 (상황별 절차)
-
-- **Initial Setup:** `poetry init` 후 `poetry add mkdocs-material mkdocs-mermaid2-plugin` 실행
-- **Joining Project:** `poetry lock` (설정 변경 시) 후 `poetry install` 실행
+- **의존성 추가:**
+  - 일반 패키지: `uv add <package_name>`
+  - 개발용 패키지: `uv add --dev <package_name>`
 
 ---
 
@@ -79,42 +69,22 @@
 
 커밋 전 자동 줄맞춤(Prettier) 및 시크릿 유출 차단(Gitleaks) 강제화
 
-### 3.1 설치 및 Hook 등록 (상황별 절차)
-
-#### A. 프로젝트 최초 설정 시 (Project Creator)
-
-`pyproject.toml`에 의존성을 추가하고 훅을 활성화하는 최초 1회 작업
-
-```bash
-# 1. 개발 의존성으로 툴 설치
-poetry add --group dev pre-commit
-
-# 2. Git Hook 등록 (로컬 .git 설정에 반영)
-poetry run pre-commit install
-```
-
-#### B. 저장소 클론 후 신규 참여 시 (Contributors) - 필수
-
-패키지 설치 후 **로컬 Git 훅 활성화**를 위해 반드시 수행
-
-````bash
 ### 3.1 설치 및 Hook 등록
+
 ```powershell
 # 1. 의존성 설치 (pre-commit 포함)
-poetry install
+uv sync
 
 # 2. Git Hook 등록 (로컬 .git 설정에 반영)
-poetry run pre-commit install
-````
+uv run pre-commit install
+```
 
 ### 3.2 수동 실행 및 보안 검사
 
-로컬 환경에서의 즉각적인 품질 진단 및 취약점 스캔
-
-- **전수 스타일 교정:** `poetry run pre-commit run --all-files` 명령으로 즉시 스타일 교정 및 보안 검사 실행.
+- **전수 스타일 교정:** `uv run pre-commit run --all-files` 명령으로 즉시 스타일 교정 및 보안 검사 실행.
 - **Python 의존성 감사 (SCA):**
-  - **설치:** `poetry add --group dev pip-audit`
-  - **실행:** `poetry run pip-audit` 명령어를 통해 `poetry.lock` 및 현재 환경의 취약점 실시간 진단.
+  - **설치:** `uv add --dev pip-audit`
+  - **실행:** `uv run pip-audit` 명령어를 통해 `uv.lock` 기반의 라이브러리 취약점 실시간 진단.
 
 ### 3.3 에디터 연동 및 포맷팅 동기화 (VS Code)
 
@@ -124,38 +94,33 @@ poetry run pre-commit install
   ```json
   {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true
   }
   ```
-- **작동 원리:** 프로젝트 로컬에 설치된 `prettier` 패키지 버전을 자동으로 참조하여 포맷팅 수행.
 
 ---
 
 ## 4. MkDocs 웹 포털 가동 및 확장
 
-Material for MkDocs 테마 기반의 기술 문서 사이트 운영
-
-- **로컬 가동:** `poetry run mkdocs serve -a localhost:8008`
-- **포트 지정:** 파이썬 애플리케이션 서버(8000)와의 포트 충돌 방지를 위해 `8008` 포트 사용 권장.
-- **주요 확장:** Mermaid 다이어그램, 코드 주석, 수식 표현 등 지원 (`mkdocs.yml` 참조).
+- **로컬 가동:** `uv run mkdocs serve -a localhost:8008`
+- **포트 충돌 방지:** 기본 8000 포트 대신 `8008` 포트 사용 준수.
 
 ---
 
 ## 5. 발표 자료 관리 및 PDF 변환 (Marp)
 
-마크다운 기반 장표 관리 및 표준 PDF 문서 생성 절차
-
-- **대상 파일:** `docs/presentation/presentation.md`
 - **PDF 변환 명령어:**
   - **단축 스크립트 이용 (추천):** `./gen-pdf.ps1` (Windows), `./gen-pdf.sh` (macOS/Linux)
   - **직접 실행:** `npx @marp-team/marp-cli@latest docs/presentation/presentation.md --pdf`
-- **관리 원칙:** 슬라이드 구분(`---`), 발표자 전용 메모(`<!-- 주석 -->`) 및 YAML Frontmatter 조정 지침 준수.
 
 ---
 
 ## 6. 트러블슈팅 및 관리 원칙
 
-- **한글 깨짐 (PowerShell):** `$env:PYTHONUTF8=1` 또는 인코딩 고정 명령 사용.
-- **의존성 불일치:** `pyproject.toml` 변경 시 반드시 `poetry lock`으로 잠금 파일 동기화.
-- **보안 준수:** `.venv`, `node_modules`, 민감 정보 파일은 절대 Git 추적 금지 (`.gitignore` 확인).
+- **한글 깨짐 (PowerShell):** `$env:PYTHONUTF8=1` 설정 사용.
+- **줄바꿈(LF) 강제:** `.gitattributes` 파일을 통해 Git 수준에서 LF 형식 강제화.
+- **보안 준수:** `.venv`, `node_modules`, 민감 정보 파일은 절대 Git 추적 금지.
 - **상시 업데이트:** 환경 관련 모든 변경 사항은 본 문서에 즉시 기록하여 최신 상태 유지.

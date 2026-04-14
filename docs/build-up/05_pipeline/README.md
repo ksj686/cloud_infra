@@ -47,11 +47,13 @@
 - **SAST (Semgrep) 정적 분석:** 소스 코드 내 보안 취약 패턴 및 코드 스멜(Code Smell) 자동 탐지
 - **SCA (Software Composition Analysis) 종속성 감사:**
   - **Node.js (pnpm audit):** `pnpm-lock.yaml` 기반의 프론트엔드/API 라이브러리 취약점 전수 검사
-  - **Python (pip-audit):** `poetry.lock` 파일을 직접 스캔하여 파이썬 패키지의 알려진 보안 결함 탐지
+  - **Python (pip-audit):** `uv.lock` 파일을 직접 스캔하여 파이썬 패키지의 알려진 보안 결함 탐지
+
   - **보안 가드레일 (Enforcement):**
     - **자동 차단 로직:** 취약점 레벨이 'High' 또는 'Critical'인 경우 파이프라인 프로세스 즉시 중단 및 종료 코드(Exit Code 1) 반환
     - **공급망 무결성:** 보안 검사를 통과하지 못한 코드는 Harbor 레지스트리로의 이미지 Push 및 Staging 환경 배포를 원천 차단
     - **사후 조치:** 발견된 CVE 번호를 기반으로 라이브러리 버전 업데이트 또는 대체 라이브러리 검토 후 재검증 수행
+
 - **Trivy 이미지 정밀 스캔:**
   - 최종 이미지 아티팩트의 OS 패키지 및 런타임 보안 결함 최종 검증
   - 분석 결과의 중앙 대시보드 전송 및 Slack/Email 연동 통보

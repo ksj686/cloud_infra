@@ -11,7 +11,7 @@
 - **[완료] 문서 작성 원칙 수립:** 순수 명사형 종결 및 기술적 정교함 원칙 정의 (`GEMINI.md`)
 - **[완료] 기술 지식 베이스 구축:** 엔터프라이즈 HA 및 관측성 분석 완료 (`docs/knowledge_base/`)
 - **[완료] 웹 포털 인프라 구축:** MkDocs Material 기반 환경 설정 및 빌드 검증 완료
-- **[완료] 개발 환경 표준화:** Poetry, pyenv, nvm 도입 및 지침 수립 (`docs/ENVIRONMENT_SETUP.md`)
+- **[완료] 개발 환경 표준화:** uv, nvm 도입 및 지침 수립 (`docs/ENVIRONMENT_SETUP.md`)
 - **[진행 중] 실습 로드맵 이행:** Step 1 기초 자동화 실습 착수 및 가이드 작성 중
 
 ---
