@@ -41,6 +41,7 @@ repos:
         types_or: [markdown, yaml, json]
         exclude: |
           (?x)^(
+            uv\.lock|
             pnpm-lock\.yaml|
             package-lock\.json|
             poetry\.lock

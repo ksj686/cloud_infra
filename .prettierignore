@@ -1,6 +1,7 @@
 # Prettier 제외 대상 설정
 
 # 패키지 매니저 관리 파일 (기계 생성)
+uv.lock
 pnpm-lock.yaml
 package-lock.json
 poetry.lock
