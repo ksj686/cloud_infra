@@ -74,13 +74,27 @@
 
 ### 3.1 설치 및 Hook 등록
 
-```powershell
-# 1. 의존성 설치 (pre-commit 포함)
-uv sync
+보안 검사 및 의존성 자동 동기화 환경 구축
 
-# 2. Git Hook 등록 (로컬 .git 설정에 반영)
+#### A. 의존성 및 훅 활성화 (전 공통)
+
+```powershell
+# 1. Python 및 Node.js 의존성 통합 설치
+uv sync
+pnpm install
+
+# 2. pre-commit 훅 등록 (보안 및 품질 검사)
 uv run pre-commit install
+
+# 3. Husky 훅 초기화 (의존성 자동 동기화 활성화)
+pnpm exec husky init
 ```
+
+#### B. 의존성 자동 동기화 (Husky & post-merge)
+
+`git pull` 시 락파일(`pnpm-lock.yaml`, `uv.lock`) 변경을 감지하여 패키지를 자동 업데이트함.
+
+- **상세 가이드:** [Git Hook 기반 협업 자동화 가이드](./playbooks/dev/git_hook_automation.md) 참조.
 
 ### 3.2 수동 실행 및 보안 검사
 

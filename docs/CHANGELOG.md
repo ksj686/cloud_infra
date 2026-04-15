@@ -22,13 +22,18 @@
 
 ## [파이썬 관리 도구 uv 전환 및 아키텍처 정립]
 
-| 날짜       | 분류          | 수정 내용                                                                                | 수정 파일                                                                 |
-| :--------- | :------------ | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------ |
-| 2026-04-14 | `⚙️ Refactor` | `pyproject.toml` 구조 최적화(build-system 제거 등) 및 `uv` 표준 의존성 문법 적용         | `pyproject.toml`, `docs/ENVIRONMENT_SETUP.md`                             |
-| 2026-04-14 | `📝 Docs`     | 상세 마이그레이션 가이드(`poetry_to_uv_migration.md`) 구축 및 호스트 환경 정리 지침 보완 | `docs/knowledge_base/*`                                                   |
-| 2026-04-14 | `🛠️ Fix`      | 윈도우 환경 Poetry 삭제 오류 및 백신 오탐(Gitleaks) 대응 사례(`20260414_*.md`) 추가      | `docs/case_studies/*`                                                     |
-| 2026-04-15 | `⚙️ Refactor` | Prettier 포맷팅 대상에서 `uv.lock` 제외를 위한 설정 업데이트                             | `.prettierignore`, `.pre-commit-config.yaml`                              |
-| 2026-04-15 | `⚙️ Refactor` | 파이썬 환경 관리 도구를 Poetry/pyenv에서 **`uv`**로 전면 전환 및 환경 구축 가이드 개편   | `docs/ENVIRONMENT_SETUP.md`, `pyproject.toml`, `docs/PROJECT_WORKFLOW.md` |
+| 날짜       | 분류          | 수정 내용                                                                          | 수정 파일                                     |
+| :--------- | :------------ | :--------------------------------------------------------------------------------- | :-------------------------------------------- |
+| 2026-04-15 | `🚀 Feature`  | Husky 기반의 Git Hook 공유 및 의존성 자동 동기화(`post-merge`) 체계 구축           | `docs/playbooks/dev/*`, `.husky/*`            |
+| 2026-04-15 | `⚙️ Refactor` | 개발자 환경 자동화 가이드를 `playbooks/dev/`로 이관하여 기술 자산 분류 체계 정교화 | `docs/playbooks/dev/*`, `mkdocs.yml`          |
+| 2026-04-15 | `⚙️ Refactor` | `pyproject.toml` 구조 최적화(build-system 제거 등) 및 `uv` 표준 의존성 문법 적용   | `pyproject.toml`, `docs/ENVIRONMENT_SETUP.md` |
+
+| 2026-04-14 | `📝 Docs` | 상세 마이그레이션 가이드(`poetry_to_uv_migration.md`) 구축 및 호스트 환경 정리 지침 보완 | `docs/knowledge_base/*` |
+| 2026-04-14 | `🛠️ Fix` | 윈도우 환경 Poetry 삭제 오류 및 백신 오탐(Gitleaks) 대응 사례(`20260414_*.md`) 추가 | `docs/case_studies/*` |
+| 2026-04-15 | `🚀 Feature` | Git Hook 기반 협업 자동화 가이드(`git_hook_automation.md`) 구축 및 Husky 설정 최적화 | `docs/knowledge_base/*`, `docs/ENVIRONMENT_SETUP.md` |
+| 2026-04-15 | `⚙️ Refactor` | Prettier 포맷팅 대상에서 `uv.lock` 제외를 위한 설정 업데이트 | `.prettierignore`, `.pre-commit-config.yaml` |
+
+| 2026-04-15 | `⚙️ Refactor` | 파이썬 환경 관리 도구를 Poetry/pyenv에서 **`uv`**로 전면 전환 및 환경 구축 가이드 개편 | `docs/ENVIRONMENT_SETUP.md`, `pyproject.toml`, `docs/PROJECT_WORKFLOW.md` |
 
 | 2026-04-14 | `⚙️ Refactor` | `pip-audit` 실행 명령어 및 가이드 내 모든 파이썬 실행 환경을 `uv run` 체계로 업데이트 | `docs/ENVIRONMENT_SETUP.md`, `docs/case_studies/*` |
 | 2026-04-14 | `📝 Docs` | ADR-008 아키텍처 결정서 내 파이썬 도구 선정 근거를 `uv` 중심으로 최신화 및 재승인 | `docs/decisions/ADR-008-tech-stack-rationale.md` |

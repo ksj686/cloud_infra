@@ -90,6 +90,8 @@ nav:
       - Analysis: knowledge_base/analysis_and_improvement.md
       - Checklist: knowledge_base/full_tech_checklist.md
   - Playbooks:
+      - Dev:
+          - Hook Automation: playbooks/dev/git_hook_automation.md
       - Ops:
           - Audit System: playbooks/ops/audit_system.md
           - Safe Upgrade: playbooks/ops/safe_upgrade.md
