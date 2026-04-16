@@ -19,14 +19,26 @@
   - `%LOCALAPPDATA%\pypoetry` (캐시 및 가상환경)
   - **명령어:** `Remove-Item -Recurse -Force $env:APPDATA\pypoetry, $env:LOCALAPPDATA\pypoetry`
 
-### 1.2 pyenv-win 전역 삭제
+### 1.2 pyenv-win 전역 삭제 (PowerShell)
 
-- **설치 폴더 제거:** 기본 설치 경로인 `$HOME\.pyenv` 폴더를 통째로 삭제.
-- **환경 변수 정리 (중요):**
-  - 시스템 속성 -> 환경 변수 -> `Path` 항목에서 아래 경로 관련 항목 전수 제거:
-    - `.pyenv\pyenv-win\bin`
-    - `.pyenv\pyenv-win\shims`
-  - `PYENV`, `PYENV_HOME`, `PYENV_ROOT` 등의 사용자 변수 삭제.
+터미널에서 아래 스크립트를 실행하여 폴더 삭제 및 환경 변수 정리를 한 번에 수행합니다.
+
+```powershell
+# 1. 설치 폴더 제거
+Remove-Item -Recurse -Force "$HOME\.pyenv"
+
+# 2. 사용자 환경 변수(PYENV 관련) 완전 삭제
+"PYENV", "PYENV_HOME", "PYENV_ROOT" | ForEach-Object {
+    [System.Environment]::SetEnvironmentVariable($_, $null, "User")
+}
+
+# 3. Path 환경 변수에서 pyenv 관련 경로 제거
+$oldPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
+$newPath = ($oldPath -split ';' | Where-Object { $_ -notmatch 'pyenv-win' }) -join ';'
+[System.Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+
+Write-Host "pyenv-win 삭제 및 환경 변수 정리가 완료되었습니다. 터미널을 재시작하세요." -ForegroundColor Green
+```
 
 ### 1.3 프로젝트 로컬 파일 정리
 
@@ -44,6 +56,7 @@
   ```powershell
   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
   ```
+- **환경 변수 적용 (필수):** 설치 완료 후, 새로운 `Path` 설정을 반영하기 위해 **현재 사용 중인 터미널(PowerShell) 또는 VS Code를 반드시 재시작**합니다.
 - **설치 확인:** `uv --version`
 
 ---
@@ -131,6 +144,12 @@ uv run pip-audit
 
 ## 6. 트러블슈팅 (Troubleshooting)
 
+- **pip-audit 가상 환경 경고:** 윈도우에서 `uv run pip-audit` 실행 시 드라이브 문자 대소문자 인식 차이(`C:` vs `c:`)로 인해 환경 불일치 경고가 발생할 수 있습니다.
+  - **현상:** `pip-audit will run pip against ... but you have a virtual environment loaded at ...`
+  - **해결:** `uv run` 대신 `uvx`를 사용하면 독립된 환경에서 깨끗하게 실행됩니다.
+    ```powershell
+    uvx pip-audit
+    ```
 - **SSL 에러 (인증서 관련):** 기업망 내부에서 설치 스크립트 실행 실패 시 `--insecure` 옵션 검토 또는 사설 CA 등록 확인.
 - **Path 인식 불가:** 설치 직후 `uv` 명령어가 인식되지 않을 경우, 터미널 재시작 또는 `$env:Path`에 `~/.cargo/bin` 추가 여부 확인.
 - **인코딩 충돌:** Windows 환경에서 로그 확인 시 한글 깨짐 발생 시 `$env:PYTHONUTF8=1` 설정 후 실행.
