@@ -80,15 +80,17 @@ nav:
       - Phase 6 (Scalability):
           - Guide: build-up/06_scalability/README.md
           - As-built: build-up/06_scalability/AS_BUILT.md
+  - Engineering Standards:
+      - Core Common Elements: standards/common_infra_elements.md
+      - Asset Management: standards/infra_inventory_management.md
+      - Poetry to uv Migration: standards/poetry_to_uv_migration.md
+      - HA Strategy Analysis: standards/infra_ha_strategy_analysis.md
+      - Analysis & Improvement: standards/analysis_and_improvement.md
   - Knowledge Base:
-      - Core Elements: knowledge_base/common_infra_elements.md
+      - Advanced Tech Guide: knowledge_base/advanced_tech_guide.md
       - Project Taxonomy: knowledge_base/infra_project_taxonomy.md
-      - Ceph Storage: knowledge_base/ceph_storage_deep_dive.md
-      - Asset Mgmt: knowledge_base/infra_inventory_management.md
-      - uv Migration: knowledge_base/poetry_to_uv_migration.md
-      - Tech Guide: knowledge_base/advanced_tech_guide.md
-      - Analysis: knowledge_base/analysis_and_improvement.md
-      - Checklist: knowledge_base/full_tech_checklist.md
+      - Ceph Storage Deep-dive: knowledge_base/ceph_storage_deep_dive.md
+      - Full Tech Checklist: knowledge_base/full_tech_checklist.md
   - Playbooks:
       - Dev:
           - Hook Automation: playbooks/dev/git_hook_automation.md
