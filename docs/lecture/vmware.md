@@ -1,5 +1,4 @@
 - 특정 서버 디스크 용량 늘리고 싶을때
-
   1. snapshot 지워야 늘릴 수 있음
 
   ![image.png](attachment:3d734f8c-cdd0-4e93-9ecf-385a162de920:image.png)
@@ -8,13 +7,10 @@
   sudo apt update && sudo apt install cloud-guest-utils
 
   2)파티션 확장 (sda의 2번 파티션 확장)
-  sudo growpart /dev/sda 2
-
-  3. ext4 파일시스템 기준 확장
-     sudo resize2fs /dev/sda2
+  sudo growpart /dev/sda 2 3. ext4 파일시스템 기준 확장
+  sudo resize2fs /dev/sda2
 
   4)Compact 를 누르면 사용하지 않는 공간 정리?
-
   1.  새로운 하드디스크 add(그냥은 안올라옴. )
       [(책)이것이우분투리눅스다](https://www.notion.so/31b797a31b6e809ab3ebf914a2792874?pvs=21) → ‘p.386~396 vmware에 하드 추가’ 내용 참고
 
@@ -33,7 +29,6 @@
   그러나 이젠 사용 가능
 
   VMWare workstation, player 둘의 차이
-
   1. 동시에 실행했을때 player는 메인 화면에 띄운것 외에 다른 머신은 안보임
   2. 네트워크에 대한 설정변경 불가
 
@@ -49,7 +44,6 @@
   VMWare 설치 후 문서 폴더에 Virtual Machines 폴더 생성 후 강사님이 주신 zip 파일 압축 풀기
 
   Home tab 실수로 닫으면 tabs → Go to home tab
-
   - 우분투 서버
 
     Virtual Machines\우분투서버\우분투서버.vmx
