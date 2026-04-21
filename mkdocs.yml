@@ -96,6 +96,7 @@ nav:
           - Hook Automation: playbooks/dev/git_hook_automation.md
           - History Cleanup: playbooks/dev/git_history_cleanup_guide.md
       - Ops:
+          - Dependency Update: playbooks/ops/dependency_update_policy.md
           - Audit System: playbooks/ops/audit_system.md
           - Safe Upgrade: playbooks/ops/safe_upgrade.md
           - SSH Onboarding: playbooks/ops/ssh_onboarding.md
