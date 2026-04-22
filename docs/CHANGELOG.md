@@ -20,14 +20,18 @@
 
 ---
 
-## [운영 프로세스 내실화 및 가용성 전략 보완]
+## [인프라 구축 가이드 정교화 및 기술 명세 완결]
 
 | 날짜       | 분류          | 수정 내용                                                              | 수정 파일                                            |
 | :--------- | :------------ | :--------------------------------------------------------------------- | :--------------------------------------------------- |
-| 2026-04-21 | `📝 Docs`     | 의존성 업데이트 및 유지보수 정책(`dependency_update_policy.md`) 수립   | `docs/playbooks/ops/*`                               |
+| 2026-04-22 | `📝 Docs`     | Phase 1~6 전체 단계별 상세 구현 지침서(`IMPLEMENTATION.md`) 전수 구축  | `docs/build-up/**/IMPLEMENTATION.md`                 |
+| 2026-04-22 | `🎨 Style`    | MkDocs 내비게이션 내 구현 지침서 메뉴 등록 및 전체 구조 최적화         | `mkdocs.yml`, `docs/build-up/README.md`              |
 | 2026-04-22 | `⚙️ Refactor` | K8s 준비를 위한 Swap 비활성화 및 Cloud-init 자동화 템플릿 명세 보완    | `docs/build-up/01_foundation/README.md`              |
 | 2026-04-22 | `⚙️ Refactor` | YAML DRY 원칙(앵커/별칭) 및 무중단 롤링 업데이트 세부 전략 가이드 통합 | `docs/standards/*`, `docs/build-up/06_scalability/*` |
-| 2026-04-21 | `🎨 Style`    | MkDocs 내비게이션 내 운영 정책 메뉴 등록 및 최적화                     | `mkdocs.yml`                                         |
+
+---
+
+## [운영 프로세스 내실화 및 가용성 전략 보완]
 
 ---
 
