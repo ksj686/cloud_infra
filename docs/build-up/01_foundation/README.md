@@ -13,6 +13,7 @@
   - **네트워크 할당 계획:** Gateway `192.168.100.1`, Proxmox UI 접속 주소 `https://192.168.100.10:8006`
 - **표준 가상 머신(VM) 생성:**
   - Ubuntu Server 24.04 LTS 공식 템플릿 기반 게스트 OS 프로비저닝
+  - **Cloud-init 자동화:** `timezone: Asia/Seoul` 설정 및 `qemu-guest-agent`, `curl` 등 필수 패키지 자동 설치 템플릿 정의
   - **권장 하드웨어 사양:**
     - CPU: 최소 2 Core (AES-NI 명령어 세트 지원 확인을 통한 암호화 성능 확보)
     - RAM: 최소 4GB (운영 안정성 고려)
@@ -35,6 +36,8 @@
 - **보안 패치 유지보수 자동화:**
   - `unattended-upgrades` 패키지 도입을 통한 보안 업데이트 실시간 자동 적용
   - `/etc/apt/apt.conf.d/50unattended-upgrades` 내 배포처 설정을 통한 제로데이 취약점 노출 최소화
+- **메모리 운영 무결성 (K8s 준비):**
+  - **Swap 비활성화:** 스케줄링 예측 불가능성 제거를 위해 `sudo swapoff -a` 실행 및 `/etc/fstab` 내 swap 항목 영구 제거 필수
 - **시스템 최적화:** `apt autoremove` 및 `apt clean` 정기 수행을 통한 디스크 잔여 데이터 정리 및 파일 시스템 안정성 유지
 
 ## 3. 시스템 감사 체계 구축 (Security Auditing)
