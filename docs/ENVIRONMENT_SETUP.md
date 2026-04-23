@@ -1,143 +1,88 @@
 # Project Environment Setup Guide (Local Host)
 
-본 문서는 프로젝트 가동을 위한 로컬 개발 환경(Python, Node.js) 구축 지침 및 품질 관리 절차 정리.
-**※ 주의:** 본 문서는 사용자 로컬 PC(Host) 설정 전용이며, 인프라 서버(Server) 내부 설정은 `docs/build-up/` 가이드를 참조.
+본 문서는 프로젝트 가동을 위한 로컬 개발 환경 구축 지침임. 사용자의 역할(초기 구축자 vs 협업 참여자)에 따른 맞춤형 절차를 제공함.
 
 ---
 
-## 1. Node.js 및 패키지 관리 환경 (nvm & pnpm)
+## 1. 전 공통 필수 런타임 설치 (Common Prerequisites)
 
-버전 파편화 방지 및 도구 버전 고정을 위한 런타임 환경 구성
+역할과 관계없이 모든 작업자가 로컬 PC에 사전에 갖추어야 할 기본 도구
 
-### 1.1 Node.js 환경 구축 (nvm)
+### 1.1 Node.js 및 전역 도구 (nvm & pnpm)
 
-- **기존 버전 삭제:** `nvm` 설치 전 제어판에서 기존 모든 Node.js 버전 삭제 및 `%AppData%\npm` 폴더 잔여물 정리 필수.
-- **nvm-windows 설치:** [Releases](https://github.com/coreybutler/nvm-windows/releases)에서 `nvm-setup.exe` 다운로드 및 설치.
-- **Node.js LTS 적용:**
-  ```powershell
-  nvm install lts
-  nvm use lts
-  ```
+- **Node.js LTS 설치:** `nvm install lts` 후 `nvm use lts` 수행
+- **패키지 매니저:** `npm install -g pnpm`
+- **Gemini CLI:** `npm install -g @google/gemini-cli`
 
-### 1.2 전역 도구 설치 (Global Tools)
+### 1.2 Python 환경 관리 (uv)
 
-- **패키지 매니저 설치:** `npm install -g pnpm`
-- **Gemini CLI 설치:** `npm install -g @google/gemini-cli`
-
-### 1.3 프로젝트 로컬 의존성 및 버전 고정 (Prettier)
-
-에디터(VS Code)와 `pre-commit` 간의 포맷팅 버전 불일치 원천 차단
-
-- **프로젝트 초기화:** `package.json`이 없는 경우 수행 (`pnpm init`)
-- **Prettier 버전 명시적 설치:**
-  ```powershell
-  # pre-commit에 설정된 버전(예: 3.7.4)과 일치시켜 로컬 설치
-  pnpm add -D prettier@3.7.4
-  ```
-- **팀 협업 적용:** 신규 참여자는 `pnpm install` 실행만으로 고정된 버전의 도구 즉시 확보.
-
----
-
-## 2. Python 환경 구축 (uv)
-
-고성능 리졸버 및 파이썬 버전 관리 통합 도구인 **`uv`** 기반의 환경 구축
-
-### 2.1 uv 설치 및 파이썬 버전 관리
-
-- **uv 설치 (Windows PowerShell):**
+- **uv 설치:**
   ```powershell
   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
   ```
-- **파이썬 설치 및 고정:**
-  - `uv`는 별도의 `pyenv` 없이 프로젝트의 `.python-version`을 참조하여 파이썬 자동 설치 지원.
-  - **수동 설치 (필요 시):** `uv python install 3.12.8`
-
-### 2.2 가상 환경 및 의존성 관리
-
-- **환경 초기화 및 싱크:**
-  ```powershell
-  # 가상 환경 생성 및 pyproject.toml 기반 의존성 자동 설치
-  uv sync
-  ```
-- **설정 최적화 (pyproject.toml):**
-  - **빌드 시스템 제거:** 본 프로젝트는 라이브러리 배포 목적이 아니므로 `[build-system]` 섹션 제거를 통한 단순화 유지.
-  - **표준 문법 준수:** `[dependency-groups]` 내 버전 표기 시 `uv` 및 PEP 표준 스타일(`>=`, `<`) 사용 필수.
-- **의존성 추가:**
-  - 일반 패키지: `uv add <package_name>`
-  - 개발용 패키지: `uv add --dev <package_name>`
+- **설치 확인:** `uv --version` (별도의 파이썬 설치 불필요, uv가 프로젝트 설정에 맞춰 자동 관리)
 
 ---
 
-## 3. 품질 및 보안 관리 (pre-commit)
+## 2. 초기 환경 구축자 가이드 (For Project Initializer)
 
-커밋 전 자동 줄맞춤(Prettier) 및 시크릿 유출 차단(Gitleaks) 강제화
+저장소 생성 및 프로젝트 초기 표준을 수립하는 관리자 전용 절차
 
-### 3.1 설치 및 Hook 등록
+### 2.1 프로젝트 초기화 및 표준 수립
 
-보안 검사 및 의존성 자동 동기화 환경 구축
+- **의존성 그룹 정의:** `pyproject.toml` 내 `[dependency-groups]` 표준 문법 적용 및 빌드 시스템 최적화
+- **포맷팅 표준 고정:** `pnpm add -D prettier@3.7.4`를 통해 팀 공통 버전 고정 및 `.prettierignore` 작성
 
-#### A. 의존성 및 훅 활성화 (전 공통)
+### 2.2 Git Hook 자동화 체계 수립
+
+- **Husky 초기화:** `pnpm exec husky init`
+- **자동 동기화 스크립트 구축:** `post-merge` 훅 생성 및 락파일 감지 로직 구현
+- **상세 절차서:** [Git Hook 협업 자동화 가이드](./playbooks/dev/git_hook_automation.md) 참조하여 실구축 수행
+
+---
+
+## 3. 협업 참여자 가이드 (For Collaborators & Team Members)
+
+저장소 `clone` 이후 프로젝트에 신규 합류한 팀원이 수행해야 할 온보딩 절차
+
+### 3.1 저장소 복제 및 초기 활성화
 
 ```powershell
-# 1. Python 및 Node.js 의존성 통합 설치
-uv sync
+# 1. 저장소 복제
+git clone <repository_url>
+cd cloud_infra
+
+# 2. 통합 의존성 설치 및 Husky 훅 활성화 (최초 1회 필수)
 pnpm install
+uv sync
 
-# 2. pre-commit 훅 등록 (보안 및 품질 검사)
+# 3. 보안 및 품질 검사(pre-commit) 훅 등록
 uv run pre-commit install
-
-# 3. Husky 훅 초기화 (의존성 자동 동기화 활성화)
-pnpm exec husky init
 ```
 
-#### B. 의존성 자동 동기화 (Husky & post-merge)
+### 3.2 자동화 적용 확인
 
-`git pull` 시 락파일(`pnpm-lock.yaml`, `uv.lock`) 변경을 감지하여 패키지를 자동 업데이트함.
-
-- **상세 가이드:** [Git Hook 기반 협업 자동화 가이드](./playbooks/dev/git_hook_automation.md) 참조.
-
-### 3.2 수동 실행 및 보안 검사
-
-- **전수 스타일 교정:** `uv run pre-commit run --all-files` 명령으로 즉시 스타일 교정 및 보안 검사 실행.
-- **Python 의존성 감사 (SCA):**
-  - **설치:** `uv add --dev pip-audit`
-  - **실행:** `uv run pip-audit` 명령어를 통해 `uv.lock` 기반의 라이브러리 취약점 실시간 진단.
-
-### 3.3 에디터 연동 및 포맷팅 동기화 (VS Code)
-
-로컬 `node_modules`에 고정된 Prettier를 사용하여 일관성 확보
-
-- **VS Code 권장 설정 (`.vscode/settings.json`):**
-  ```json
-  {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "files.eol": "\n",
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true
-  }
-  ```
+- 설정 완료 후 `git pull` 수행 시 락파일 변경이 감지되면 패키지가 자동으로 업데이트됨.
+- 별도의 수동 설치 명령 없이 최신 개발 환경 상시 유지 가능.
 
 ---
 
-## 4. MkDocs 웹 포털 가동 및 확장
+## 4. 품질 관리 및 에디터 최적화 (Quality & Editor)
 
-- **로컬 가동:** `uv run mkdocs serve -a localhost:8008`
-- **포트 충돌 방지:** 기본 8000 포트 대신 `8008` 포트 사용 준수.
+### 4.1 수동 보안 검사 (SCA)
+
+- **Node.js:** `pnpm audit`
+- **Python:** `uv run pip-audit`
+
+### 4.2 에디터 연동 (VS Code 권장)
+
+- **Prettier 동기화:** `.vscode/settings.json` 내 `esbenp.prettier-vscode` 지정 필수
+- **YAML 경고 제거:** MkDocs 전용 Python 태그(!!python/name)에 대한 `customTags` 등록 필수
 
 ---
 
-## 5. 발표 자료 관리 및 PDF 변환 (Marp)
+## 5. 트러블슈팅 및 관리 원칙
 
-- **PDF 변환 명령어:**
-  - **단축 스크립트 이용 (추천):** `./gen-pdf.ps1` (Windows), `./gen-pdf.sh` (macOS/Linux)
-  - **직접 실행:** `npx @marp-team/marp-cli@latest docs/presentation/presentation.md --pdf`
-
----
-
-## 6. 트러블슈팅 및 관리 원칙
-
-- **한글 깨짐 (PowerShell):** `$env:PYTHONUTF8=1` 설정 사용.
-- **줄바꿈(LF) 강제:** `.gitattributes` 파일을 통해 Git 수준에서 LF 형식 강제화.
-- **보안 준수:** `.venv`, `node_modules`, 민감 정보 파일은 절대 Git 추적 금지.
-- **상시 업데이트:** 환경 관련 모든 변경 사항은 본 문서에 즉시 기록하여 최신 상태 유지.
+- **포트 준수:** MkDocs 로컬 가동 시 **8008** 포트 사용 (파이썬 서버 충돌 방지)
+- **보안 준수:** `.venv`, `node_modules`, `passwords.txt` 등 민감 자산 Git 추적 금지
+- **환경 현행화:** 모든 환경 변경 사항은 본 문서에 실시간 기록하여 온보딩 무결성 유지
