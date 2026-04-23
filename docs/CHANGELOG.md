@@ -22,10 +22,15 @@
 
 ## [인프라 구축 가이드 정교화 및 기술 명세 완결]
 
-| 날짜       | 분류          | 수정 내용                                                                      | 수정 파일                            |
-| :--------- | :------------ | :----------------------------------------------------------------------------- | :----------------------------------- |
-| 2026-04-22 | `⚙️ Refactor` | YAML 커스텀 태그 등록을 통한 `mkdocs.yml` 에디터 경고 제거 및 포맷팅 설정 강화 | `.vscode/settings.json`              |
-| 2026-04-22 | `📝 Docs`     | Phase 1~6 전체 단계별 상세 구현 지침서(`IMPLEMENTATION.md`) 전수 구축          | `docs/build-up/**/IMPLEMENTATION.md` |
+| 날짜       | 분류          | 수정 내용                                                                         | 수정 파일               |
+| :--------- | :------------ | :-------------------------------------------------------------------------------- | :---------------------- |
+| 2026-04-22 | `🎨 Style`    | 역할 기반 마스터 일정(Gantt)의 5월 전환 및 Project Lead 공백 태스크 보완          | `docs/standards/*`      |
+| 2026-04-22 | `🎨 Style`    | 역할 기반 병렬 트랙(Role-based Parallel Track) 중심의 프로젝트 마스터 일정 재설계 | `docs/standards/*`      |
+| 2026-04-22 | `📝 Docs`     | 팀 협업 모델 내 역할 기반 병렬 로드맵(1-Month Sprint) 상세화 및 보완              | `docs/standards/*`      |
+| 2026-04-22 | `📝 Docs`     | 팀 협업 모델 및 프로젝트 확장 전략(`team_collaboration_and_expansion.md`) 수립    | `docs/standards/*`      |
+| 2026-04-22 | `⚙️ Refactor` | YAML 커스텀 태그 등록을 통한 `mkdocs.yml` 에디터 경고 제거 및 포맷팅 설정 강화    | `.vscode/settings.json` |
+
+| 2026-04-22 | `📝 Docs` | Phase 1~6 전체 단계별 상세 구현 지침서(`IMPLEMENTATION.md`) 전수 구축 | `docs/build-up/**/IMPLEMENTATION.md` |
 
 | 2026-04-22 | `🎨 Style` | MkDocs 내비게이션 내 구현 지침서 메뉴 등록 및 전체 구조 최적화 | `mkdocs.yml`, `docs/build-up/README.md` |
 | 2026-04-22 | `⚙️ Refactor` | K8s 준비를 위한 Swap 비활성화 및 Cloud-init 자동화 템플릿 명세 보완 | `docs/build-up/01_foundation/README.md` |
