@@ -1,0 +1,15 @@
+#!/bin/bash
+# 변경된 파일 목록 추출 (병합 전후 비교)
+changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
+# 1. Node.js 의존성 동기화 (pnpm-lock.yaml)
+if echo "$changed_files" | grep -q "pnpm-lock.yaml"; then
+  echo "📦 pnpm-lock.yaml 변경 감지 → pnpm install 수행 중..."
+  pnpm install
+fi
+
+# 2. Python 의존성 동기화 (uv.lock)
+if echo "$changed_files" | grep -q "uv.lock"; then
+  echo "🐍 uv.lock 변경 감지 → uv sync 수행 중..."
+  uv sync
+fi

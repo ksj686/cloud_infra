@@ -28,13 +28,13 @@
 
 ---
 
-## 3. 통합 의존성 자동 동기화 스크립트 (`post-merge`)
+## 3. 통합 의존성 자동 동기화 설정 (Implementation)
 
 `git pull` 또는 `merge` 완료 시 락파일 변경을 감지하여 자동 설치 수행
 
-### 3.1 스크립트 작성
+### 3.1 post-merge 훅 파일 생성
 
-`.husky/post-merge` 파일에 아래 내용 작성 및 실행 권한 부여
+`.husky/post-merge` 파일을 생성하고 아래 스크립트 작성
 
 ```bash
 #!/bin/bash
@@ -54,10 +54,39 @@ if echo "$changed_files" | grep -q "uv.lock"; then
 fi
 ```
 
+### 3.2 실행 권한 및 불필요 파일 정리
+
+윈도우 환경 대응 및 기존 샘플 파일 제거 절차
+
+```powershell
+# 1. 초기화 시 생성된 불필요 샘플 제거 (선택 사항)
+Remove-Item .husky/pre-commit
+
+# 2. Git 인덱스를 통한 실행 권한 강제 부여 (Cross-platform 대응)
+git add .husky/post-merge
+git update-index --chmod=+x .husky/post-merge
+```
+
 ---
 
-## 4. 관리 및 주의 사항
+## 4. 팀 협업자 가이드 (For Team Members)
 
-- **실행 권한:** 유닉스 계열 환경의 팀원을 위해 해당 파일에 실행 권한(`chmod +x`) 부여 필수
-- **수동 수행 배제:** 본 설정 완료 후 팀원은 `git pull` 만으로 최신 개발 환경 상시 유지 가능
-- **드리프트 방지:** 락파일이 프로젝트의 신뢰 원천(Source of Truth)으로 기능하도록 관리 원칙 준수
+초기 설정자 외의 팀원이 프로젝트 참여 시 수행해야 할 최소 작업
+
+### 4.1 초기 의존성 및 훅 활성화
+
+저장소 `clone` 직후 1회만 수행하면 이후 모든 자동화 혜택 적용
+
+```powershell
+# 모든 패키지 설치 및 Husky 훅 활성화
+pnpm install
+uv sync
+
+# pre-commit 훅 등록 (보안/품질용)
+uv run pre-commit install
+```
+
+### 4.2 사후 관리
+
+- **자동화 적용:** 이후 `git pull` 시 락파일 변경이 감지되면 별도 명령 없이 패키지가 자동 업데이트됨.
+- **드리프트 방지:** 로컬에서 임의로 `post-merge` 파일을 수정하지 않으며, 수정 필요 시 공유용 브랜치를 통해 정식 반영 및 전파 수행.
