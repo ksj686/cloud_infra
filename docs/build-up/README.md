@@ -41,3 +41,9 @@
 - **목표:** Terraform/Ansible을 통한 자동화 및 멀티 노드 HA 완성
 - **가이드:** [06_scalability/README.md](./06_scalability/README.md)
 - **상세 구현:** [06_scalability/IMPLEMENTATION.md](./06_scalability/IMPLEMENTATION.md)
+
+### [Phase 7] Hybrid Cloud: 클라우드 연동 및 서비스 가속
+
+- **목표:** AWS 클라우드 자원 활용 및 글로벌 보안 가속 체계 수립
+- **가이드:** [07_hybrid/README.md](./07_hybrid/README.md)
+- **상세 구현:** [07_hybrid/IMPLEMENTATION.md](./07_hybrid/IMPLEMENTATION.md)

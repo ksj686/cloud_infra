@@ -86,9 +86,14 @@ nav:
           - Overview: build-up/06_scalability/README.md
           - Implementation: build-up/06_scalability/IMPLEMENTATION.md
           - As-built: build-up/06_scalability/AS_BUILT.md
+      - Phase 7 (Hybrid Cloud):
+          - Overview: build-up/07_hybrid/README.md
+          - Implementation: build-up/07_hybrid/IMPLEMENTATION.md
+          - As-built: build-up/07_hybrid/AS_BUILT.md
   - Engineering Standards:
       - Core Common Elements: standards/common_infra_elements.md
       - Team & Expansion Strategy: standards/team_collaboration_and_expansion.md
+      - AWS S3 & CloudFront Strategy: standards/aws_s3_cloudfront_strategy.md
       - Asset Management: standards/infra_inventory_management.md
       - Poetry to uv Migration: standards/poetry_to_uv_migration.md
       - HA Strategy Analysis: standards/infra_ha_strategy_analysis.md
