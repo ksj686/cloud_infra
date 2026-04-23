@@ -53,17 +53,16 @@ git clone <repository_url>
 cd cloud_infra
 
 # 2. 통합 의존성 설치 (Husky 훅 자동 활성화 포함)
+# 실행 시 Husky가 자동으로 Git Hook 경로를 설정하며, post-merge 및 pre-commit이 연결됨
 pnpm install
 uv sync
-
-# 3. 보안 및 품질 검사(pre-commit) 훅 등록
-uv run pre-commit install
 ```
 
 ### 3.2 자동화 적용 확인
 
-- 초기 활성화(3.1 단계)를 완료하면, 이후 `git pull` 수행 시 락파일 변경이 감지될 때마다 패키지가 자동으로 업데이트됨.
-- 협업자는 별도의 훅 스크립트 작성 없이 `pnpm install` 실행만으로 모든 자동화 혜택 수혜 가능.
+- 초기 활성화(3.1 단계)를 완료하면, 이후 `git pull` 수행 시 락파일 변경이 감지될 때마다 패키지가 자동으로 업데이트됨(`post-merge`).
+- 커밋 시에는 `pre-commit` 도구가 자동으로 실행되어 코드 품질 및 보안 검사를 수행함.
+- 협업자는 별도의 `pre-commit install` 실행 없이 `pnpm install`만으로 모든 자동화 혜택 수혜 가능.
 
 ---
 
@@ -73,6 +72,7 @@ uv run pre-commit install
 
 - **Node.js:** `pnpm audit`
 - **Python:** `uv run pip-audit`
+- **수동 훅 실행:** 전체 파일에 대해 보안/포맷 검사를 수동으로 수행하려면 `uv run pre-commit run --all-files` 실행
 
 ### 4.2 에디터 연동 (VS Code 권장)
 
@@ -83,6 +83,22 @@ uv run pre-commit install
 
 ## 5. 트러블슈팅 및 관리 원칙
 
+### 5.1 Git Hook 충돌 (Cowardly refusing 에러)
+
+만약 `uv run pre-commit install` 실행 시 `core.hooksPath` 관련 에러가 발생한다면, 이는 Husky와 pre-commit이 설정을 공유하지 못해 발생하는 현상임.
+
+- **해결책:** `git config --unset core.hooksPath`를 실행한 후 다시 `pnpm install`을 수행하여 Husky 기반으로 통합 관리되도록 유도함. 본 프로젝트는 Husky가 pre-commit을 호출하는 구조이므로 별도의 `pre-commit install`이 불필요함.
+
+### 5.2 포트 및 보안 준수
+
 - **포트 준수:** MkDocs 로컬 가동 시 **8008** 포트 사용 (파이썬 서버 충돌 방지)
 - **보안 준수:** `.venv`, `node_modules`, `passwords.txt` 등 민감 자산 Git 추적 금지
 - **환경 현행화:** 모든 환경 변경 사항은 본 문서에 실시간 기록하여 온보딩 무결성 유지
+
+### 5.3 셸 스크립트 호환성 (줄바꿈 및 인코딩)
+
+본 프로젝트는 리눅스 인프라 구축을 목표로 하므로, 모든 `.sh` 파일과 `.husky` 훅 파일은 리눅스 표준을 준수해야 함.
+
+- **줄바꿈 규칙:** 반드시 **LF**(`\n`) 사용. Windows 스타일의 **CRLF**(`\r\n`)는 `shellcheck` 오류를 유발함.
+- **인코딩 규칙:** **UTF-8 (BOM 없음)** 사용. BOM이 포함될 경우 스크립트 실행 시 문법 오류가 발생할 수 있음.
+- **자동 교정:** `.gitattributes` 설정에 의해 Git Checkout 시 자동으로 LF로 변환되나, 에디터 설정(VS Code 등)에서도 기본 줄바꿈을 LF로 설정할 것을 권장함.

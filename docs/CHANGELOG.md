@@ -22,13 +22,14 @@
 
 ## [클라우드 확장 전략 및 협업 자동화 완결]
 
-| 날짜       | 분류         | 수정 내용                                                                                 | 수정 파일                                              |
-| :--------- | :----------- | :---------------------------------------------------------------------------------------- | :----------------------------------------------------- |
-| 2026-04-23 | `🚀 Feature` | **Phase 7: Hybrid Cloud** 설계 청사진 반영 및 AWS 연동 가이드 구축                        | `docs/project_outline.md`, `docs/build-up/07_hybrid/*` |
-| 2026-04-23 | `🚀 Feature` | AWS S3 & CloudFront 기반의 데이터 가속 및 보안 전략(`aws_s3_cloudfront_strategy.md`) 수립 | `docs/standards/*`                                     |
-| 2026-04-23 | `🚀 Feature` | Husky 기반의 `post-merge` 자동 동기화 실구축 및 권한 설정 완료                            | `.husky/*`, `docs/playbooks/dev/*`                     |
-| 2026-04-23 | `📝 Docs`    | 사용자 시나리오(초기 구축자, 협업자, 공통) 기반 환경 구축 가이드 전면 개편                | `docs/ENVIRONMENT_SETUP.md`                            |
-| 2026-04-23 | `📝 Docs`    | Git Hook 자동화 가이드 내 세부 구현 절차 및 팀 협업자 지침 보완                           | `docs/playbooks/dev/*`                                 |
+| 날짜       | 분류         | 수정 내용                                                                                   | 수정 파일                                              |
+| :--------- | :----------- | :------------------------------------------------------------------------------------------ | :----------------------------------------------------- |
+| 2026-04-23 | `🛠️ Fix`     | Husky와 pre-commit 간의 `core.hooksPath` 충돌 해결 및 통합 브릿지(`.husky/pre-commit`) 구축 | `.husky/*`, `docs/ENVIRONMENT_SETUP.md`                |
+| 2026-04-23 | `🚀 Feature` | **Phase 7: Hybrid Cloud** 설계 청사진 반영 및 AWS 연동 가이드 구축                          | `docs/project_outline.md`, `docs/build-up/07_hybrid/*` |
+| 2026-04-23 | `🚀 Feature` | AWS S3 & CloudFront 기반의 데이터 가속 및 보안 전략(`aws_s3_cloudfront_strategy.md`) 수립   | `docs/standards/*`                                     |
+| 2026-04-23 | `🚀 Feature` | Husky 기반의 `post-merge` 자동 동기화 실구축 및 권한 설정 완료                              | `.husky/*`, `docs/playbooks/dev/*`                     |
+| 2026-04-23 | `📝 Docs`    | 사용자 시나리오(초기 구축자, 협업자, 공통) 기반 환경 구축 가이드 전면 개편                  | `docs/ENVIRONMENT_SETUP.md`                            |
+| 2026-04-23 | `📝 Docs`    | Git Hook 자동화 가이드 내 세부 구현 절차 및 팀 협업자 지침 보완                             | `docs/playbooks/dev/*`                                 |
 
 ---
 
