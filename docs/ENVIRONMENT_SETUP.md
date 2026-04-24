@@ -105,3 +105,26 @@ uv sync
 - **포트 준수:** MkDocs 로컬 가동 시 **8008** 포트 사용 (애플리케이션 서버 8000 포트와 분리).
 - **보안 가드레일:** `.venv`, `node_modules`, `passwords.txt` 등 민감 자산의 Git 추적 원천 금지.
 - **환경 현행화:** 모든 환경 변경 사항은 본 문서에 실시간 기록하여 팀 온보딩 무결성 유지.
+
+---
+
+## 6. 주요 도구 명령어 가이드 (Quick Reference)
+
+프로젝트 운영 중 자주 사용되는 패키지 관리 및 환경 제어 명령어 요약.
+
+### 6.1 Node.js (pnpm)
+
+- **패키지 목록/검색:** `pnpm list [package]` (예: `pnpm list lodash`)
+- **의존성 설치:** `pnpm add [package]` (개발용: `-D` 옵션 추가)
+- **의존성 제거:** `pnpm remove [package]`
+- **보안 감사:** `pnpm audit`
+- **스크립트 실행:** `pnpm run [script]`
+
+### 6.2 Python (uv)
+
+- **패키지 정보 확인:** `uv pip show [package]` (예: `uv pip show httpx`)
+- **패키지 목록:** `uv pip list`
+- **의존성 추가:** `uv add [package]`
+- **의존성 제거:** `uv remove [package]`
+- **환경 동기화:** `uv sync` (lock 파일 기준 환경 재구축)
+- **도구 실행:** `uv run [command]` (가상환경 내에서 명령 실행)
