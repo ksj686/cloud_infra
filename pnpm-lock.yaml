@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      lodash:
+        specifier: ^4.18.1
+        version: 4.18.1
     devDependencies:
       husky:
         specifier: ^9.1.7
@@ -22,6 +26,9 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
+
   prettier@3.7.4:
     resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
     engines: {node: '>=14'}
@@ -30,5 +37,7 @@ packages:
 snapshots:
 
   husky@9.1.7: {}
+
+  lodash@4.18.1: {}
 
   prettier@3.7.4: {}

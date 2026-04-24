@@ -5,5 +5,8 @@
   },
   "scripts": {
     "prepare": "husky"
+  },
+  "dependencies": {
+    "lodash": "^4.18.1"
   }
 }

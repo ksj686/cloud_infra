@@ -9,7 +9,8 @@ readme = "README.md"
 requires-python = ">=3.12,<4.0"
 dependencies = [
     "mkdocs-material>=9.7.6",
-    "mkdocs-mermaid2-plugin>=1.2.3"
+    "mkdocs-mermaid2-plugin>=1.2.3",
+    "requests>=2.33.1",
 ]
 
 [dependency-groups]
