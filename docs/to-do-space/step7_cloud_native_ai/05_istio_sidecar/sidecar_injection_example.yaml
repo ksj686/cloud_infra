@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidecar-test-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidecar-test
+  template:
+    metadata:
+      labels:
+        app: sidecar-test
+    spec:
+      containers:
+        - name: web-app
+          image: nginx:latest
+          ports:
+            - containerPort: 80

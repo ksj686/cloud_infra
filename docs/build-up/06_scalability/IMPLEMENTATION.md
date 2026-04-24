@@ -97,7 +97,64 @@ docker stack deploy -c docker-compose.yml infra_stack
 
 ---
 
-## 4. 지능형 스케일링 (KEDA)
+## 4. K8s 설정 및 배포 자동화 (Helm & Argo CD)
+
+### 4.1 Helm Chart 구조화
+
+```bash
+# Helm 차트 생성
+helm create infra-app
+
+# values.yaml 환경별 변수 정의
+vi infra-app/values.yaml
+```
+
+```yaml
+# infra-app/values.yaml 예시
+replicaCount: 3
+image:
+  repository: hub.kosa.kr/library/infra-api
+  tag: "1.0"
+service:
+  type: ClusterIP
+  port: 80
+```
+
+### 4.2 Argo CD GitOps 어플리케이션 등록
+
+```yaml
+# argo-app.yaml (Argo CD에 등록할 매니페스트)
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloud-infra-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/your-repo/cloud-infra.git"
+    targetRevision: HEAD
+    path: charts/infra-app
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+```
+
+```bash
+# Argo CD에 어플리케이션 생성
+kubectl apply -f argo-app.yaml
+```
+
+---
+
+## 5. 지능형 스케일링 (KEDA)
 
 ### 4.1 이벤트 기반 오토스케일링 설정
 

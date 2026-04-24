@@ -4,6 +4,7 @@
 - **02_k6_latency:** k6 부하 테스트를 통한 p95 지연 시간 분석 및 성능 벤치마킹
 - **03_argocd_gitops:** Argo CD 기반 선언적 배포 및 GitOps 운영 체계 구축
 - **04_keda_ai_scaling:** KEDA 및 AI 모델 연동을 통한 지능적 자원 증설 실무
+- **05_istio_sidecar:** Istio 서비스 메시 및 Sidecar 자동 주입 실습
 
 **학습 가이드:**
 

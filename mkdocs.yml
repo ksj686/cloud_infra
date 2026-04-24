@@ -93,6 +93,7 @@ nav:
   - Engineering Standards:
       - Core Common Elements: standards/common_infra_elements.md
       - Team & Expansion Strategy: standards/team_collaboration_and_expansion.md
+      - K8s Deployment Strategy: standards/k8s_deployment_strategy.md
       - AWS S3 & CloudFront Strategy: standards/aws_s3_cloudfront_strategy.md
       - Asset Management: standards/infra_inventory_management.md
       - Poetry to uv Migration: standards/poetry_to_uv_migration.md

@@ -94,6 +94,8 @@
 - **구성 관리 (Configuration Management):**
   - Ansible Playbook: 모든 서버의 보안 설정 및 패키지 구성을 코드화하여 환경 일관성(Idempotency) 유지
 - **심화 로드맵:**
+  - **설정 및 배포 자동화:** Helm Chart 기반 패키징 및 Argo CD를 활용한 GitOps 운영 체계 구축
+  - **서비스 메시(고급):** Istio 사이드카 도입을 통한 정밀 트래픽 제어 및 서비스 간 mTLS 보안 강화
   - DB 가용성 고도화: MariaDB Galera Cluster 기반의 동기식 이중화 및 ProxySQL 부하 분산 구현
   - **오토 스케일링:** 트래픽 부하에 따른 리소스 동적 할당 및 인스턴스 확장 체계 연구
   - 하이브리드 확장: 온프레미스와 퍼블릭 클라우드 간의 유연한 자원 연동(Cloud Bursting) 체계 분석
