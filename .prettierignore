@@ -9,6 +9,7 @@ poetry.lock
 # 의존성 폴더
 node_modules/
 .venv/
+.audit_cache/
 
 # 빌드 및 임시 파일
 dist/

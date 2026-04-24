@@ -48,3 +48,20 @@ repos:
           )$
         additional_dependencies:
           - prettier@3.7.4
+
+  # 4. SCA 종속성 보안 감사 (Software Composition Analysis)
+  - repo: local
+    hooks:
+      - id: pnpm-audit
+        name: "SCA Security: pnpm audit"
+        entry: pnpm audit
+        language: system
+        files: pnpm-lock.yaml
+        pass_filenames: false
+
+      - id: pip-audit
+        name: "SCA Security: pip-audit"
+        entry: uv run pip-audit --local --cache-dir .audit_cache
+        language: system
+        files: uv.lock
+        pass_filenames: false

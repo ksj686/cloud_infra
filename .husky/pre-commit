@@ -1,3 +1,3 @@
 #!/bin/bash
-# Husky v9에서 pre-commit 도구를 실행하기 위한 Bridge 스크립트
+# Husky를 통해 파이썬 pre-commit 도구 호출
 uv run pre-commit run --all-files

@@ -20,16 +20,37 @@
 
 ---
 
+## [인벤토리 구조화 및 사용자 맞춤형 가이드 고도화]
+
+| 날짜       | 분류          | 수정 내용                                                                    | 수정 파일                                              |
+| :--------- | :------------ | :--------------------------------------------------------------------------- | :----------------------------------------------------- |
+| 2026-04-24 | `🧪 Test`     | **Step 7-5: Istio Sidecar 주입 실습** 공간 구축 및 샘플 매니페스트 작성      | `docs/to-do-space/step7_cloud_native_ai/*`             |
+| 2026-04-24 | `📝 Docs`     | K8s 재배포 전략 가이드 내 Sidecar 도입 단계를 향후 과제(TO-BE)로 명시        | `docs/standards/*`                                     |
+| 2026-04-24 | `🛠️ Fix`      | `pip-audit` 윈도우 권한 오류 해결을 위한 로컬 캐시 경로(`.audit_cache`) 적용 | `.pre-commit-config.yaml`, `.gitignore`                |
+| 2026-04-24 | `🔒 Security` | SCA 종속성 보안 감사(`pip-audit`, `pnpm audit`)의 `pre-commit` 자동화 연동   | `.pre-commit-config.yaml`, `docs/ENVIRONMENT_SETUP.md` |
+
+| 2026-04-24 | `📝 Docs` | 환경 구축 가이드 내 백업본 핵심 내용(Git Hook 충돌 해결 및 LF 규약) 통합 보완 | `docs/ENVIRONMENT_SETUP.md` |
+
+| 2026-04-24 | `🚀 Feature` | Husky-precommit 통합 브릿지 스크립트 구축 및 충돌 해결 지침 보완 | `.husky/*`, `docs/playbooks/dev/*` |
+| 2026-04-24 | `📝 Docs` | 사용자 역할(초기 구축자, 협업자, 공통) 기반 환경 구축 가이드 전면 개편 | `docs/ENVIRONMENT_SETUP.md` |
+
+| 2026-04-24 | `⚙️ Refactor` | Phase 6 가이드 내 K8s 설정 및 배포 자동화(Helm & GitOps) 공정 정식 반영 | `docs/build-up/06_scalability/README.md` |
+| 2026-04-24 | `⚙️ Refactor` | Phase 6 구현 지침서 내 Helm Chart 및 Argo CD GitOps 상세 절차 보완 | `docs/build-up/06_scalability/IMPLEMENTATION.md` |
+
+---
+
 ## [클라우드 확장 전략 및 협업 자동화 완결]
 
 | 날짜       | 분류         | 수정 내용                                                                                   | 수정 파일                                              |
 | :--------- | :----------- | :------------------------------------------------------------------------------------------ | :----------------------------------------------------- |
 | 2026-04-23 | `🛠️ Fix`     | Husky와 pre-commit 간의 `core.hooksPath` 충돌 해결 및 통합 브릿지(`.husky/pre-commit`) 구축 | `.husky/*`, `docs/ENVIRONMENT_SETUP.md`                |
-| 2026-04-23 | `🚀 Feature` | **Phase 7: Hybrid Cloud** 설계 청사진 반영 및 AWS 연동 가이드 구축                          | `docs/project_outline.md`, `docs/build-up/07_hybrid/*` |
-| 2026-04-23 | `🚀 Feature` | AWS S3 & CloudFront 기반의 데이터 가속 및 보안 전략(`aws_s3_cloudfront_strategy.md`) 수립   | `docs/standards/*`                                     |
-| 2026-04-23 | `🚀 Feature` | Husky 기반의 `post-merge` 자동 동기화 실구축 및 권한 설정 완료                              | `.husky/*`, `docs/playbooks/dev/*`                     |
-| 2026-04-23 | `📝 Docs`    | 사용자 시나리오(초기 구축자, 협업자, 공통) 기반 환경 구축 가이드 전면 개편                  | `docs/ENVIRONMENT_SETUP.md`                            |
-| 2026-04-23 | `📝 Docs`    | Git Hook 자동화 가이드 내 세부 구현 절차 및 팀 협업자 지침 보완                             | `docs/playbooks/dev/*`                                 |
+| 2026-04-24 | `🚀 Feature` | K8s 설정 관리 및 재배포 전략(Helm Chart & Argo CD GitOps) 수립                              | `docs/standards/*`, `docs/project_outline.md`          |
+| 2026-04-23 | `🚀 Feature` | Phase 7: Hybrid Cloud 설계 청사진 반영 및 AWS 연동 가이드 구축                              | `docs/project_outline.md`, `docs/build-up/07_hybrid/*` |
+
+| 2026-04-23 | `🚀 Feature` | AWS S3 & CloudFront 기반의 데이터 가속 및 보안 전략(`aws_s3_cloudfront_strategy.md`) 수립 | `docs/standards/*` |
+| 2026-04-23 | `🚀 Feature` | Husky 기반의 `post-merge` 자동 동기화 실구축 및 권한 설정 완료 | `.husky/*`, `docs/playbooks/dev/*` |
+| 2026-04-23 | `📝 Docs` | 사용자 시나리오(초기 구축자, 협업자, 공통) 기반 환경 구축 가이드 전면 개편 | `docs/ENVIRONMENT_SETUP.md` |
+| 2026-04-23 | `📝 Docs` | Git Hook 자동화 가이드 내 세부 구현 절차 및 팀 협업자 지침 보완 | `docs/playbooks/dev/*` |
 
 ---
 
