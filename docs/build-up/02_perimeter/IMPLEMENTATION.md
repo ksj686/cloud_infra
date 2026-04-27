@@ -23,17 +23,28 @@ server 192.168.100.12:80 max_fails=1 fail_timeout=10s;
 }
 
 server {
-listen 80;
-server_name api.kosa.kr;
+    listen 80;
+    server_name api.kosa.kr;
 
-location / {
-proxy_pass http://backend_servers;
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_connect_timeout 2s;
-proxy_read_timeout 5s;
+    # L7 경로 기반 라우팅 (Ingress 개념 적용)
+    location /api/v1 {
+        proxy_pass http://backend_servers;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /static {
+        alias /usr/share/nginx/html/static;
+        expires 30d;
+        access_log off;
+    }
+
+    location / {
+        proxy_pass http://frontend_servers;
+        proxy_set_header Host $host;
+    }
 }
-}
+
 ```
 
 ```bash

@@ -12,6 +12,7 @@
 - **부하 분산 및 지능형 라우팅:**
   - `upstream` 설정을 활용한 다중 백엔드 노드 부하 분산 및 고가용성(HA) 확보
   - **가상 호스트(Virtual Host) 운영:** 단일 IP 기반에서 도메인별 서버 블록 분리를 통한 멀티 서비스 수용
+  - **L7 경로 기반 라우팅 (Ingress):** URL 경로(`/api`, `/static` 등)별 트래픽 분기 및 타겟 서비스 매핑 최적화
   - **최적화 파라미터:** `max_fails=1`, `fail_timeout=10s` 설정을 통한 장애 노드 즉각 감지
 
   - **응답 가용성:** `proxy_connect_timeout 2s`, `proxy_read_timeout 5s` 적용 및 `proxy_next_upstream` 설정을 통한 실시간 페일오버(Failover) 구현

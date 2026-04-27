@@ -80,7 +80,20 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 ---
 
-## 5. 결론 및 제언
+## 5. 온프레미스(MinIO)에서 클라우드(S3)로의 전이 전략
+
+성공적인 하이브리드 운영을 위한 단계별 승격(Promotion) 시나리오
+
+- **표준 인터페이스 준수:** 애플리케이션 개발 시 특정 벤더에 종속되지 않는 표준 S3 SDK(Boto3, aws-sdk-js 등) 사용 강제.
+- **환경 변수 기반 스위칭:**
+  - **Development (MinIO):** `S3_ENDPOINT=http://minio.local:9000`, `USE_SSL=false`
+  - **Production (AWS S3):** `S3_ENDPOINT=https://s3.ap-northeast-2.amazonaws.com`, `USE_SSL=true`
+- **데이터 마이그레이션:** MinIO 클라이언트(`mc`)의 `mirror` 기능을 활용하여 온프레미스 데이터를 AWS S3 버킷으로 동기화.
+  - **명령어:** `./mc mirror myminio/infra-assets awss3/kosa-infra-assets`
+
+---
+
+## 6. 결론 및 제언
 
 - S3/CDN 조합은 서버의 I/O 부하를 획기적으로 줄이는 **'인프라 오프로딩(Offloading)'**의 핵심 기술임.
 - 온프레미스(Proxmox) 서비스와의 하이브리드 연동 시, 클라우드 자격 증명 관리를 위해 **`IAM Roles`** 또는 **`Vault`** 연동을 권장함.
