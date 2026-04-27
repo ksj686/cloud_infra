@@ -125,6 +125,7 @@ nav:
       - Git Push Protection: case_studies/20260321_github_push_protection.md
       - pre-commit Encoding: case_studies/20260408_precommit_troubleshooting.md
       - Win Env & Antivirus: case_studies/20260414_windows_env_troubleshooting.md
+      - pip Vulnerability Fix: case_studies/20260427_pip_audit_vulnerability_fix.md
   - Solutions:
       - Overview: solutions/README.md
       - Airflow: solutions/01_airflow/README.md
