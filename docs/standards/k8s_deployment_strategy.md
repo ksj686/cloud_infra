@@ -16,6 +16,11 @@
 
 - **신뢰의 단일 원천 (Source of Truth):** Git 저장소의 상태를 클러스터의 최종 상태로 정의.
 - **드리프트 탐지 (Drift Detection):** 수동 수정으로 인한 클러스터 상태 불일치를 자동으로 감지하고 Git 상태로 강제 동기화.
+- **설정 변경 자동 반영 (Config Hot-reload):**
+  - **지양 기법 (Lab-style):** `kubectl patch`를 이용한 수동 체크섬 주입. (GitOps 원칙 위배 및 휴먼 에러 위험 상존)
+  - **현업 표준 (Enterprise):**
+    - **Reloader Operator:** ConfigMap/Secret의 변경을 감시하여 연관된 Deployment를 자동으로 롤링 업데이트하는 오퍼레이터 운용.
+    - **Helm SHA256 Automation:** Helm 템플릿 내 `sha256sum` 함수를 활용하여 배포 시점에 설정값의 해시를 자동으로 파드 어노테이션에 주입.
 - **워크플로우:**
   1. 개발자/운영자가 Git에 `values.yaml` 수정 및 커밋.
   2. Argo CD가 변경 감지 및 자동 동기화(Sync) 수행.

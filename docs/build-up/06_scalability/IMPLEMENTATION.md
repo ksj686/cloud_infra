@@ -97,7 +97,74 @@ docker stack deploy -c docker-compose.yml infra_stack
 
 ---
 
-## 4. K8s 설정 및 배포 자동화 (Helm & Argo CD)
+## 4. 온프레미스 네트워크 서비스 (MetalLB)
+
+클라우드 외부 로드밸런서 연동 없이 공인/사설 IP 할당을 위한 LB 구축
+
+### 4.1 MetalLB 설치 및 L2 모드 설정
+
+```bash
+# kube-proxy 설정 수정 (strictARP 활성화)
+kubectl edit configmap -n kube-system kube-proxy
+# strictARP: true 로 변경 확인
+
+# MetalLB 네이티브 매니페스트 적용
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+```
+
+### 4.2 IP 주소 풀(Pool) 정의
+
+```yaml
+# metallb-config.yaml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default-pool
+  namespace: metallb-system
+spec:
+  addresses:
+    - 192.168.100.200-192.168.100.250 # 가용 IP 대역 지정
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default-adv
+  namespace: metallb-system
+```
+
+---
+
+## 5. 설정 변경 자동 동기화 (Hot-reload)
+
+### 5.1 Reloader 오퍼레이터 설치 (추천)
+
+```bash
+# Helm을 이용한 Reloader 설치
+helm repo add stakater https://stakater.github.io/stakater-charts
+helm repo update
+helm install reloader stakater/reloader --namespace config-management --create-namespace
+```
+
+### 5.2 Helm 내장 SHA256 자동화 (매니페스트 예시)
+
+```yaml
+# templates/deployment.yaml
+spec:
+  template:
+    metadata:
+      annotations:
+        # ConfigMap 변경 시 자동으로 해시를 계산하여 파드 재시작 유도
+        checksum/config:
+          {
+            {
+              include (print $.Template.BasePath "/configmap.yaml") . | sha256sum,
+            },
+          }
+```
+
+---
+
+## 6. K8s 설정 및 배포 자동화 (Helm & Argo CD)
 
 ### 4.1 Helm Chart 구조화
 
