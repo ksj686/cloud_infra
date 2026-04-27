@@ -22,6 +22,10 @@
   - `proxy_pass` 및 `X-Forwarded-For` 설정을 통한 실제 백엔드 서버 IP 마스킹(Masking) 수행
   - `client_max_body_size 0` 설정을 통한 대용량 데이터 전송(이미지 Push 등) 지원
 - **암호화 통신(SSL/TLS) 적용:** Let's Encrypt 또는 엔터프라이즈 사설 인증 발급 기능을 통한 데이터 전송 구간 기밀성 확보
+- **인증서 라이프사이클 관리:**
+  - **자동 발급 및 갱신:** `Certbot` 및 ACME 프로토콜 활용을 통한 인증서 무중단 갱신 체계 구축
+  - **갱신 자동화 (Automation):** 스케줄러(Cron/Timer) 기반의 정기 갱신 체크 및 웹 서버(Nginx) 자동 리로드 연동
+  - **만료 감시 (Monitoring):** 인증서 유효 기간에 대한 상시 모니터링 및 사전 알림 시스템 수립
 
 ## 2. HTTPS 사설 레지스트리 구축 (Docker Registry v2)
 

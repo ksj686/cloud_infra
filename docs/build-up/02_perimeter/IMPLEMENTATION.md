@@ -134,3 +134,39 @@ sudo vi /etc/ufw/before.rules
 ```bash
 sudo ufw reload
 ```
+
+---
+
+## 5. 인증서 라이프사이클 관리 (SSL/TLS)
+
+### 5.1 Certbot 설치 및 인증서 자동 발급
+
+```bash
+# Certbot 및 Nginx 플러그인 설치
+sudo apt update && sudo apt install certbot python3-certbot-nginx -y
+
+# 인증서 발급 (HTTP 챌린지 방식)
+sudo certbot --nginx -d api.kosa.kr -d hub.kosa.kr
+```
+
+### 5.2 자동 갱신 및 웹 서버 리로드 설정
+
+```bash
+# 갱신 테스트 (Dry Run)
+sudo certbot renew --dry-run
+
+# 자동 갱신 훅 설정 (갱신 성공 시 Nginx 리로드)
+sudo vi /etc/letsencrypt/cli.ini
+```
+
+```yaml
+# /etc/letsencrypt/cli.ini 추가 내역
+deploy-hook = systemctl reload nginx
+```
+
+### 5.3 인증서 만료 모니터링 (CLI)
+
+```bash
+# 전체 인증서 유효 기간 확인
+sudo certbot certificates
+```
