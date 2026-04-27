@@ -22,15 +22,17 @@
 
 ## [강의 기반 실무 명세 보완 및 인벤토리 정교화]
 
-| 날짜       | 분류          | 수정 내용                                                                         | 수정 파일                                                   |
-| :--------- | :------------ | :-------------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| 2026-04-27 | `⚙️ Refactor` | Phase 3 구현 지침서 내 클라우드 전이(Migration) 실무 절차 및 참조 보완            | `docs/build-up/03_persistence/IMPLEMENTATION.md`            |
-| 2026-04-27 | `📝 Docs`     | 온프레미스(MinIO)에서 클라우드(S3)로의 운영 전이(Promotion) 전략 수립             | `docs/standards/*`, `docs/project_outline.md`               |
-| 2026-04-27 | `🛠️ Fix`      | Phase 3 섹션 내 누락된 백업 및 복구 정책 링크 복구                                | `docs/project_outline.md`                                   |
-| 2026-04-27 | `⚙️ Refactor` | Phase 3 스토리지 전략 전면 개편 (NFS 배제 및 **Ceph/MinIO** 채택)                 | `docs/project_outline.md`, `docs/build-up/03_persistence/*` |
-| 2026-04-27 | `⚙️ Refactor` | 단계별 설계 가이드(README)와 상세 구현 명세(Implementation) 간 기술 정합성 동기화 | `docs/build-up/**/README.md`                                |
+| 날짜       | 분류          | 수정 내용                                                                  | 수정 파일                                               |
+| :--------- | :------------ | :------------------------------------------------------------------------- | :------------------------------------------------------ |
+| 2026-04-27 | `🛠️ Fix`      | `uv` 환경 내 `pip` 의존성 명시적 고정을 통한 취약점 근본 해결 및 사례 기록 | `pyproject.toml`, `docs/case_studies/*`                 |
+| 2026-04-27 | `🔒 Security` | **인증서 라이프사이클 관리** 전략 수립 및 자동 갱신(Certbot) 절차 보완     | `docs/build-up/02_perimeter/*`                          |
+| 2026-04-27 | `🚀 Feature`  | 하이브리드 확장 전략의 전방위 동기화 (성과 지표 명문화 및 발표 자료 반영)  | `docs/CORE_FEATURE_EXPLAINER.md`, `docs/presentation/*` |
+| 2026-04-27 | `📝 Docs`     | 온프레미스(MinIO)에서 클라우드(S3)로의 운영 전이(Promotion) 전략 수립      | `docs/standards/*`, `docs/project_outline.md`           |
 
-| 2026-04-27 | `⚙️ Refactor` | **NFS 공유 스토리지** 구축 절차 및 컨테이너 연동 지침 추가 (0413/0415 기반) | `docs/build-up/03_persistence/IMPLEMENTATION.md` |
+| 2026-04-27 | `⚙️ Refactor` | Phase 3 구현 지침서 내 클라우드 전이(Migration) 실무 절차 및 참조 보완 | `docs/build-up/03_persistence/IMPLEMENTATION.md` |
+| 2026-04-27 | `🛠️ Fix` | Phase 3 섹션 내 누락된 백업 및 복구 정책 링크 복구 | `docs/project_outline.md` |
+| 2026-04-27 | `⚙️ Refactor` | Phase 3 스토리지 전략 전면 개편 (NFS 배제 및 **Ceph/MinIO** 채택) | `docs/project_outline.md`, `docs/build-up/03_persistence/*` |
+| 2026-04-27 | `⚙️ Refactor` | 단계별 설계 가이드(README)와 상세 구현 명세(Implementation) 간 기술 정합성 동기화 | `docs/build-up/**/README.md` |
 | 2026-04-27 | `⚙️ Refactor` | **L7 경로 기반 라우팅(Ingress)** 개념을 반영한 Nginx 가상 호스트 명세 보완 | `docs/build-up/02_perimeter/IMPLEMENTATION.md` |
 | 2026-04-27 | `📝 Docs` | 백업본 기술 지침(Git Hook 충돌 해결 및 LF 규약) 통합 및 시나리오별 가이드 완결 | `docs/ENVIRONMENT_SETUP.md` |
 
