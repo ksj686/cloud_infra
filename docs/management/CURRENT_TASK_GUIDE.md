@@ -8,8 +8,8 @@
 
 - **상태:** 🏗️ 진행 중
 - **목표:** 주기적 작업의 성공/실패 여부를 로그에 남기고, 실패 시 관리자에게 알림을 보내는 체계 구축
-- **가이드 위치:** `docs/to-do-space/step1_automation/01_cron_alert/README.md`
-- **핵심 소스:** `docs/to-do-space/step1_automation/01_cron_alert/cron_task.sh`
+- **가이드 위치:** `docs/labs/step1_automation/01_cron_alert/README.md`
+- **핵심 소스:** `docs/labs/step1_automation/01_cron_alert/cron_task.sh`
 
 ### 🏗️ 1단계: 실습 환경 및 가이드 확인
 
@@ -26,8 +26,8 @@
 
 - **스크립트 권한 부여 및 수동 테스트:**
   ```bash
-  chmod +x docs/to-do-space/step1_automation/01_cron_alert/cron_task.sh
-  ./docs/to-do-space/step1_automation/01_cron_alert/cron_task.sh
+  chmod +x docs/labs/step1_automation/01_cron_alert/cron_task.sh
+  ./docs/labs/step1_automation/01_cron_alert/cron_task.sh
   ```
 - **스크립트 체크리스트:**
   - `LOG_FILE` 경로 확인 (`/var/log/cron_tasks.log` 등 권한 확인)

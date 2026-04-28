@@ -33,7 +33,7 @@ theme:
 
 # 빌드 제외 설정 (분석용 소스 제외)
 exclude_docs: |
-  lecture/**
+  resources/lecture/**
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -56,102 +56,156 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Strategy & Blueprint:
-      - Blueprint: project_outline.md
-      - Features & Strengths: CORE_FEATURE_EXPLAINER.md
-      - Scenarios: SCENARIOS.md
-  - Build-up Guide:
-      - Overview: build-up/README.md
-      - Phase 1 (Foundation):
-          - Overview: build-up/01_foundation/README.md
-          - Implementation: build-up/01_foundation/IMPLEMENTATION.md
-          - As-built: build-up/01_foundation/AS_BUILT.md
-      - Phase 2 (Perimeter):
-          - Overview: build-up/02_perimeter/README.md
-          - Implementation: build-up/02_perimeter/IMPLEMENTATION.md
-          - As-built: build-up/02_perimeter/AS_BUILT.md
-      - Phase 3 (Persistence):
-          - Overview: build-up/03_persistence/README.md
-          - Implementation: build-up/03_persistence/IMPLEMENTATION.md
-          - As-built: build-up/03_persistence/AS_BUILT.md
-      - Phase 4 (Observability):
-          - Overview: build-up/04_observability/README.md
-          - Implementation: build-up/04_observability/IMPLEMENTATION.md
-          - As-built: build-up/04_observability/AS_BUILT.md
-      - Phase 5 (Pipeline):
-          - Overview: build-up/05_pipeline/README.md
-          - Implementation: build-up/05_pipeline/IMPLEMENTATION.md
-          - As-built: build-up/05_pipeline/AS_BUILT.md
-      - Phase 6 (Scalability):
-          - Overview: build-up/06_scalability/README.md
-          - Implementation: build-up/06_scalability/IMPLEMENTATION.md
-          - As-built: build-up/06_scalability/AS_BUILT.md
-      - Phase 7 (Hybrid Cloud):
-          - Overview: build-up/07_hybrid/README.md
-          - Implementation: build-up/07_hybrid/IMPLEMENTATION.md
-          - As-built: build-up/07_hybrid/AS_BUILT.md
-  - Engineering Standards:
-      - Core Common Elements: standards/common_infra_elements.md
-      - Team & Expansion Strategy: standards/team_collaboration_and_expansion.md
-      - K8s Deployment Strategy: standards/k8s_deployment_strategy.md
-      - AWS S3 & CloudFront Strategy: standards/aws_s3_cloudfront_strategy.md
-      - Asset Management: standards/infra_inventory_management.md
-      - Poetry to uv Migration: standards/poetry_to_uv_migration.md
-      - HA Strategy Analysis: standards/infra_ha_strategy_analysis.md
-      - Analysis & Improvement: standards/analysis_and_improvement.md
-  - Knowledge Base:
-      - Advanced Tech Guide: knowledge_base/advanced_tech_guide.md
-      - Project Taxonomy: knowledge_base/infra_project_taxonomy.md
-      - Ceph Storage Deep-dive: knowledge_base/ceph_storage_deep_dive.md
-      - Full Tech Checklist: knowledge_base/full_tech_checklist.md
-  - Playbooks:
-      - Dev:
-          - Hook Automation: playbooks/dev/git_hook_automation.md
-          - History Cleanup: playbooks/dev/git_history_cleanup_guide.md
-      - Ops:
-          - Dependency Update: playbooks/ops/dependency_update_policy.md
-          - Audit System: playbooks/ops/audit_system.md
-          - Safe Upgrade: playbooks/ops/safe_upgrade.md
-          - SSH Onboarding: playbooks/ops/ssh_onboarding.md
-      - Build:
-          - Security Pipeline: playbooks/build/security_pipeline.md
-          - Storage Setup: playbooks/build/storage_setup.md
-      - Recovery:
-          - RAID Rebuild: playbooks/recovery/raid_rebuild.md
-  - Policies:
-      - Backup Policy: policies/backup_policy.md
-      - Log Policy: policies/log_policy.md
-  - Case Studies:
-      - Git Push Protection: case_studies/20260321_github_push_protection.md
-      - pre-commit Encoding: case_studies/20260408_precommit_troubleshooting.md
-      - Win Env & Antivirus: case_studies/20260414_windows_env_troubleshooting.md
-      - pip Vulnerability Fix: case_studies/20260427_pip_audit_vulnerability_fix.md
-  - Solutions:
-      - Overview: solutions/README.md
-      - Airflow: solutions/01_airflow/README.md
-      - Wazuh: solutions/02_wazuh/README.md
-      - Prometheus & Grafana: solutions/03_prometheus_grafana/README.md
-      - Vault: solutions/04_vault/README.md
-      - Proxmox VE:
-          - Guide: solutions/05_proxmox_ve/README.md
-          - HA Cluster: solutions/05_proxmox_ve/01_ha_cluster.md
-          - Backup PBS: solutions/05_proxmox_ve/02_backup_pbs.md
-          - Automation API: solutions/05_proxmox_ve/03_automation_api.md
+  - Architecture:
+      - Blueprint: architecture/project_outline.md
+      - Features & Strengths: architecture/CORE_FEATURE_EXPLAINER.md
+      - Scenarios: architecture/SCENARIOS.md
+      - Inventory: architecture/INFRA_INVENTORY.md
+      - Build-up Guide:
+          - Overview: architecture/build-up/README.md
+          - Phase 1 (Foundation):
+              - Overview: architecture/build-up/01_foundation/README.md
+              - Implementation: architecture/build-up/01_foundation/IMPLEMENTATION.md
+              - As-built: architecture/build-up/01_foundation/AS_BUILT.md
+          - Phase 2 (Perimeter):
+              - Overview: architecture/build-up/02_perimeter/README.md
+              - Implementation: architecture/build-up/02_perimeter/IMPLEMENTATION.md
+              - As-built: architecture/build-up/02_perimeter/AS_BUILT.md
+          - Phase 3 (Persistence):
+              - Overview: architecture/build-up/03_persistence/README.md
+              - Implementation: architecture/build-up/03_persistence/IMPLEMENTATION.md
+              - As-built: architecture/build-up/03_persistence/AS_BUILT.md
+          - Phase 4 (Observability):
+              - Overview: architecture/build-up/04_observability/README.md
+              - Implementation: architecture/build-up/04_observability/IMPLEMENTATION.md
+              - As-built: architecture/build-up/04_observability/AS_BUILT.md
+          - Phase 5 (Pipeline):
+              - Overview: architecture/build-up/05_pipeline/README.md
+              - Implementation: architecture/build-up/05_pipeline/IMPLEMENTATION.md
+              - As-built: architecture/build-up/05_pipeline/AS_BUILT.md
+          - Phase 6 (Scalability):
+              - Overview: architecture/build-up/06_scalability/README.md
+              - Implementation: architecture/build-up/06_scalability/IMPLEMENTATION.md
+              - As-built: architecture/build-up/06_scalability/AS_BUILT.md
+          - Phase 7 (Hybrid Cloud):
+              - Overview: architecture/build-up/07_hybrid/README.md
+              - Implementation: architecture/build-up/07_hybrid/IMPLEMENTATION.md
+              - As-built: architecture/build-up/07_hybrid/AS_BUILT.md
+      - ADR:
+          - Overview: architecture/decisions/README.md
+          - ADR-001 (DB Setup): architecture/decisions/ADR-001-db-setup-method.md
+          - ADR-002 (Documentation): architecture/decisions/ADR-002-documentation-tool.md
+          - ADR-003 (Source Strategy): architecture/decisions/ADR-003-source-management-strategy.md
+          - ADR-004 (Data Strategy): architecture/decisions/ADR-004-data-persistence-strategy.md
+          - ADR-005 (Quality Automation): architecture/decisions/ADR-005-quality-automation.md
+          - ADR-006 (Task Strategy): architecture/decisions/ADR-006-task-management-strategy.md
+          - ADR-007 (HA Strategy): architecture/decisions/ADR-007-ha-layered-strategy.md
+          - ADR-008 (Tech Stack): architecture/decisions/ADR-008-tech-stack-rationale.md
+  - Engineering:
+      - Standards:
+          - Core Common Elements: engineering/standards/common_infra_elements.md
+          - Team & Expansion Strategy: engineering/standards/team_collaboration_and_expansion.md
+          - K8s Deployment Strategy: engineering/standards/k8s_deployment_strategy.md
+          - AWS S3 & CloudFront Strategy: engineering/standards/aws_s3_cloudfront_strategy.md
+          - Asset Management: engineering/standards/infra_inventory_management.md
+          - Poetry to uv Migration: engineering/standards/poetry_to_uv_migration.md
+          - HA Strategy Analysis: engineering/standards/infra_ha_strategy_analysis.md
+          - Analysis & Improvement: engineering/standards/analysis_and_improvement.md
+      - Policies:
+          - Backup Policy: engineering/policies/backup_policy.md
+          - Log Policy: engineering/policies/log_policy.md
+  - Operations:
+      - Playbooks:
+          - Dev:
+              - Hook Automation: operations/playbooks/dev/git_hook_automation.md
+              - History Cleanup: operations/playbooks/dev/git_history_cleanup_guide.md
+          - Ops:
+              - Dependency Update: operations/playbooks/ops/dependency_update_policy.md
+              - Audit System: operations/playbooks/ops/audit_system.md
+              - Safe Upgrade: operations/playbooks/ops/safe_upgrade.md
+              - SSH Onboarding: operations/playbooks/ops/ssh_onboarding.md
+          - Build:
+              - Security Pipeline: operations/playbooks/build/security_pipeline.md
+              - Storage Setup: operations/playbooks/build/storage_setup.md
+          - Recovery:
+              - RAID Rebuild: operations/playbooks/recovery/raid_rebuild.md
+      - Solutions:
+          - Overview: operations/solutions/README.md
+          - Airflow: operations/solutions/01_airflow/README.md
+          - Wazuh: operations/solutions/02_wazuh/README.md
+          - Prometheus & Grafana: operations/solutions/03_prometheus_grafana/README.md
+          - Vault: operations/solutions/04_vault/README.md
+          - Proxmox VE:
+              - Guide: operations/solutions/05_proxmox_ve/README.md
+              - HA Cluster: operations/solutions/05_proxmox_ve/01_ha_cluster.md
+              - Backup PBS: operations/solutions/05_proxmox_ve/02_backup_pbs.md
+              - Automation API: operations/solutions/05_proxmox_ve/03_automation_api.md
+      - Case Studies:
+          - Git Push Protection: operations/case_studies/20260321_github_push_protection.md
+          - pre-commit Encoding: operations/case_studies/20260408_precommit_troubleshooting.md
+          - Win Env & Antivirus: operations/case_studies/20260414_windows_env_troubleshooting.md
+          - pip Vulnerability Fix: operations/case_studies/20260427_pip_audit_vulnerability_fix.md
+  - Labs:
+      - Overview: labs/README.md
+      - Step 1 (Automation):
+          - Overview: labs/step1_automation/README.md
+          - 01 Cron Alert: labs/step1_automation/01_cron_alert/README.md
+          - 02 Backup Script: labs/step1_automation/02_backup_script/README.md
+          - 03 Disk Monitor: labs/step1_automation/03_disk_monitoring/README.md
+          - 04 SSH Security: labs/step1_automation/04_ssh_security/README.md
+          - 05 User Audit: labs/step1_automation/05_user_audit/README.md
+          - 06 Task Report: labs/step1_automation/06_task_reporting/README.md
+      - Step 2 (Troubleshooting):
+          - Overview: labs/step2_troubleshooting/README.md
+          - 01 RAID Recovery: labs/step2_troubleshooting/01_raid_recovery/README.md
+          - 02 LVM Reduce: labs/step2_troubleshooting/02_lvm_reduce/README.md
+          - 03 Kernel Config: labs/step2_troubleshooting/03_kernel_config/README.md
+      - Step 3 (Optimization):
+          - Overview: labs/step3_optimization/README.md
+          - 01 Netplan & Firewall: labs/step3_optimization/01_netplan_firewall/README.md
+          - 02 Process Signals: labs/step3_optimization/02_process_signals/README.md
+          - 03 Symlink Versioning: labs/step3_optimization/03_symlink_versioning/README.md
+          - 04 Logrotate Custom: labs/step3_optimization/04_logrotate_custom/README.md
+      - Step 4 (Expansion):
+          - Overview: labs/step4_expansion/README.md
+          - 01 Ansible Intro: labs/step4_expansion/01_ansible_intro/README.md
+          - 02 Docker Strategy: labs/step4_expansion/02_docker_strategy/README.md
+          - 03 Security ClamAV: labs/step4_expansion/03_security_clamav/README.md
+          - 04 Nginx Tuning: labs/step4_expansion/04_nginx_tuning/README.md
+      - Step 5 (Security):
+          - Overview: labs/step5_advanced_security/README.md
+          - 01 Auditd Setup: labs/step5_advanced_security/01_auditd_setup/README.md
+          - 02 Load Balancing: labs/step5_advanced_security/02_nginx_load_balancing/README.md
+          - 03 Self Healing: labs/step5_advanced_security/03_self_healing/README.md
+          - 04 pre-commit Gitleaks: labs/step5_advanced_security/04_pre_commit_gitleaks/README.md
+          - 05 Dependency Audit: labs/step5_advanced_security/05_dependency_audit/README.md
+          - 06 Trivy Scan: labs/step5_advanced_security/06_trivy_scan/README.md
+      - Step 6 (Enterprise HA):
+          - Overview: labs/step6_enterprise_ha/README.md
+          - 02 Galera Cluster: labs/step6_enterprise_ha/02_galera_cluster/README.md
+      - Step 7 (Cloud Native AI):
+          - Overview: labs/step7_cloud_native_ai/README.md
+          - 05 Istio Sidecar: labs/step7_cloud_native_ai/05_istio_sidecar/README.md
+  - Resources:
+      - Knowledge Base:
+          - Advanced Tech Guide: resources/knowledge_base/advanced_tech_guide.md
+          - Project Taxonomy: resources/knowledge_base/infra_project_taxonomy.md
+          - Ceph Storage Deep-dive: resources/knowledge_base/ceph_storage_deep_dive.md
+          - Full Tech Checklist: resources/knowledge_base/full_tech_checklist.md
+      - Presentation:
+          - Index: resources/presentation/index.md
+          - Presentation: resources/presentation/presentation.md
+          - 01 Vision & Goals: resources/presentation/01_vision_and_goals.md
+          - 02 Security Guardrails: resources/presentation/02_security_guardrails.md
+          - 03 HA Strategy: resources/presentation/03_high_availability.md
+          - 04 Automated Ops: resources/presentation/04_automated_ops.md
+          - 05 Impact & Future: resources/presentation/05_impact_and_future.md
   - Management:
-      - Workflow: PROJECT_WORKFLOW.md
-      - Task Guide: CURRENT_TASK_GUIDE.md
-      - Env Setup: ENVIRONMENT_SETUP.md
-  - Roadmap: to-do-list.md
-  - Lab Space:
-      - Overview: to-do-space/README.md
-      - Step 1 (Automation): to-do-space/step1_automation/README.md
-      - Step 2 (Troubleshooting): to-do-space/step2_troubleshooting/README.md
-      - Step 3 (Optimization): to-do-space/step3_optimization/README.md
-      - Step 4 (Expansion): to-do-space/step4_expansion/README.md
-      - Step 5 (Security): to-do-space/step5_advanced_security/README.md
-      - Step 6 (Enterprise HA): to-do-space/step6_enterprise_ha/README.md
-      - Step 7 (Cloud Native AI): to-do-space/step7_cloud_native_ai/README.md
-  - Changelog: CHANGELOG.md
+      - Workflow: management/PROJECT_WORKFLOW.md
+      - Task Guide: management/CURRENT_TASK_GUIDE.md
+      - Env Setup: management/ENVIRONMENT_SETUP.md
+      - Roadmap: management/to-do-list.md
+      - Changelog: management/CHANGELOG.md
 
 plugins:
   - search

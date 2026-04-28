@@ -48,22 +48,22 @@ graph TD
 ## 3. 문서 시스템 가이드 (Documentation Guide)
 
 - **[README.md](./docs/index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
-- **[CORE_FEATURE_EXPLAINER.md](./docs/CORE_FEATURE_EXPLAINER.md):** 프로젝트 핵심 기술적 차별성 및 보안 특장점 상세 설명
-- **[project_outline.md](./docs/project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
-- **[Build-up Guide](./docs/build-up/README.md):** 설계 구성안을 실제 환경에 구현하기 위한 단계별 기술 실행 절차
-- **[SCENARIOS.md](./docs/SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
-- **[playbooks/](./docs/playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
+- **[CORE_FEATURE_EXPLAINER.md](./docs/architecture/CORE_FEATURE_EXPLAINER.md):** 프로젝트 핵심 기술적 차별성 및 보안 특장점 상세 설명
+- **[project_outline.md](./docs/architecture/project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
+- **[Build-up Guide](./docs/architecture/build-up/README.md):** 설계 구성안을 실제 환경에 구현하기 위한 단계별 기술 실행 절차
+- **[SCENARIOS.md](./docs/architecture/SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
+- **[playbooks/](./docs/operations/playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
   - `ops/`: 일상 운영 및 온보딩 절차
   - `recovery/`: 장애 대응 및 복구 절차
-- **[case_studies/](./docs/case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물
-- **[knowledge_base/](./docs/knowledge_base/):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
+- **[case_studies/](./docs/operations/case_studies/):** 실제 보안 대응 및 트러블슈팅 사례(Lessons Learned) 기록물
+- **[knowledge_base/](./docs/resources/knowledge_base/):** 고도화 기술 가이드 및 아키텍처 분석(Thanos, Ceph, AI 등) 자료
 - **[Management Docs]:**
-  - [Workflow](./docs/PROJECT_WORKFLOW.md): 프로젝트 실행 공정 및 대화 기반 의사결정 로그
-  - [Task Guide](./docs/CURRENT_TASK_GUIDE.md): 현재 진행 중인 활성 작업 실행 매뉴얼
-  - [Env Setup](./docs/ENVIRONMENT_SETUP.md): 개발 환경 구축 및 품질 관리(pre-commit) 영구 지침
-- **[to-do-list.md](./docs/to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
-- **[to-do-space/](./docs/to-do-space/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
-- **[solutions/](./docs/solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Harbor 등) 구축 가이드
+  - [Workflow](./docs/management/PROJECT_WORKFLOW.md): 프로젝트 실행 공정 및 대화 기반 의사결정 로그
+  - [Task Guide](./docs/management/CURRENT_TASK_GUIDE.md): 현재 진행 중인 활성 작업 실행 매뉴얼
+  - [Env Setup](./docs/management/ENVIRONMENT_SETUP.md): 개발 환경 구축 및 품질 관리(pre-commit) 영구 지침
+- **[to-do-list.md](./docs/management/to-do-list.md):** 인프라 구축 및 보안 표준 환경 실습 로드맵
+- **[labs/](./docs/labs/):** 로드맵 항목별 단계별 가이드 및 실전 스크립트 보관소
+- **[solutions/](./docs/operations/solutions/):** 핵심 오픈소스 솔루션(Airflow, Wazuh, Harbor 등) 구축 가이드
 
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
 

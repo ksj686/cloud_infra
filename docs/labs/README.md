@@ -1,4 +1,4 @@
-# 📂 생성된 학습 공간 구조 (to-do-space)
+# 📂 생성된 학습 공간 구조 (labs)
 
 - **step1_automation:** 크론탭 알림, 백업, 디스크 모니터링, SSH 보안, 사용자 권한 감사 수행
 - **step2_troubleshooting:** RAID 장애 복구, LVM 볼륨 축소, 커널 컴파일 옵션 학습

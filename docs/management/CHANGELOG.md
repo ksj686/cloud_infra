@@ -49,7 +49,7 @@
 | 날짜       | 분류          | 수정 내용                                                                    | 수정 파일                                              |
 | :--------- | :------------ | :--------------------------------------------------------------------------- | :----------------------------------------------------- |
 | 2026-04-24 | `📝 Docs`     | 패키지 관리 도구(pnpm, uv) 주요 명령어 퀵 레퍼런스 가이드 추가               | `docs/ENVIRONMENT_SETUP.md`                            |
-| 2026-04-24 | `🧪 Test`     | **Step 7-5: Istio Sidecar 주입 실습** 공간 구축 및 샘플 매니페스트 작성      | `docs/to-do-space/step7_cloud_native_ai/*`             |
+| 2026-04-24 | `🧪 Test`     | **Step 7-5: Istio Sidecar 주입 실습** 공간 구축 및 샘플 매니페스트 작성      | `docs/labs/step7_cloud_native_ai/*`                    |
 | 2026-04-24 | `📝 Docs`     | K8s 재배포 전략 가이드 내 Sidecar 도입 단계를 향후 과제(TO-BE)로 명시        | `docs/standards/*`                                     |
 | 2026-04-24 | `🛠️ Fix`      | `pip-audit` 윈도우 권한 오류 해결을 위한 로컬 캐시 경로(`.audit_cache`) 적용 | `.pre-commit-config.yaml`, `.gitignore`                |
 | 2026-04-24 | `🔒 Security` | SCA 종속성 보안 감사(`pip-audit`, `pnpm audit`)의 `pre-commit` 자동화 연동   | `.pre-commit-config.yaml`, `docs/ENVIRONMENT_SETUP.md` |
@@ -233,12 +233,12 @@
 
 ## [도커 데이터 관리 전략 수립 및 로드맵 보완]
 
-| 날짜       | 분류         | 수정 내용                                                                                     | 수정 파일                                                       |
-| :--------- | :----------- | :-------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
-| 2026-04-06 | `🚀 Feature` | 도커 데이터 보존 3대 방식(Bind, Named, Anonymous) 비교 및 데이터 성격별 권장 전략 가이드 구축 | `docs/to-do-space/step4_expansion/02_docker_strategy/README.md` |
-| 2026-04-06 | `🚀 Feature` | `docker commit` 기반 골든 이미지 전략 및 `--net-alias` 이용 내부 로드 밸런싱 설계 가이드 추가 | `docs/to-do-space/step4_expansion/02_docker_strategy/README.md` |
-| 2026-04-06 | `🧪 Test`    | 바인드 마운트 DB 보호 및 네트워크 별칭 기반 로드 밸런싱 실습 항목 로드맵 추가                 | `docs/to-do-list.md`                                            |
-| 2026-04-06 | `📝 Docs`    | `poetry lock` 절차 및 상황별(신규/참여) 환경 구축 가이드 정밀화                               | `docs/ENVIRONMENT_SETUP.md`, `docs/CURRENT_TASK_GUIDE.md`       |
+| 날짜       | 분류         | 수정 내용                                                                                     | 수정 파일                                                 |
+| :--------- | :----------- | :-------------------------------------------------------------------------------------------- | :-------------------------------------------------------- |
+| 2026-04-06 | `🚀 Feature` | 도커 데이터 보존 3대 방식(Bind, Named, Anonymous) 비교 및 데이터 성격별 권장 전략 가이드 구축 | `docs/labs/step4_expansion/02_docker_strategy/README.md`  |
+| 2026-04-06 | `🚀 Feature` | `docker commit` 기반 골든 이미지 전략 및 `--net-alias` 이용 내부 로드 밸런싱 설계 가이드 추가 | `docs/labs/step4_expansion/02_docker_strategy/README.md`  |
+| 2026-04-06 | `🧪 Test`    | 바인드 마운트 DB 보호 및 네트워크 별칭 기반 로드 밸런싱 실습 항목 로드맵 추가                 | `docs/to-do-list.md`                                      |
+| 2026-04-06 | `📝 Docs`    | `poetry lock` 절차 및 상황별(신규/참여) 환경 구축 가이드 정밀화                               | `docs/ENVIRONMENT_SETUP.md`, `docs/CURRENT_TASK_GUIDE.md` |
 
 | 2026-04-04 | `📝 Docs` | `nvm` 설치 전 기존 Node.js 삭제 권고 및 경로 충돌 방지 지침 추가 | `docs/ENVIRONMENT_SETUP.md`, `docs/CURRENT_TASK_GUIDE.md` |
 | 2026-04-04 | `📝 Docs` | Poetry 설치 시 터미널 로그를 통한 절대 경로 확인 및 PATH 등록 절차 구체화 | `docs/ENVIRONMENT_SETUP.md` |
@@ -250,14 +250,14 @@
 
 ## [MkDocs 빌드 오류 수정 및 경로 일관성 확보]
 
-| 날짜       | 분류          | 수정 내용                                                                                | 수정 파일                                                            |
-| :--------- | :------------ | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------- |
-| 2026-04-02 | `🚀 Feature`  | Nginx 로드 밸런싱 기반 무중단 롤링 업데이트(Rolling Update) 시나리오 설계 및 반영        | `docs/SCENARIOS.md`                                                  |
-| 2026-04-02 | `🔒 Security` | ClamAV 보안 스캔 인터페이스 고도화(자동 격리, 로깅, Slack 알림 기능 통합)                | `docs/to-do-space/step4_expansion/03_security_clamav/clamav_scan.sh` |
-| 2026-04-02 | `🛠️ Fix`      | `exclude_docs` 설정 형식 오류(List -> Multiline String) 수정 및 빌드 정상화              | `mkdocs.yml`                                                         |
-| 2026-04-02 | `⚙️ Refactor` | MkDocs 내비게이션 구조 최종 최적화 및 누락된 모든 문서(Scenario, Playbooks 등) 메뉴 등록 | `mkdocs.yml`                                                         |
-| 2026-04-02 | `🧪 Test`     | 각 실습 Step별 인덱스(README.md) 생성 및 웹 포털 내비게이션 연결성 강화                  | `docs/to-do-space/*/README.md`                                       |
-| 2026-04-02 | `📝 Docs`     | 문서 간 잘못된 상대 경로 및 디렉토리 직접 링크 전수 수정                                 | `README.md`, `docs/*.md`                                             |
+| 날짜       | 분류          | 수정 내용                                                                                | 수정 파일                                                     |
+| :--------- | :------------ | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------ |
+| 2026-04-02 | `🚀 Feature`  | Nginx 로드 밸런싱 기반 무중단 롤링 업데이트(Rolling Update) 시나리오 설계 및 반영        | `docs/SCENARIOS.md`                                           |
+| 2026-04-02 | `🔒 Security` | ClamAV 보안 스캔 인터페이스 고도화(자동 격리, 로깅, Slack 알림 기능 통합)                | `docs/labs/step4_expansion/03_security_clamav/clamav_scan.sh` |
+| 2026-04-02 | `🛠️ Fix`      | `exclude_docs` 설정 형식 오류(List -> Multiline String) 수정 및 빌드 정상화              | `mkdocs.yml`                                                  |
+| 2026-04-02 | `⚙️ Refactor` | MkDocs 내비게이션 구조 최종 최적화 및 누락된 모든 문서(Scenario, Playbooks 등) 메뉴 등록 | `mkdocs.yml`                                                  |
+| 2026-04-02 | `🧪 Test`     | 각 실습 Step별 인덱스(README.md) 생성 및 웹 포털 내비게이션 연결성 강화                  | `docs/labs/*/README.md`                                       |
+| 2026-04-02 | `📝 Docs`     | 문서 간 잘못된 상대 경로 및 디렉토리 직접 링크 전수 수정                                 | `README.md`, `docs/*.md`                                      |
 
 ---
 
@@ -274,13 +274,13 @@
 
 ## [문서 작성 원칙 강화 및 고도화 기술 분석]
 
-| 날짜       | 분류          | 수정 내용                                                                                                                | 수정 파일                        |
-| :--------- | :------------ | :----------------------------------------------------------------------------------------------------------------------- | :------------------------------- |
-| 2026-03-28 | `📝 Docs`     | `GEMINI.md` 내 순수 명사형 종결 원칙 및 기술적 정교함 지침 강화                                                          | `GEMINI.md`                      |
-| 2026-03-28 | `🚀 Feature`  | 고도화 기술 가이드 및 프로젝트 개선 전략 분석 문서 구축                                                                  | `knowledge_base/*`               |
-| 2026-03-28 | `⚙️ Refactor` | 기존 작성 문서(`project_outline.md`, `README.md`, `knowledge_base/*`, `playbooks/*`)에 순수 명사형 종결 스타일 일괄 적용 | `*.md`                           |
-| 2026-03-28 | `🧪 Test`     | 엔터프라이즈 HA(Step 6) 및 클라우드 네이티브/AI(Step 7) 실습 로드맵 확장 및 학습 공간 구축                               | `to-do-list.md`, `to-do-space/*` |
-| 2026-03-30 | `🚀 Feature`  | MkDocs Material 기반 웹 포털 환경 구축 및 사이드바 내비게이션 구조 설계                                                  | `mkdocs.yml`                     |
+| 날짜       | 분류          | 수정 내용                                                                                                                | 수정 파일                 |
+| :--------- | :------------ | :----------------------------------------------------------------------------------------------------------------------- | :------------------------ |
+| 2026-03-28 | `📝 Docs`     | `GEMINI.md` 내 순수 명사형 종결 원칙 및 기술적 정교함 지침 강화                                                          | `GEMINI.md`               |
+| 2026-03-28 | `🚀 Feature`  | 고도화 기술 가이드 및 프로젝트 개선 전략 분석 문서 구축                                                                  | `knowledge_base/*`        |
+| 2026-03-28 | `⚙️ Refactor` | 기존 작성 문서(`project_outline.md`, `README.md`, `knowledge_base/*`, `playbooks/*`)에 순수 명사형 종결 스타일 일괄 적용 | `*.md`                    |
+| 2026-03-28 | `🧪 Test`     | 엔터프라이즈 HA(Step 6) 및 클라우드 네이티브/AI(Step 7) 실습 로드맵 확장 및 학습 공간 구축                               | `to-do-list.md`, `labs/*` |
+| 2026-03-30 | `🚀 Feature`  | MkDocs Material 기반 웹 포털 환경 구축 및 사이드바 내비게이션 구조 설계                                                  | `mkdocs.yml`              |
 
 ---
 
@@ -312,9 +312,9 @@
 
 ## [실습 로드맵 및 보안 학습 환경 강화]
 
-| 날짜       | 분류      | 수정 내용                                                                                       | 수정 파일                                                |
-| :--------- | :-------- | :---------------------------------------------------------------------------------------------- | :------------------------------------------------------- |
-| 2026-03-25 | `🧪 Test` | `project_outline.md` 구현을 위한 단계별 실습 항목(auditd, 로드 밸런싱 등) 추가 및 가이드 생성함 | `to-do-list.md`, `to-do-space/step5_advanced_security/*` |
+| 날짜       | 분류      | 수정 내용                                                                                       | 수정 파일                                         |
+| :--------- | :-------- | :---------------------------------------------------------------------------------------------- | :------------------------------------------------ |
+| 2026-03-25 | `🧪 Test` | `project_outline.md` 구현을 위한 단계별 실습 항목(auditd, 로드 밸런싱 등) 추가 및 가이드 생성함 | `to-do-list.md`, `labs/step5_advanced_security/*` |
 
 ---
 
@@ -347,7 +347,7 @@
 | 날짜       | 분류         | 수정 내용                                                                | 수정 파일                                                                    |
 | :--------- | :----------- | :----------------------------------------------------------------------- | :--------------------------------------------------------------------------- |
 | 2026-03-21 | `🚀 Feature` | 단계별 보안 자동화 도구(Gitleaks, Trivy 등) 체계 설계 및 플레이북 생성함 | `project_outline.md`, `SCENARIOS.md`, `playbooks/build/security_pipeline.md` |
-| 2026-03-21 | `🛠️ Fix`     | GitHub Push Protection 대응을 위한 예시 URL 추상화 및 오탐지 수정함      | `to-do-space/.../README.md`, `daily_report.sh`                               |
+| 2026-03-21 | `🛠️ Fix`     | GitHub Push Protection 대응을 위한 예시 URL 추상화 및 오탐지 수정함      | `labs/.../README.md`, `daily_report.sh`                                      |
 
 ---
 

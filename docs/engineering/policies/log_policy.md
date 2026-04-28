@@ -35,4 +35,4 @@
 
 ---
 
-_참조 플레이북: [Audit System](../playbooks/ops/audit_system.md) (기타 상세 설정은 playbooks 참조)_
+_참조 플레이북: [Audit System](../../operations/playbooks/ops/audit_system.md) (기타 상세 설정은 playbooks 참조)_

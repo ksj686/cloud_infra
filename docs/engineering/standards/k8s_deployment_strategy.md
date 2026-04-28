@@ -45,7 +45,7 @@
 
 4. **4단계 (심화 - Istio Sidecar):**
    - **목적:** 서비스 메시 도입을 통한 정밀 트래픽 제어 및 전 구간 보안(mTLS) 강화.
-   - **실습 안내:** [Step 7-5: Istio Sidecar 주입 실습](../../to-do-space/step7_cloud_native_ai/05_istio_sidecar/README.md) 참조.
+   - **실습 안내:** [Step 7-5: Istio Sidecar 주입 실습](../../labs/step7_cloud_native_ai/05_istio_sidecar/README.md) 참조.
 
 ---
 

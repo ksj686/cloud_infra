@@ -43,7 +43,7 @@
 - **Argo CD 기반 GitOps 운영:**
   - **신뢰의 단일 원천(Source of Truth):** Git 저장소의 상태를 클러스터에 강제 동기화하여 수동 작업 배제
   - **드리프트 탐지(Drift Detection):** 클러스터 상태 불일치 자동 감지 및 자동 복구(Self-healing) 가동
-  - **상세 전략:** [K8s 설정 관리 및 재배포 전략](../../standards/k8s_deployment_strategy.md) 참조
+  - **상세 전략:** [K8s 설정 관리 및 재배포 전략](../../../engineering/standards/k8s_deployment_strategy.md) 참조
 
 ## 4. 유연한 인프라 확장 및 미래 로드맵
 

@@ -39,7 +39,7 @@
 - **자동화 훅 구축:**
   - `post-merge`: 락파일 변경 시 의존성 자동 동기화 로직 구현
   - `pre-commit`: Husky가 파이썬 기반 `pre-commit` 도구를 호출하도록 브릿지 구성
-- **상세 실구축 가이드:** [Git Hook 협업 자동화 플레이북](./playbooks/dev/git_hook_automation.md)을 참조하여 전 공정 수행
+- **상세 실구축 가이드:** [Git Hook 협업 자동화 플레이북](../operations/playbooks/dev/git_hook_automation.md)을 참조하여 전 공정 수행
 
 ---
 

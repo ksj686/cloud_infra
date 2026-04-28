@@ -39,7 +39,7 @@
 ## Phase 3: Persistence (데이터 및 스토리지 가용성) {: #phase-3 }
 
 **목표:** SPoF(단일 장애점)가 제거된 고가용성 분산 스토리지 및 객체 저장소 체계 구축
-**관련 정책:** [백업 및 복구 정책](./policies/backup_policy.md)
+**관련 정책:** [백업 및 복구 정책](../engineering/policies/backup_policy.md)
 
 - **분산 스토리지 (Ceph):**
   - Proxmox 통합 관리: 하이퍼바이저 노드 간 디스크를 통합하여 데이터 삼중화(Replication) 및 자가 복구 구현
@@ -58,7 +58,7 @@
 ## Phase 4: Observability (운영 가시성 및 성능 최적화) {: #phase-4 }
 
 **목표:** 실시간 모니터링, 성능 튜닝 및 자동 장애 대응 체계 구축을 통한 서비스 가용성 극대화
-**관련 정책:** [로그 보존 및 관리 정책](./policies/log_policy.md)
+**관련 정책:** [로그 보존 및 관리 정책](../engineering/policies/log_policy.md)
 
 - **고가용성 유지 (High Availability):**
   - 하이퍼바이저 HA: Proxmox 3노드 이상 클러스터 구성을 통한 노드 장애 시 VM 자동 페일오버 보장

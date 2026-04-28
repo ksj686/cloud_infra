@@ -45,4 +45,4 @@
 
 ---
 
-_참조 플레이북: [RAID Rebuild](../playbooks/recovery/raid_rebuild.md) (기타 복구 절차는 playbooks 참조)_
+_참조 플레이북: [RAID Rebuild](../../operations/playbooks/recovery/raid_rebuild.md) (기타 복구 절차는 playbooks 참조)_

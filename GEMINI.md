@@ -20,19 +20,19 @@
 
 ## 2. 작업 완료 및 검증 원칙
 
-- 모든 설계 변경 시 `docs/project_outline.md`의 **Phase별 구축 순서**와 보안/자동화 원칙에 위배되지 않는지 확인
-- 새로운 실습 항목은 `docs/to-do-space/` 폴더 하위에 실습 가이드(`README.md`)와 함께 정리하여 사용자가 단계별로 따라 하기 편하도록 구성
-- **환경 설정 기록 유지 (Mandatory):** 개발 도구 설치, MkDocs 설정, 시스템 환경 변수 등 초기 세팅 및 환경과 관련된 모든 사항을 `docs/ENVIRONMENT_SETUP.md`에 상시 기록하여 최신 상태 유지
+- 모든 설계 변경 시 `docs/architecture/project_outline.md`의 **Phase별 구축 순서**와 보안/자동화 원칙에 위배되지 않는지 확인
+- 새로운 실습 항목은 `docs/labs/` 폴더 하위에 실습 가이드(`README.md`)와 함께 정리하여 사용자가 단계별로 따라 하기 편하도록 구성
+- **환경 설정 기록 유지 (Mandatory):** 개발 도구 설치, MkDocs 설정, 시스템 환경 변수 등 초기 세팅 및 환경과 관련된 모든 사항을 `docs/management/ENVIRONMENT_SETUP.md`에 상시 기록하여 최신 상태 유지
 
 ## 3. 기록 관리 (CHANGELOG & Archive)
 
-- **날짜 정확성 확보 (Mandatory):** `docs/CHANGELOG.md` 또는 날짜가 포함된 기록물 작성 직전, 반드시 `run_shell_command`를 통해 현재 시스템 날짜(`Get-Date -Format "yyyy-MM-dd"`) 확인 후 기재. 추측에 의한 날짜 기입 엄격 금지
+- **날짜 정확성 확보 (Mandatory):** `docs/management/CHANGELOG.md` 또는 날짜가 포함된 기록물 작성 직전, 반드시 `run_shell_command`를 통해 현재 시스템 날짜(`Get-Date -Format "yyyy-MM-dd"`) 확인 후 기재. 추측에 의한 날짜 기입 엄격 금지
 - **기록 보존:** 새로운 기록 추가 시 기존 기록의 날짜나 내용을 함부로 수정하지 않으며, 오직 당일 작업 내역에 대해서만 현재 날짜를 적용
-- **작업 단위 기록:** 모든 주요 설계 및 설정 변경 사항은 `docs/CHANGELOG.md`에 작업명 단위로 그룹화하여 기록
+- **작업 단위 기록:** 모든 주요 설계 및 설정 변경 사항은 `docs/management/CHANGELOG.md`에 작업명 단위로 그룹화하여 기록
 - **Git 커밋 전략 자동 제안 (Mandatory):** 작업 완료 후 `git status` 기반 변경 사항 분석. 논리적 단위로 그룹화하여 (1) 그룹명, (2) 대상 파일 및 상태, (3) 커밋 메시지(제목 및 상세 내역) 형식을 콘솔에 텍스트로 제안. **모든 커밋 메시지는 한국어 작성을 원칙으로 함.** 에이전트의 독단적인 Git 커밋(commit) 및 푸시(push) 실행은 어떠한 경우에도 절대 엄격히 금지함. 실행 명령어 제시는 생략하며, 사용자가 직접 수행하도록 유도함.
 - **분류 체계 준수:** 🚀 Feature, 🛠️ Fix, 🔥 Removal, 🔒 Security, 📝 Docs, ⚙️ Refactor, 🧪 Test, 📦 Dependency, 🎨 Style, 🧹 Chore 분류를 사용하여 변경 성격 명시
 - **아카이빙 전략:**
-  - `docs/CHANGELOG.md`가 500라인을 초과하거나 분기가 종료될 경우, 과거 기록을 `docs/archives/changelogs/` 하위로 이전
+  - `docs/management/CHANGELOG.md`가 500라인을 초과하거나 분기가 종료될 경우, 과거 기록을 `docs/archives/changelogs/` 하위로 이전
   - 이전 시 파일명 형식은 `[YEAR]_[Q/MONTH]_CHANGELOG.md` 준수
 - **추적성 확보:** 수정 파일 목록을 반드시 포함하여 변경 사항의 영향 범위를 파악할 수 있도록 함.
 
@@ -40,11 +40,11 @@
 
 에이전트는 프로젝트의 연속성 확보를 위해 다음 3대 문서를 상시 최신화하여 관리함.
 
-- **`docs/PROJECT_WORKFLOW.md` (전략):** 전체 진행 상황(Progress), 차기 과제(Next Steps), 주요 의사결정 이력(Decision Log) 관리
-- **`docs/CORE_FEATURE_EXPLAINER.md` (성과):** 프로젝트 핵심 기술적 차별성 및 보안 강점 상시 최신화
-- **`docs/presentation/` (발표):** 프로젝트 진척도에 따른 기술 구현 성과 및 시나리오별 발표 자료 동기화 유지 (Mandatory). 주요 기술적 마일스톤 달성, 아키텍처 변경, 혹은 신규 실습 항목 추가 시 `presentation.md`와 하위 개별 슬라이드들을 즉각 갱신하여 프로젝트의 현재 상태를 항상 대외 공유 가능한 수준으로 유지함.
-- **`docs/to-do-list.md` (목표):** 실습 로드맵 및 학습 항목별 체크리스트 관리
-- **`docs/CURRENT_TASK_GUIDE.md` (전술):** 현재 활성화된 작업(Active Task)에 대한 상세 단계별 실행 매뉴얼 제공. 작업 완료 시 새로운 과업 내용으로 갱신
+- **`docs/management/PROJECT_WORKFLOW.md` (전략):** 전체 진행 상황(Progress), 차기 과제(Next Steps), 주요 의사결정 이력(Decision Log) 관리
+- **`docs/architecture/CORE_FEATURE_EXPLAINER.md` (성과):** 프로젝트 핵심 기술적 차별성 및 보안 강점 상시 최신화
+- **`docs/resources/presentation/` (발표):** 프로젝트 진척도에 따른 기술 구현 성과 및 시나리오별 발표 자료 동기화 유지 (Mandatory). 주요 기술적 마일스톤 달성, 아키텍처 변경, 혹은 신규 실습 항목 추가 시 `presentation.md`와 하위 개별 슬라이드들을 즉각 갱신하여 프로젝트의 현재 상태를 항상 대외 공유 가능한 수준으로 유지함.
+- **`docs/management/to-do-list.md` (목표):** 실습 로드맵 및 학습 항목별 체크리스트 관리
+- **`docs/management/CURRENT_TASK_GUIDE.md` (전술):** 현재 활성화된 작업(Active Task)에 대한 상세 단계별 실행 매뉴얼 제공. 작업 완료 시 새로운 과업 내용으로 갱신
 
 ## 5. 문서 작성 및 기술 기록 원칙
 
@@ -56,9 +56,9 @@
 - **기술적 정교함 (Technical Precision):** 정확한 파라미터(설정값, 명령어 옵션), 기술적 맥락, 의존 관계를 누락 없이 상세히 기록함. 단순 요약보다 정보의 정확성과 실행 가능성을 우선함.
 - **기존 내용 보존 (Content Preservation):** 새로운 기능이나 설정을 추가할 때, 기존에 작성된 유효한 기술 정보(예: SCA, auditd 등)를 임의로 삭제하거나 축소하지 않음. 오직 새로운 내용과 정면으로 상충하거나 대체가 명시된 경우에만 수정 허용.
 - **기술 디테일 무결성 (Technical Detail Integrity):** 여러 도구나 기술을 하나의 그룹으로 묶을 때(예: 보안 도구 통합), 개별 도구의 명칭(`pnpm audit`, `Semgrep` 등)과 각각의 고유한 역할 설명을 생략하지 않고 개별 불렛 포인트로 유지 관리함.
-- **전방위적 동기화 (Full Synchronization):** 아키텍처나 실습 항목 변경 시, `README.md`, `project_outline.md`, `to-do-list.md`, `presentation/` 등 연관된 모든 문서를 전수 검토하여 변경 사항을 일괄 반영함.
-- **수정 전 전수 검토 (Pre-edit Audit):** `replace` 또는 `write_file` 도구 사용 전, 대상 섹션의 기존 내용을 `read_file`로 완벽히 파악하여 편집 과정에서의 휴먼 에러 및 정보 누락 차단.
-- **구축 가이드 무결성 (Build-up Integrity):** `docs/build-up/` 하위 문서는 설계의 구조적 이해와 실제 구현을 위한 '상세 매뉴얼'임을 명심함. 기존 설명의 맥락과 기술 명세를 최대한 상세히 유지하되, 아키텍처 개선이나 논리적 최적화가 필요한 경우 명확한 근거 하에 구조 변경 및 재배치를 허용함. 단, 신규 기술 통합 시 기존의 유효한 정보가 부주의하게 누락되지 않도록 '상세화 및 보완'을 원칙으로 함.
+- **전방위적 동기화 (Full Synchronization):** 아키텍처나 실습 항목 변경 시, `README.md`, `architecture/project_outline.md`, `management/to-do-list.md`, `resources/presentation/` 등 연관된 모든 문서를 전수 검토하여 변경 사항을 일괄 반영함.
+- **수정 전 전수 검토 (Pre-edit Audit):** `read_file`로 대상 섹션의 기존 내용을 완벽히 파악하여 편집 과정에서의 휴먼 에러 및 정보 누락 차단.
+- **구축 가이드 무결성 (Build-up Integrity):** `docs/architecture/build-up/` 하위 문서는 설계의 구조적 이해와 실제 구현을 위한 '상세 매뉴얼'임을 명심함. 기존 설명의 맥락과 기술 명세를 최대한 상세히 유지하되, 아키텍처 개선이나 논리적 최적화가 필요한 경우 명확한 근거 하에 구조 변경 및 재배치를 허용함. 단, 신규 기술 통합 시 기존의 유효한 정보가 부주의하게 누락되지 않도록 '상세화 및 보완'을 원칙으로 함.
 - **구조적 가독성:** 정보 전달 효율을 위해 개조식(번호, 불렛 포인트)을 사용하되, 기술적 깊이가 필요한 구간에서는 충분한 설명을 제공함.
 - **언어 및 어투:** 한국어 사용을 원칙으로 하며, 불필요한 수식어를 배제하고 신뢰성 있는 기술 어투를 유지함.
 - **용어 표기 원칙 (Terminology):** 핵심 기술 용어나 업계 표준 약어(예: SPoF, HA 등)는 '한국어(영어)' 형식을 사용하여 의미를 명확히 전달함.

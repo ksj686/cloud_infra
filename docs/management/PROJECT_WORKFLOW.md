@@ -9,9 +9,9 @@
 인프라 관리 체계 구축 완료 및 단계별 기술 실습(Roadmap) 착수 단계
 
 - **[완료] 문서 작성 원칙 수립:** 순수 명사형 종결 및 기술적 정교함 원칙 정의 (`GEMINI.md`)
-- **[완료] 기술 지식 베이스 구축:** 엔터프라이즈 HA 및 관측성 분석 완료 (`docs/knowledge_base/`)
+- **[완료] 기술 지식 베이스 구축:** 엔터프라이즈 HA 및 관측성 분석 완료 (`docs/resources/knowledge_base/`)
 - **[완료] 웹 포털 인프라 구축:** MkDocs Material 기반 환경 설정 및 빌드 검증 완료
-- **[완료] 개발 환경 표준화:** uv, nvm 도입 및 지침 수립 (`docs/ENVIRONMENT_SETUP.md`)
+- **[완료] 개발 환경 표준화:** uv, nvm 도입 및 지침 수립 (`docs/management/ENVIRONMENT_SETUP.md`)
 - **[완료] 크로스 플랫폼 환경 무결성 확보:** 윈도우-리눅스 간 셸 스크립트 실행 호환성 자동화(LF/BOM 관리) 수립
 - **[진행 중] 실습 로드맵 이행:** Step 1 기초 자동화 실습 착수 및 가이드 작성 중
 
@@ -53,10 +53,10 @@
 
 ## 4. 아키텍처 의사결정 기록 (ADR)
 
-본 프로젝트의 모든 주요 기술적 의사결정은 `docs/decisions/` 디렉토리에 **ADR (Architecture Decision Records)** 형식으로 관리함.
+본 프로젝트의 모든 주요 기술적 의사결정은 `docs/architecture/decisions/` 디렉토리에 **ADR (Architecture Decision Records)** 형식으로 관리함.
 
-- **전체 이력 확인:** [ADR Index (README.md)](decisions/README.md)
+- **전체 이력 확인:** [ADR Index (README.md)](../architecture/decisions/README.md)
 - **최신 주요 결정:**
-  - [ADR-007: HA 계층형 가용성 전략 채택](decisions/ADR-007-ha-layered-strategy.md)
-  - [ADR-006: 태스크 관리 도구 확장 전략](decisions/ADR-006-task-management-strategy.md)
-  - [ADR-005: pre-commit 프레임워크 전면 도입](decisions/ADR-005-quality-automation.md)
+  - [ADR-007: HA 계층형 가용성 전략 채택](../architecture/decisions/ADR-007-ha-layered-strategy.md)
+  - [ADR-006: 태스크 관리 도구 확장 전략](../architecture/decisions/ADR-006-task-management-strategy.md)
+  - [ADR-005: pre-commit 프레임워크 전면 도입](../architecture/decisions/ADR-005-quality-automation.md)

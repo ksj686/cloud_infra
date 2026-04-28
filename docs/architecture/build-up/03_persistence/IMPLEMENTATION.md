@@ -96,7 +96,7 @@ chmod +x mc
 
 ### 4.2 하이브리드 운영 전략 참조
 
-- **상세 아키텍처 및 전이 전략:** [AWS S3 & CloudFront 가속 전략](../../standards/aws_s3_cloudfront_strategy.md) 문서 참조 필수.
+- **상세 아키텍처 및 전이 전략:** [AWS S3 & CloudFront 가속 전략](../../../engineering/standards/aws_s3_cloudfront_strategy.md) 문서 참조 필수.
 
 ---
 
