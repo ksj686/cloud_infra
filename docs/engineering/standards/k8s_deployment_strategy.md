@@ -15,12 +15,24 @@
 ## 2. GitOps 기반 자동 배포 (Argo CD)
 
 - **신뢰의 단일 원천 (Source of Truth):** Git 저장소의 상태를 클러스터의 최종 상태로 정의.
+
+## 2. GitOps 기반 자동 배포 (Argo CD)
+
+- **신뢰의 단일 원천 (Source of Truth):** Git 저장소의 상태를 클러스터의 최종 상태로 정의.
 - **드리프트 탐지 (Drift Detection):** 수동 수정으로 인한 클러스터 상태 불일치를 자동으로 감지하고 Git 상태로 강제 동기화.
 - **설정 변경 자동 반영 (Config Hot-reload):**
-  - **지양 기법 (Lab-style):** `kubectl patch`를 이용한 수동 체크섬 주입. (GitOps 원칙 위배 및 휴먼 에러 위험 상존)
+  - **지양 기법 (Lab-style):** `kubectl patch`를 이용한 수동 체크섬 주입 (GitOps 원칙 위배 및 휴먼 에러 위험 상존).
   - **현업 표준 (Enterprise):**
     - **Reloader Operator:** ConfigMap/Secret의 변경을 감시하여 연관된 Deployment를 자동으로 롤링 업데이트하는 오퍼레이터 운용.
     - **Helm SHA256 Automation:** Helm 템플릿 내 `sha256sum` 함수를 활용하여 배포 시점에 설정값의 해시를 자동으로 파드 어노테이션에 주입.
+
+- **벤더 종속성 최소화를 위한 설정 추상화 (Configuration Abstraction):**
+  - **지양 기법 (Hard Coding):** 애플리케이션 코드 내 `if/else` 분기 처리를 통한 환경별(On-premise/Cloud) 로직 구분.
+  - **현업 표준 (Injection Strategy):**
+    - **인터페이스 표준화:** 애플리케이션은 S3 표준 프로토콜만을 호출하도록 설계하고 상세 설정(암호화, 서명 버전 등)은 외부 설정 파일(ConfigMap)에서 주입.
+    - **환경별 어댑터 구성:** Argo CD 환경에서 `values-onprem.yaml`과 `values-cloud.yaml`을 분리 관리하여 환경별 상세 설정값을 인프라 레벨에서 완벽히 격리.
+    - **초기 구동 검증:** 애플리케이션 초기화 시 주입된 설정값이 대상 저장소(MinIO/S3)의 요구 스키마를 만족하는지 검증하는 로직 분리.
+
 - **워크플로우:**
   1. 개발자/운영자가 Git에 `values.yaml` 수정 및 커밋.
   2. Argo CD가 변경 감지 및 자동 동기화(Sync) 수행.
