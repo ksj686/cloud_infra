@@ -22,16 +22,21 @@
 
 ## [강의 기반 실무 명세 보완 및 인벤토리 정교화]
 
-| 날짜       | 분류          | 수정 내용                                                                  | 수정 파일                                               |
-| :--------- | :------------ | :------------------------------------------------------------------------- | :------------------------------------------------------ |
-| 2026-04-27 | `🛠️ Fix`      | `uv` 환경 내 `pip` 의존성 명시적 고정을 통한 취약점 근본 해결 및 사례 기록 | `pyproject.toml`, `docs/case_studies/*`                 |
-| 2026-04-27 | `🔒 Security` | **인증서 라이프사이클 관리** 전략 수립 및 자동 갱신(Certbot) 절차 보완     | `docs/build-up/02_perimeter/*`                          |
-| 2026-04-27 | `⚙️ Refactor` | K8s 재배포 전략 현업 표준화 (**Reloader Operator** 및 Helm 자동화 채택)    | `docs/standards/*`, `docs/build-up/06_scalability/*`    |
-| 2026-04-27 | `📝 Docs`     | Phase 6 설계 가이드(README) 내 MetalLB 전략 반영 및 문서 동기화            | `docs/build-up/06_scalability/README.md`                |
-| 2026-04-27 | `🚀 Feature`  | 온프레미스 K8s 외관 접점 확보를 위한 **MetalLB** 실구축 절차 추가          | `docs/build-up/06_scalability/IMPLEMENTATION.md`        |
-| 2026-04-27 | `⚙️ Refactor` | **Checksum 어노테이션** 기반 설정 변경 자동 재배포 전략 수립               | `docs/standards/k8s_deployment_strategy.md`             |
-| 2026-04-27 | `📝 Docs`     | AWS 하이브리드 보안 설계(VPC/SG) 및 목적별 DB 선정 가이드 통합             | `docs/standards/aws_s3_cloudfront_strategy.md`          |
-| 2026-04-27 | `🚀 Feature`  | 하이브리드 확장 전략의 전방위 동기화 (성과 지표 명문화 및 발표 자료 반영)  | `docs/CORE_FEATURE_EXPLAINER.md`, `docs/presentation/*` |
+| 날짜       | 분류          | 수정 내용                                                                   | 수정 파일                               |
+| :--------- | :------------ | :-------------------------------------------------------------------------- | :-------------------------------------- |
+| 2026-04-27 | `🛠️ Fix`      | `uv` 환경 내 `pip` 의존성 명시적 고정을 통한 취약점 근본 해결 및 사례 기록  | `pyproject.toml`, `docs/case_studies/*` |
+| 2026-04-27 | `🔒 Security` | **인증서 라이프사이클 관리** 전략 수립 및 자동 갱신(Certbot) 절차 보완      | `docs/build-up/02_perimeter/*`          |
+| 2026-04-29 | `🚀 Feature`  | 개발자 생산성 향상을 위한 **도구 활용 가이드(Tooling & Productivity)** 구축 | `docs/resources/knowledge_base/*`       |
+| 2026-04-29 | `🚀 Feature`  | 프로젝트 범용 인프라 무결성 및 건강성 진단 프레임워크(**Audit**) 구축       | `docs/engineering/audits/*`             |
+| 2026-04-29 | `⚙️ Refactor` | 폴더 구조 전면 개편(architecture/engineering/operations 등) 및 문서 체계화  | `docs/*`                                |
+
+| 2026-04-29 | `⚙️ Refactor` | K8s 재배포 및 설정 자동화의 현업 표준(Reloader/Helm) 채택 및 설계 가이드 최신화 | `docs/engineering/standards/k8s_deployment_strategy.md` |
+
+| 2026-04-27 | `📝 Docs` | Phase 6 설계 가이드(README) 내 MetalLB 전략 반영 및 문서 동기화 | `docs/build-up/06_scalability/README.md` |
+| 2026-04-27 | `🚀 Feature` | 온프레미스 K8s 외관 접점 확보를 위한 **MetalLB** 실구축 절차 추가 | `docs/build-up/06_scalability/IMPLEMENTATION.md` |
+| 2026-04-27 | `⚙️ Refactor` | **Checksum 어노테이션** 기반 설정 변경 자동 재배포 전략 수립 | `docs/standards/k8s_deployment_strategy.md` |
+| 2026-04-27 | `📝 Docs` | AWS 하이브리드 보안 설계(VPC/SG) 및 목적별 DB 선정 가이드 통합 | `docs/standards/aws_s3_cloudfront_strategy.md` |
+| 2026-04-27 | `🚀 Feature` | 하이브리드 확장 전략의 전방위 동기화 (성과 지표 명문화 및 발표 자료 반영) | `docs/CORE_FEATURE_EXPLAINER.md`, `docs/presentation/*` |
 
 | 2026-04-27 | `📝 Docs` | 온프레미스(MinIO)에서 클라우드(S3)로의 운영 전이(Promotion) 전략 수립 | `docs/standards/*`, `docs/project_outline.md` |
 
