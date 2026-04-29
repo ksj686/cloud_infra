@@ -192,6 +192,7 @@ nav:
           - Project Taxonomy: resources/knowledge_base/infra_project_taxonomy.md
           - Ceph Storage Deep-dive: resources/knowledge_base/ceph_storage_deep_dive.md
           - Full Tech Checklist: resources/knowledge_base/full_tech_checklist.md
+          - Tooling & Productivity: resources/knowledge_base/tooling_and_productivity.md
       - Presentation:
           - Index: resources/presentation/index.md
           - Presentation: resources/presentation/presentation.md
