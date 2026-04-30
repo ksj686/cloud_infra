@@ -38,6 +38,9 @@
   - `/etc/apt/apt.conf.d/50unattended-upgrades` 내 배포처 설정을 통한 제로데이 취약점 노출 최소화
 - **메모리 운영 무결성 (K8s 준비):**
   - **Swap 비활성화:** 스케줄링 예측 불가능성 제거를 위해 `sudo swapoff -a` 실행 및 `/etc/fstab` 내 swap 항목 영구 제거 필수
+- **컨테이너 네트워크 표준 (성장형 모델):**
+  - **CNI 프로토타입 (Flannel):** 기초 인프라 구축 및 파드 간 기본 통신 검증
+  - **운영 보안 표준 (Calico):** 네트워크 정책 준수 및 BGP 고성능 라우팅 확보를 위한 단계적 전환 실습 (Phase 6 연계)
 - **시스템 최적화:** `apt autoremove` 및 `apt clean` 정기 수행을 통한 디스크 잔여 데이터 정리 및 파일 시스템 안정성 유지
 
 ## 3. 시스템 감사 체계 구축 (Security Auditing)

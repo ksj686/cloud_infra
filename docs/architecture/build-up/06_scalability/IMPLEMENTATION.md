@@ -154,19 +154,14 @@ spec:
     metadata:
       annotations:
         # ConfigMap 변경 시 자동으로 해시를 계산하여 파드 재시작 유도
-        checksum/config:
-          {
-            {
-              include (print $.Template.BasePath "/configmap.yaml") . | sha256sum,
-            },
-          }
+        checksum/config: '{{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}'
 ```
 
 ---
 
 ## 6. K8s 설정 및 배포 자동화 (Helm & Argo CD)
 
-### 4.1 Helm Chart 구조화
+### 6.1 Helm Chart 구조화
 
 ```bash
 # Helm 차트 생성
@@ -187,7 +182,7 @@ service:
   port: 80
 ```
 
-### 4.2 Argo CD GitOps 어플리케이션 등록
+### 6.2 Argo CD GitOps 어플리케이션 등록
 
 ```yaml
 # argo-app.yaml (Argo CD에 등록할 매니페스트)
@@ -221,9 +216,34 @@ kubectl apply -f argo-app.yaml
 
 ---
 
-## 5. 지능형 스케일링 (KEDA)
+## 7. CNI 전환 실습 (Flannel → Calico)
 
-### 4.1 이벤트 기반 오토스케일링 설정
+운영 수준의 네트워크 보안(Network Policy)을 확보하기 위한 CNI 마이그레이션
+
+### 7.1 노드 초기화
+
+```bash
+# 워커 노드 및 마스터 노드에서 순차 수행
+sudo kubeadm reset -f
+sudo rm -rf /etc/cni/net.d/*
+```
+
+### 7.2 Calico 연동 및 보안 정책 활성화
+
+```bash
+# Calico Operator 및 CRD 설치
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+
+# 네트워크 정책 검증 예시
+kubectl get nodes -w
+```
+
+---
+
+## 8. 지능형 스케일링 (KEDA)
+
+### 8.1 이벤트 기반 오토스케일링 설정
 
 ```yaml
 # keda-scaledobject.yaml

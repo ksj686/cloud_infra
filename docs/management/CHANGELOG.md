@@ -22,13 +22,14 @@
 
 ## [강의 기반 실무 명세 보완 및 인벤토리 정교화]
 
-| 날짜       | 분류          | 수정 내용                                                                   | 수정 파일                               |
-| :--------- | :------------ | :-------------------------------------------------------------------------- | :-------------------------------------- |
-| 2026-04-27 | `🛠️ Fix`      | `uv` 환경 내 `pip` 의존성 명시적 고정을 통한 취약점 근본 해결 및 사례 기록  | `pyproject.toml`, `docs/case_studies/*` |
-| 2026-04-27 | `🔒 Security` | **인증서 라이프사이클 관리** 전략 수립 및 자동 갱신(Certbot) 절차 보완      | `docs/build-up/02_perimeter/*`          |
-| 2026-04-29 | `🚀 Feature`  | 개발자 생산성 향상을 위한 **도구 활용 가이드(Tooling & Productivity)** 구축 | `docs/resources/knowledge_base/*`       |
-| 2026-04-29 | `🚀 Feature`  | 프로젝트 범용 인프라 무결성 및 건강성 진단 프레임워크(**Audit**) 구축       | `docs/engineering/audits/*`             |
-| 2026-04-29 | `⚙️ Refactor` | 폴더 구조 전면 개편(architecture/engineering/operations 등) 및 문서 체계화  | `docs/*`                                |
+| 날짜       | 분류          | 수정 내용                                                                           | 수정 파일                                     |
+| :--------- | :------------ | :---------------------------------------------------------------------------------- | :-------------------------------------------- |
+| 2026-04-30 | `🧪 Test`     | 인프라 고도화를 위한 **CNI 전환 시나리오(Flannel → Calico)** 구축 및 실습 지침 반영 | `docs/architecture/build-up/06_scalability/*` |
+| 2026-04-27 | `🛠️ Fix`      | `uv` 환경 내 `pip` 의존성 명시적 고정을 통한 취약점 근본 해결 및 사례 기록          | `pyproject.toml`, `docs/case_studies/*`       |
+| 2026-04-27 | `🔒 Security` | **인증서 라이프사이클 관리** 전략 수립 및 자동 갱신(Certbot) 절차 보완              | `docs/build-up/02_perimeter/*`                |
+| 2026-04-29 | `🚀 Feature`  | 개발자 생산성 향상을 위한 **도구 활용 가이드(Tooling & Productivity)** 구축         | `docs/resources/knowledge_base/*`             |
+| 2026-04-29 | `🚀 Feature`  | 프로젝트 범용 인프라 무결성 및 건강성 진단 프레임워크(**Audit**) 구축               | `docs/engineering/audits/*`                   |
+| 2026-04-29 | `⚙️ Refactor` | 폴더 구조 전면 개편(architecture/engineering/operations 등) 및 문서 체계화          | `docs/*`                                      |
 
 | 2026-04-29 | `⚙️ Refactor` | K8s 재배포 및 설정 자동화의 현업 표준(Reloader/Helm) 채택 및 설계 가이드 최신화 | `docs/engineering/standards/k8s_deployment_strategy.md` |
 

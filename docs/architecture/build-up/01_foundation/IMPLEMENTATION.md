@@ -128,3 +128,28 @@ sudo vi /etc/cloud/templates/hosts.ubuntu.tmpl
 # 파일 최하단에 수동 도메인 추가 (초기화 방지)
 127.0.0.1 api.kosa.kr hub.kosa.kr
 ```
+
+---
+
+## 5. [심화 실습] CNI 전환: Flannel → Calico
+
+운영 환경(Phase 6)으로 넘어가기 전, 네트워크 정책 적용을 위한 Calico 마이그레이션 수행
+
+### 5.1 기존 환경(Flannel) 초기화
+
+```bash
+# 노드 초기화 및 CNI 설정 파일 제거
+sudo kubeadm reset -f
+sudo rm -rf /etc/cni/net.d/*
+```
+
+### 5.2 Calico CNI 배포 및 정책 활성화
+
+```bash
+# Calico Operator 및 CRD 설치
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+
+# 네트워크 정책 검증 예시
+kubectl get nodes -w
+```
