@@ -26,8 +26,8 @@ resource "aws_cloudfront_origin_access_control" "infra_oac" {
 resource "aws_cloudfront_distribution" "infra_cdn" {
   origin {
     domain_name              = aws_s3_bucket.infra_assets.bucket_regional_domain_name
-    origin_id                = "S3Origin"
     origin_access_control_id = aws_cloudfront_origin_access_control.infra_oac.id
+    origin_id                = "S3Origin"
   }
   enabled             = true
   default_root_object = "index.html"
@@ -80,3 +80,37 @@ aws s3 sync ./dist/ s3://kosa-infra-static-assets/ --delete
 # 수동 갱신 시 수행
 aws cloudfront create-invalidation --distribution-id ED123456789 --paths "/*"
 ```
+
+---
+
+## 4. 하이브리드 네트워킹 (Site-to-Site VPN)
+
+온프레미스(Proxmox)와 AWS VPC 간 안전한 암호화 터널링 구성
+
+### 4.1 AWS VPN 프로비저닝 (Terraform)
+
+```hcl
+# 가상 프라이빗 게이트웨이(VGW) 생성
+resource "aws_vpn_gateway" "vpn_gw" {
+  vpc_id = aws_vpc.main.id
+}
+
+# 고객 게이트웨이(CGW) 설정
+resource "aws_customer_gateway" "cgw" {
+  bgp_asn    = 65000
+  ip_address = "온프레미스_공인IP"
+  type       = "ipsec.1"
+}
+
+# VPN 연결 생성
+resource "aws_vpn_connection" "main" {
+  vpn_gateway_id      = aws_vpn_gateway.vpn_gw.id
+  customer_gateway_id = aws_customer_gateway.cgw.id
+  type                = "ipsec.1"
+}
+```
+
+### 4.2 온프레미스 라우터(IPsec) 연동
+
+- **설정 내용:** AWS에서 제공하는 VPN Configuration(Generic)을 온프레미스 라우터(VyOS/pfsense 등)에 적용
+- **라우팅 설정:** 온프레미스 서브넷 대역을 AWS 라우팅 테이블(VPN 게이트웨이 타겟)에 반영

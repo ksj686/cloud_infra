@@ -107,6 +107,7 @@ nav:
           - Team & Expansion Strategy: engineering/standards/team_collaboration_and_expansion.md
           - K8s Deployment Strategy: engineering/standards/k8s_deployment_strategy.md
           - AWS S3 & CloudFront Strategy: engineering/standards/aws_s3_cloudfront_strategy.md
+          - Hybrid Network Strategy: engineering/standards/hybrid_network_strategy.md
           - Asset Management: engineering/standards/infra_inventory_management.md
           - Poetry to uv Migration: engineering/standards/poetry_to_uv_migration.md
           - HA Strategy Analysis: engineering/standards/infra_ha_strategy_analysis.md
