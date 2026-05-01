@@ -1,3 +1,3 @@
 #!/bin/bash
-# Husky를 통해 파이썬 pre-commit 도구 호출
-uv run pre-commit run --all-files
+# 커밋 단계에서는 staged 파일 중심의 빠른 품질/시크릿 검사만 수행
+uv run pre-commit run --hook-stage pre-commit

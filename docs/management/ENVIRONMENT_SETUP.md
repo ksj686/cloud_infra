@@ -38,7 +38,8 @@
 - **Husky 초기화:** `pnpm exec husky init` 수행
 - **자동화 훅 구축:**
   - `post-merge`: 락파일 변경 시 의존성 자동 동기화 로직 구현
-  - `pre-commit`: Husky가 파이썬 기반 `pre-commit` 도구를 호출하도록 브릿지 구성
+  - `pre-commit`: Husky가 파이썬 기반 `pre-commit` 도구를 호출하여 staged 파일 중심의 빠른 품질/시크릿 검사 수행
+  - `pre-push`: 전체 파일 기준의 보안/SCA 검사를 수행하여 원격 저장소 반영 전 최종 검증
 - **상세 실구축 가이드:** [Git Hook 협업 자동화 플레이북](../operations/playbooks/dev/git_hook_automation.md)을 참조하여 전 공정 수행
 
 ---
@@ -57,7 +58,7 @@ git clone <repository_url>
 cd cloud_infra
 
 # 2. 통합 의존성 설치 (Husky 훅 자동 활성화 포함)
-# 실행 시 Husky가 자동으로 Git Hook 경로를 설정하며, post-merge 및 pre-commit이 연결됨
+# 실행 시 Husky가 자동으로 Git Hook 경로를 설정하며, post-merge, pre-commit, pre-push가 연결됨
 pnpm install
 uv sync
 ```
@@ -65,7 +66,7 @@ uv sync
 ### 3.2 자동화 적용 확인
 
 - **의존성 자동 동기화:** 이후 `git pull` 수행 시 락파일(`pnpm-lock.yaml`, `uv.lock`) 변경이 감지되면 패키지가 자동으로 업데이트됨(`post-merge`).
-- **보안/품질 자동 검사:** 커밋 시 `pre-commit` 도구가 자동으로 실행되어 코드 무결성을 검증함.
+- **보안/품질 자동 검사:** 커밋 시 `pre-commit` 도구가 자동으로 실행되어 빠른 품질/시크릿 검사를 수행하고, 푸시 시 `pre-push`가 전체 파일 기준 보안/SCA 검사를 수행함.
 - **사후 관리:** 협업자는 별도의 `pre-commit install` 실행 없이 `pnpm install`만으로 모든 자동화 혜택 수혜 가능.
 
 ---
@@ -74,8 +75,11 @@ uv sync
 
 ### 4.1 보안 감사 및 훅 관리
 
-- **자동화된 SCA 검사:** 커밋 시 `pre-commit` 훅에 의해 `pnpm audit` 및 `pip-audit`이 자동으로 수행됨. 취약점 발견 시 커밋이 거부됨.
-- **수동 훅 실행:** 전체 파일 대상의 전수 검사 시 `uv run pre-commit run --all-files` 수행
+- **검사 단계 분리 원칙:** 커밋 단계는 빠른 피드백을 위해 staged 파일 중심의 포맷, 문법, 시크릿 검사를 수행하고, 푸시 단계는 원격 반영 전 전체 파일 기준 보안/SCA 검사를 수행함.
+- **분리 사유:** `pnpm audit` 및 `pip-audit`은 외부 취약점 데이터베이스 조회와 로컬 환경 의존성이 있어 매 커밋마다 실행하면 개발 흐름을 지연시킬 수 있음. 보안 검증 강도는 유지하되 실행 시점을 `pre-push`로 이동하여 생산성과 보안성을 함께 확보함.
+- **커밋 단계 검사:** `.husky/pre-commit`에서 `uv run pre-commit run --hook-stage pre-commit` 수행. Gitleaks, 개인키 탐지, YAML/JSON 검사, ShellCheck, Prettier 등 빠른 검사를 실행함.
+- **푸시 단계 검사:** `.husky/pre-push`에서 `uv run pre-commit run --hook-stage pre-push --all-files` 수행. Gitleaks, 개인키/대용량 파일 탐지, `pnpm audit`, `pip-audit`를 전체 파일 기준으로 실행함.
+- **수동 SCA 실행:** 필요 시 `uv run pre-commit run --hook-stage manual pnpm-audit` 또는 `uv run pre-commit run --hook-stage manual pip-audit` 수행.
 
 ### 4.2 VS Code 환경 최적화
 

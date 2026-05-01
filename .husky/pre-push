@@ -1,0 +1,3 @@
+#!/bin/bash
+# 푸시 단계에서는 전체 파일 기준의 보안/SCA 검사를 수행
+uv run pre-commit run --hook-stage pre-push --all-files

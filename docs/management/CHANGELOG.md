@@ -22,11 +22,12 @@
 
 ## 🔒 Security & Compliance
 
-| 날짜       | 분류          | 수정 내용                                                                  | 수정 파일                                          |
-| :--------- | :------------ | :------------------------------------------------------------------------- | :------------------------------------------------- |
-| 2026-04-29 | `🚀 Feature`  | 프로젝트 범용 인프라 무결성 및 건강성 진단 프레임워크(**Audit**) 구축      | `docs/engineering/audits/*`                        |
-| 2026-04-27 | `🔒 Security` | **인증서 라이프사이클 관리** 전략 수립 및 자동 갱신(Certbot) 절차 보완     | `docs/architecture/build-up/02_perimeter/*`        |
-| 2026-04-27 | `🛠️ Fix`      | `uv` 환경 내 `pip` 의존성 명시적 고정을 통한 취약점 근본 해결 및 사례 기록 | `pyproject.toml`, `docs/operations/case_studies/*` |
+| 날짜       | 분류          | 수정 내용                                                                  | 수정 파일                                                                                                                                                                         |
+| :--------- | :------------ | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-05-01 | `🔒 Security` | commit/push 검사 단계 분리 및 SCA 보안 감사 pre-push 이동                  | `.pre-commit-config.yaml`, `.husky/*`, `docs/management/ENVIRONMENT_SETUP.md`, `docs/management/PROJECT_WORKFLOW.md`, `docs/architecture/decisions/ADR-005-quality-automation.md` |
+| 2026-04-29 | `🚀 Feature`  | 프로젝트 범용 인프라 무결성 및 건강성 진단 프레임워크(**Audit**) 구축      | `docs/engineering/audits/*`                                                                                                                                                       |
+| 2026-04-27 | `🔒 Security` | **인증서 라이프사이클 관리** 전략 수립 및 자동 갱신(Certbot) 절차 보완     | `docs/architecture/build-up/02_perimeter/*`                                                                                                                                       |
+| 2026-04-27 | `🛠️ Fix`      | `uv` 환경 내 `pip` 의존성 명시적 고정을 통한 취약점 근본 해결 및 사례 기록 | `pyproject.toml`, `docs/operations/case_studies/*`                                                                                                                                |
 
 ## 🚀 Scalability & Operations
 
