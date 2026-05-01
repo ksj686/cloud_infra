@@ -22,3 +22,5 @@ error.txt
 chatlog_tmp
 
 site/
+
+*.code-workspace
