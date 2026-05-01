@@ -22,7 +22,22 @@ graph LR
 
 ---
 
-## 2. 가속 및 최적화 전략 (Performance)
+## 2. 관리형 서비스 가용성 기준 (Managed HA Baseline)
+
+S3와 DynamoDB는 사용자가 직접 디스크 복제, 서버 이중화, 장애 조치 스크립트를 구성하는 방식이 아니라 AWS가 관리하는 고가용성(HA) 기반을 활용하는 서비스로 분류함.
+
+- **Amazon S3 Standard:**
+  - 객체를 하나의 서버나 단일 디스크에 저장하지 않고, 리전 내 최소 3개 가용 영역(AZ)에 중복 저장하는 것을 기본 전제로 설계.
+  - 일반적인 온프레미스 파일 서버 장애, 단일 디스크 장애, 단일 AZ 장애 대응을 애플리케이션이 직접 구현하지 않아도 되는 오프로딩 대상으로 활용.
+  - 단, 스토리지 클래스가 `S3 One Zone-IA` 또는 `S3 Express One Zone`인 경우 단일 AZ 특성이 있으므로, 운영 데이터의 HA 요구사항과 비용 최적화 목적을 구분하여 선택.
+- **Amazon DynamoDB:**
+  - 리전 내 3개 AZ에 데이터를 자동 복제하여 단일 DB 서버/디스크/노드 이중화 운영 부담을 줄이는 관리형 NoSQL DB로 분류.
+  - 리전 장애 또는 지리적 격리가 필요한 서비스는 DynamoDB Global Tables를 별도 검토.
+  - 파티션 키 편향, 읽기/쓰기 용량 모드, 비용, 일관성 모델은 별도 설계 대상.
+
+---
+
+## 3. 가속 및 최적화 전략 (Performance)
 
 - **전역 가속 (Global Acceleration):** 엣지 로케이션 캐싱을 통한 물리적 거리 기반 응답 지연(Latency) 최소화.
 - **캐시 정책(TTL) 최적화:**
@@ -32,7 +47,7 @@ graph LR
 
 ---
 
-## 3. 보안 가드레일 (Security Guardrails)
+## 4. 보안 가드레일 (Security Guardrails)
 
 - **OAC 기반 버킷 보안 정책 (Bucket Policy):**
   ```json
@@ -57,7 +72,7 @@ graph LR
 
 ---
 
-## 4. 코드형 인프라 구현 (Terraform)
+## 5. 코드형 인프라 구현 (Terraform)
 
 ```hcl
 # S3 버킷 생성
@@ -80,7 +95,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 ---
 
-## 5. 온프레미스(MinIO)에서 클라우드(S3)로의 전이 전략
+## 6. 온프레미스(MinIO)에서 클라우드(S3)로의 전이 전략
 
 성공적인 하이브리드 운영을 위한 단계별 승격(Promotion) 시나리오
 
@@ -94,7 +109,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 ---
 
-## 6. 하이브리드 네트워킹 및 보안 설계 (VPC)
+## 7. 하이브리드 네트워킹 및 보안 설계 (VPC)
 
 클라우드 리소스 연동을 위한 논리적 격리 환경 및 보안 계층 수립
 
@@ -105,7 +120,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 ---
 
-## 7. 목적 기반 데이터베이스 선정 전략 (Purpose-built DB)
+## 8. 목적 기반 데이터베이스 선정 전략 (Purpose-built DB)
 
 데이터 특성에 따른 최적의 AWS 관리형 DB 서비스 매핑
 
@@ -117,7 +132,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 ---
 
-## 8. 결론 및 제언
+## 9. 결론 및 제언
 
 - S3/CDN 조합은 서버의 I/O 부하를 획기적으로 줄이는 **'인프라 오프로딩(Offloading)'**의 핵심 기술임.
 - 온프레미스(Proxmox) 서비스와의 하이브리드 연동 시, 클라우드 자격 증명 관리를 위해 **`IAM Roles`** 또는 **`Vault`** 연동을 권장함.

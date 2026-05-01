@@ -39,6 +39,17 @@
   3.  **서비스 프로세스 자동 복구:** 셀프 힐링 스크립트를 통한 주요 서비스 중단 대응.
   4.  **전체 백업본 복원:** PBS(Proxmox Backup Server)를 활용한 이미지 레벨 복구. [Playbook: recovery/backup_restore.md]
 
+## 🟠 Scenario 4-1: 장애 우회 및 오프로딩 전략 (Bypass & Offloading)
+
+- **개요:** 특정 계층의 장애가 전체 서비스 중단으로 확산되지 않도록 대체 경로와 관리형 서비스를 활용하여 핵심 기능 유지
+- **주요 절차:**
+  1.  **웹/API 서버 장애 우회:** Nginx upstream health check와 `proxy_next_upstream`을 활용하여 장애 노드를 제외하고 정상 노드로 트래픽 전환.
+  2.  **정적 자산 제공 장애 우회:** 정적 파일, 이미지, 다운로드 자산은 S3 + CloudFront로 오프로딩하여 온프레미스 웹 서버 장애 시에도 캐시된 콘텐츠 제공.
+  3.  **객체 저장소 장애 우회:** 애플리케이션은 S3 SDK 표준 인터페이스를 사용하고, 환경별 endpoint를 Helm values, ConfigMap, Secret으로 주입하여 MinIO와 AWS S3 전환 가능성 확보. 전환 전 IAM, CORS, presigned URL, 멀티파트 업로드 검증 필수.
+  4.  **DB 장애 우회:** Galera + ProxySQL 구성에서는 장애 노드를 트래픽 대상에서 제외하고, 읽기 중심 워크로드는 MariaDB Replication + ProxySQL 읽기/쓰기 분리 대안을 검토.
+  5.  **인프라 노드 장애 우회:** Proxmox HA + Ceph 공유 스토리지로 VM 재시작/이동을 수행하고, 컨테이너 계층에서는 K8s/Swarm 재스케줄링으로 애플리케이션 복구.
+  6.  **관리형 서비스 활용 기준:** 자체 운영보다 S3/DynamoDB 같은 관리형 고가용성(HA) 서비스가 더 적합한 영역은 오프로딩 대상으로 분리. 단, 리전 장애, 비용, 벤더 종속성, 권한 모델은 별도 검토.
+
 ## 🛡️ Scenario 5: 보안 자동화 파이프라인 (Security Pipeline)
 
 - **개요:** 인프라 코드 및 서비스 변경 시 단계별 자동화 도구를 통한 보안 무결성 검증

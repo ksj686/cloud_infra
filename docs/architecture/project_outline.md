@@ -118,7 +118,7 @@ flowchart LR
   - **설정 및 배포 자동화:** Helm Chart 기반 패키징 및 Argo CD를 활용한 GitOps 운영 체계 구축
   - **서비스 메시(고급):** Istio 사이드카 도입을 통한 정밀 트래픽 제어 및 서비스 간 mTLS 보안 강화
   - DB 가용성 고도화: MariaDB Galera Cluster 기반의 동기식 이중화 및 ProxySQL 부하 분산 구현. 쓰기 지연과 충돌 가능성이 있는 워크로드는 MariaDB Replication + ProxySQL 읽기/쓰기 분리 대안도 함께 평가
-  - **오토 스케일링:** 트래픽 부하에 따른 리소스 동적 할당 및 인스턴스 확장 체계 연구
+  - **오토 스케일링:** 트래픽 부하에 따른 리소스 동적 할당 및 인스턴스 확장 체계 연구. 운영 표준은 장애 도메인 분산이 가능한 다중 인스턴스 기반 수평 확장을 우선 적용
   - 하이브리드 연계 준비: Phase 7에서 사용할 환경별 설정 분리, 배포 자동화, 오토스케일링 기준 수립
 
 ## Phase 7: Hybrid Cloud (AWS Integration) {: #phase-7 }
