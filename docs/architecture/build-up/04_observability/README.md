@@ -23,7 +23,8 @@
 서비스 Throttling 원인 규명 및 코드 레벨 최적화
 
 - **APM 도구 도입 및 연동:**
-  - Pinpoint 또는 Scouter 설치 및 Java/Python 에이전트 설정
+  - OpenTelemetry SDK/자동 계측과 OpenTelemetry Collector 또는 Grafana Alloy를 통해 애플리케이션 trace를 수집하고 Grafana Tempo에 저장
+  - Pinpoint 또는 Scouter는 Java 중심 트랜잭션 분석 실습 도구로 선택 적용하고, Python/Go/Node.js 등 다언어 서비스는 OpenTelemetry 기반 계측을 우선 적용
   - 트랜잭션 추적 및 데이터베이스 쿼리 응답 시간 실시간 모니터링
 - **병목 지점 정밀 진단:**
   - 비효율적 알고리즘 및 I/O 대기 시간 분석을 통한 성능 최적화

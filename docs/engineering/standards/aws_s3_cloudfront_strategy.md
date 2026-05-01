@@ -88,6 +88,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 - **환경 변수 기반 스위칭:**
   - **Development (MinIO):** `S3_ENDPOINT=http://minio.local:9000`, `USE_SSL=false`
   - **Production (AWS S3):** `S3_ENDPOINT=https://s3.ap-northeast-2.amazonaws.com`, `USE_SSL=true`
+- **호환성 검증:** 환경 변수 교체만으로 완전한 호환을 보장하지 않음. IAM 권한 모델, 버킷 정책, CORS, presigned URL 만료 시간, 멀티파트 업로드, 객체 ACL/소유권 설정을 운영 전이 체크리스트로 검증.
 - **데이터 마이그레이션:** MinIO 클라이언트(`mc`)의 `mirror` 기능을 활용하여 온프레미스 데이터를 AWS S3 버킷으로 동기화.
   - **명령어:** `./mc mirror myminio/infra-assets awss3/kosa-infra-assets`
 

@@ -6,6 +6,8 @@
 
 ## 🚀 학습 로드맵 (Learning Roadmap)
 
+> **표기 기준:** `Step`은 학습 및 실습 진행 순서, `Phase`는 인프라 아키텍처 구축 영역을 의미함. 일부 Step은 여러 Phase를 함께 다룸.
+
 ```mermaid
 graph TD
     subgraph "Phase 1-3: Foundation & Persistence"
@@ -40,13 +42,13 @@ graph TD
 - **Web/Proxy:** Nginx
 - **Storage:** RAID 1/5, ZFS, LVM, Ceph (Advanced)
 - **Automation:** Bash Shell, Ansible, Terraform
-- **Monitoring:** Prometheus, Grafana, Thanos (Multi-cluster), Loki
+- **Monitoring/APM:** Prometheus, Grafana, Thanos (Multi-cluster), Loki, OpenTelemetry, Grafana Tempo, Pinpoint/Scouter
 
 ## 3. 문서 시스템 가이드 (Documentation Guide)
 
 - **[README.md](./index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
 - **[CORE_FEATURE_EXPLAINER.md](./architecture/CORE_FEATURE_EXPLAINER.md):** 프로젝트 핵심 기술적 차별성 및 보안 특장점 상세 설명
-- **[project_outline.md](./architecture/project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
+- **[project_outline.md](./architecture/project_outline.md):** 단계별(Phase 1-7) 기술적 상세 설계 및 체크리스트
 - **[SCENARIOS.md](./architecture/SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
 - **[playbooks/](./operations/playbooks/ops/audit_system.md):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
   - `ops/`: 일상 운영 및 온보딩 절차
@@ -111,6 +113,14 @@ graph TD
   코드형 인프라 완성, 대규모 환경 복제 및 확장성 확보.
 
   [:octicons-arrow-right-24: 바로가기](architecture/project_outline.md#phase-6)
+
+- :material-cloud:{ .lg .middle } **Phase 7: Hybrid Cloud**
+
+  ***
+
+  온프레미스와 AWS 간 네트워크, 스토리지, CDN 연동.
+
+  [:octicons-arrow-right-24: 바로가기](architecture/project_outline.md#phase-7)
 
 </div>
 

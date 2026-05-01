@@ -50,6 +50,8 @@ ansible-playbook -i hosts.ini site.yml
 
 ## 2. DB 고가용성 클러스터 (Galera)
 
+Galera는 커밋 시점에 write-set 인증과 전 노드 순서 보장을 수행하므로, 쓰기 부하가 큰 서비스에서는 지연 시간과 충돌률을 먼저 검증한다. 읽기 확장이 핵심인 경우 MariaDB Replication + ProxySQL 읽기/쓰기 분리 구조를 대안으로 비교한다.
+
 ### 2.1 MariaDB Galera Cluster 설정
 
 ```yaml

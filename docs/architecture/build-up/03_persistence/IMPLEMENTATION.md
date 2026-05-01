@@ -6,6 +6,8 @@
 
 ## 1. 가용 스토리지 구성 (RAID/LVM)
 
+RAID 1은 OS/부트 볼륨 또는 단일 노드 로컬 데이터 보호 용도로 사용한다. Ceph OSD 데이터 디스크는 Ceph가 디스크 단위 장애를 직접 감지하고 복구할 수 있도록 전용 디스크(JBOD/IT mode)를 우선 적용한다.
+
 ### 1.1 RAID 1 (Mirroring) 구축
 
 ```bash
@@ -33,7 +35,7 @@ pveceph mgr create
 ### 2.2 OSD 생성 및 풀(Pool) 설정
 
 ```bash
-# 디스크 등록 및 3중화 풀 생성
+# 전용 디스크 등록 및 3중화 풀 생성
 pveceph osd create /dev/sdd
 pveceph pool create vm_storage --size 3 --min_size 2
 ```
@@ -97,6 +99,7 @@ chmod +x mc
 ### 4.2 하이브리드 운영 전략 참조
 
 - **상세 아키텍처 및 전이 전략:** [AWS S3 & CloudFront 가속 전략](../../../engineering/standards/aws_s3_cloudfront_strategy.md) 문서 참조 필수.
+- **전이 검증 체크:** IAM 권한, 버킷 정책, CORS, presigned URL 만료 시간, 멀티파트 업로드, 객체 ACL/소유권 설정을 MinIO와 AWS S3에서 각각 검증.
 
 ---
 

@@ -6,6 +6,8 @@
 
 ## 🚀 학습 로드맵 (Learning Roadmap)
 
+> **표기 기준:** `Step`은 학습 및 실습 진행 순서, `Phase`는 인프라 아키텍처 구축 영역을 의미함. 일부 Step은 여러 Phase를 함께 다룸.
+
 ```mermaid
 graph TD
     subgraph "Phase 1-3: Foundation & Persistence"
@@ -43,13 +45,13 @@ graph TD
 - **Registry:** Harbor (Enterprise Private Registry)
 - **Storage:** RAID 1/5, ZFS, LVM, Ceph (Distributed)
 - **Automation:** Bash Shell, Ansible, Terraform
-- **Monitoring/APM:** Prometheus, Grafana, Thanos, Loki, Pinpoint/Scouter
+- **Monitoring/APM:** Prometheus, Grafana, Thanos, Loki, OpenTelemetry, Grafana Tempo, Pinpoint/Scouter
 
 ## 3. 문서 시스템 가이드 (Documentation Guide)
 
 - **[README.md](./docs/index.md):** 프로젝트 전체 개요 및 아키텍처 청사진 제공
 - **[CORE_FEATURE_EXPLAINER.md](./docs/architecture/CORE_FEATURE_EXPLAINER.md):** 프로젝트 핵심 기술적 차별성 및 보안 특장점 상세 설명
-- **[project_outline.md](./docs/architecture/project_outline.md):** 단계별(Phase 1-6) 기술적 상세 설계 및 체크리스트
+- **[project_outline.md](./docs/architecture/project_outline.md):** 단계별(Phase 1-7) 기술적 상세 설계 및 체크리스트
 - **[Build-up Guide](./docs/architecture/build-up/README.md):** 설계 구성안을 실제 환경에 구현하기 위한 단계별 기술 실행 절차
 - **[SCENARIOS.md](./docs/architecture/SCENARIOS.md):** 상황별 흐름 및 운영 전략(Strategy) 마스터 인덱스
 - **[playbooks/](./docs/operations/playbooks/):** 실제 수행 명령어가 담긴 원자적(Atomic) 절차서(Tactics)
@@ -68,11 +70,12 @@ graph TD
 ## 4. 인프라 구축 단계 (Infrastructure Phases)
 
 - **Phase 1 (Foundation):** 시스템 기초, 하드닝 및 커널 최적화 수행
-- **Phase 2 (Perimeter):** 보안 경계 설정, 방화벽 및 MacVLAN 기반 네트워크 세분화 구현
+- **Phase 2 (Perimeter):** 보안 경계 설정, 방화벽 및 Bridge/MacVLAN 병행 기반 네트워크 세분화 구현
 - **Phase 3 (Persistence):** 데이터 영속성(Named Volume) 확보 및 Ceph 분산 스토리지 구축
-- **Phase 4 (Observability):** 운영 가시성 확보, APM 기반 성능 분석 및 서비스 가용성 튜닝
+- **Phase 4 (Observability):** 운영 가시성 확보, OpenTelemetry/APM 기반 성능 분석 및 서비스 가용성 튜닝
 - **Phase 5 (Pipeline):** 사설 레지스트리(Harbor) 연동, 형상 관리 및 보안 파이프라인 구축
-- **Phase 6 (Scalability):** 코드형 인프라(IaC) 완성, 대규모 환경 복제 및 하이브리드 확장
+- **Phase 6 (Scalability):** 코드형 인프라(IaC) 완성, 대규모 환경 복제 및 서비스 확장
+- **Phase 7 (Hybrid Cloud):** 온프레미스와 AWS 간 네트워크, 스토리지, CDN 연동
 
 ## 5. 단계별 자동화 보안 도구 (Automated Security Tools)
 

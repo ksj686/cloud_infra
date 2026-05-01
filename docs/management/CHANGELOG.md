@@ -51,6 +51,7 @@
 
 | 날짜       | 분류          | 수정 내용                                                                      | 수정 파일                                                                      |
 | :--------- | :------------ | :----------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| 2026-05-01 | `📝 Docs`     | MacVLAN, Ceph, MinIO/S3, OpenTelemetry/APM, Galera 운영 제약 및 검증 포인트 보강 | `README.md`, `docs/index.md`, `docs/architecture/project_outline.md`, `docs/architecture/build-up/*`, `docs/engineering/standards/aws_s3_cloudfront_strategy.md`, `docs/resources/knowledge_base/ceph_storage_deep_dive.md`, `docs/management/to-do-list.md` |
 | 2026-04-27 | `📝 Docs`     | Phase 6 설계 가이드(README) 내 MetalLB 전략 반영 및 문서 동기화                | `docs/architecture/build-up/06_scalability/README.md`                          |
 | 2026-04-27 | `📝 Docs`     | AWS 하이브리드 보안 설계(VPC/SG) 및 목적별 DB 선정 가이드 통합                 | `docs/engineering/standards/aws_s3_cloudfront_strategy.md`                     |
 | 2026-04-27 | `🚀 Feature`  | 하이브리드 확장 전략의 전방위 동기화 (성과 지표 명문화 및 발표 자료 반영)      | `docs/architecture/CORE_FEATURE_EXPLAINER.md`, `docs/resources/presentation/*` |

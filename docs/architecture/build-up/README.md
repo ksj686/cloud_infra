@@ -1,4 +1,4 @@
-# Infrastructure Build-up Guide (Phase 1-6)
+# Infrastructure Build-up Guide (Phase 1-7)
 
 본 문서는 `project_outline.md` 설계 청사진을 바탕으로, 실제 인프라를 처음부터 끝까지 구축하기 위한 단계별 기술 실행 절차 정리
 
@@ -14,19 +14,19 @@
 
 ### [Phase 2] 네트워크 경계 보안 및 고도화
 
-- **목표:** 트래픽 제어 및 MacVLAN 기반 네트워크 격리 구현
+- **목표:** 트래픽 제어 및 Bridge/MacVLAN 병행 기반 네트워크 격리 구현
 - **가이드:** [02_perimeter/README.md](./02_perimeter/README.md)
 - **상세 구현:** [02_perimeter/IMPLEMENTATION.md](./02_perimeter/IMPLEMENTATION.md)
 
 ### [Phase 3] 데이터 영속성 및 가용 스토리지
 
-- **목표:** RAID/Ceph 기반 데이터 보호 및 자동 백업 체계 수립
+- **목표:** RAID와 Ceph의 역할을 분리한 데이터 보호 및 자동 백업 체계 수립
 - **가이드:** [03_persistence/README.md](./03_persistence/README.md)
 - **상세 구현:** [03_persistence/IMPLEMENTATION.md](./03_persistence/IMPLEMENTATION.md)
 
 ### [Phase 4] 운영 가시성 및 성능 최적화
 
-- **목표:** APM 기반 프로파일링 및 서비스 가용성 튜닝
+- **목표:** OpenTelemetry/APM 기반 프로파일링 및 서비스 가용성 튜닝
 - **가이드:** [04_observability/README.md](./04_observability/README.md)
 - **상세 구현:** [04_observability/IMPLEMENTATION.md](./04_observability/IMPLEMENTATION.md)
 

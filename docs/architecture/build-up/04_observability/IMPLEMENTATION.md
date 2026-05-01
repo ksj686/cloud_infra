@@ -6,19 +6,24 @@
 
 ## 1. 애플리케이션 성능 분석 (APM)
 
-### 1.1 Python APM 에이전트 설치 및 실행
+### 1.1 OpenTelemetry 기반 trace 수집
 
 ```bash
-# Pinpoint 에이전트 설치 (예시)
-pip install pinpoint-py-agent
+# Python 자동 계측 도구 설치
+uv add opentelemetry-distro opentelemetry-exporter-otlp
 
-# 애플리케이션 가동 시 에이전트 연동
-export PINPOINT_AGENT_ID="infra-api-01"
-export PINPOINT_APP_NAME="INFRA_API"
-export PINPOINT_COLLECTOR_HOST="192.168.100.50"
+# 계측 라이브러리 자동 설치
+uv run opentelemetry-bootstrap -a install
 
-uv run python app.py
+# Tempo 또는 OpenTelemetry Collector OTLP 엔드포인트로 trace 전송
+export OTEL_SERVICE_NAME="infra-api"
+export OTEL_EXPORTER_OTLP_ENDPOINT="http://tempo:4318"
+uv run opentelemetry-instrument python app.py
 ```
+
+### 1.2 Java 중심 APM 선택 적용
+
+Pinpoint/Scouter는 Java 트랜잭션 상세 분석이 필요한 실습에서 선택 적용한다. Python/Go/Node.js 등 다언어 서비스는 OpenTelemetry 기반 계측을 우선한다.
 
 ---
 

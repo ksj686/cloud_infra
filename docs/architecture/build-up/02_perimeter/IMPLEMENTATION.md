@@ -96,6 +96,8 @@ docker run -d \
 
 ## 3. 컨테이너 네트워크 (MacVLAN)
 
+MacVLAN은 외부 네트워크에서 컨테이너를 독립 IP로 식별해야 하는 서비스에 한정 적용한다. 동일 호스트와 MacVLAN 컨테이너 간 직접 통신은 제한되므로, 관리 트래픽이나 내부 서비스 호출은 Bridge 네트워크를 병행한다.
+
 ### 3.1 MacVLAN 네트워크 생성
 
 ```bash
@@ -105,6 +107,15 @@ docker network create -d macvlan \
   --gateway=172.16.31.1 \
   -o parent=eth0 \
   macvlan_net
+```
+
+### 3.2 내부 통신용 Bridge 네트워크 병행
+
+```bash
+docker network create app_internal
+
+# 외부 노출 컨테이너는 macvlan_net과 app_internal을 함께 연결
+docker network connect app_internal <container_name>
 ```
 
 ---
