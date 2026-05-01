@@ -3,19 +3,22 @@
 ## 📌 개요
 
 - 개발 및 운영 전 과정 보안 자동화 도구 통합을 통한 취약점 조기 발견
-- 로컬 커밋, CI 빌드, 아티팩트 생성 단계별 보안 무결성 검증
+- 로컬 커밋, pre-push/CI, 아티팩트 생성 단계별 보안 무결성 검증
 
-## ✅ 1단계: 로컬 보안 검증 (Phase 1: Local)
+## ✅ 1단계: 로컬 커밋 보안 검증 (Stage 1: Local Commit)
 
-- **`pre-commit` & `Gitleaks` 설정**
+- **Husky 기반 `pre-commit` & `Gitleaks` 설정**
 
   - 목적: 커밋 전 민감 정보 유출 차단 및 코드 품질 유지
   - 실행:
 
     ```bash
-    # pre-commit 설치 및 설정
-    pip install pre-commit
-    pre-commit install
+    # Husky가 .husky/pre-commit을 통해 pre-commit 프레임워크 호출
+    pnpm install
+    uv sync
+
+    # 커밋 단계 검사 수동 실행
+    uv run pre-commit run --hook-stage pre-commit
 
     # Gitleaks를 이용한 시크릿 스캔 (로컬)
     gitleaks detect --source . -v
@@ -24,21 +27,23 @@
 - **코드 품질 분석**
   - `ESLint`(JS/TS), `Bandit`(Python) 등을 활용한 정적 분석 수행
 
-## ✅ 2단계: 종속성 취약점 점검 (Phase 2: CI)
+## ✅ 2단계: 종속성 취약점 점검 (Stage 2: Pre-push / CI)
 
 - **더미 웹서버 기반 SCA 스캔**
   - 목적: 사용 중인 오픈소스 라이브러리의 알려진 취약점 점검
   - 실행:
     ```bash
-    # npm/pnpm audit을 통한 종속성 검사
-    npm audit
-    # 또는
+    # pre-push 단계 전체 검사
+    uv run pre-commit run --hook-stage pre-push --all-files
+
+    # 개별 종속성 검사
     pnpm audit
+    uv run pip-audit --local --cache-dir .audit_cache
     ```
 - **정적 응용 프로그램 보안 테스트 (SAST)**
   - `Semgrep`을 활용한 커스텀 보안 규칙 검사 수행
 
-## ✅ 3단계: 컨테이너 이미지 스캔 (Phase 3: Artifact)
+## ✅ 3단계: 컨테이너 이미지 스캔 (Stage 3: Artifact)
 
 - **`Trivy`를 이용한 이미지 취약점 분석**
   - 목적: Docker 이미지 내 OS 패키지 및 애플리케이션 취약점 탐지
@@ -49,7 +54,7 @@
     ```
 - **취약점 등급 관리:** `CRITICAL`, `HIGH` 등급 발견 시 빌드 중단 및 수정 권고
 
-## ✅ 4단계: 보안 이벤트 알림 (Phase 4: Alert)
+## ✅ 4단계: 보안 이벤트 알림 (Stage 4: Alert)
 
 - **실시간 알림 연동**
   - 파이프라인 실패 또는 보안 위협 감지 시 Slack Webhook을 통해 즉시 전송

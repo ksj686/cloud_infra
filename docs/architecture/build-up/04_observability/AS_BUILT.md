@@ -4,10 +4,12 @@
 
 ---
 
-## 1. APM 실구축 정보 (Pinpoint/Scouter)
+## 1. Trace/APM 실구축 정보 (OpenTelemetry/Tempo)
 
 - **에이전트 연결 리스트:**
-- **프로파일링 주기:**
+- **OpenTelemetry Collector/Alloy 엔드포인트:**
+- **Tempo 저장소 상태:**
+- **Java 전용 APM(Pinpoint/Scouter) 사용 여부:**
 
 ## 2. 모니터링 시스템 정보 (Thanos/Prometheus)
 

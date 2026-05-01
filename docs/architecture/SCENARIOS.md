@@ -44,7 +44,7 @@
 - **개요:** 인프라 코드 및 서비스 변경 시 단계별 자동화 도구를 통한 보안 무결성 검증
 - **주요 절차:**
   1.  **로컬 커밋 보안 검증:** pre-commit 및 Gitleaks를 통한 시크릿 유출 차단. [Playbook: build/security_pipeline.md]
-  2.  **종속성 취약점 점검 (SCA):** pnpm audit을 활용한 라이브러리 보안 검사.
+  2.  **종속성 취약점 점검 (SCA):** pre-push 또는 CI 단계에서 `pnpm audit`, `pip-audit`를 활용한 라이브러리 보안 검사.
   3.  **이미지 및 인프라 스캔:** Trivy를 이용한 Docker 이미지 및 IaC 코드 취약점 스캔.
 
 ## 🔄 Scenario 6: 무중단 서비스 배포 (Rolling Update)

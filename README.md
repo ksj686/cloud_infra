@@ -10,19 +10,33 @@
 
 ```mermaid
 graph TD
-    subgraph "Phase 1-3: Foundation & Persistence"
-    S1[Step 1: Automation] --> S2[Step 2: Troubleshoot]
-    S2 --> S3[Step 3: Optimization]
+    subgraph LearningSteps["Learning Steps: 실습 진행 순서"]
+      S1["Step 1<br/>Automation"] --> S2["Step 2<br/>Troubleshooting"]
+      S2 --> S3["Step 3<br/>Optimization"]
+      S3 --> S4["Step 4<br/>Expansion"]
+      S4 --> S5["Step 5<br/>Security"]
+      S5 --> S6["Step 6<br/>Enterprise HA"]
+      S6 --> S7["Step 7<br/>Cloud Native AI"]
     end
-    subgraph "Phase 4-5: Ops & Security"
-    S3 --> S4[Step 4: Expansion]
-    S4 --> S5[Step 5: Advanced Security]
+
+    subgraph InfraPhases["Infrastructure Phases: 아키텍처 구축 영역"]
+      P1["Phase 1<br/>Foundation"] --> P2["Phase 2<br/>Perimeter"]
+      P2 --> P3["Phase 3<br/>Persistence"]
+      P3 --> P4["Phase 4<br/>Observability"]
+      P4 --> P5["Phase 5<br/>Pipeline"]
+      P5 --> P6["Phase 6<br/>Scalability"]
+      P6 --> P7["Phase 7<br/>Hybrid Cloud"]
     end
-    subgraph "Phase 6-7: Enterprise & HA"
-    S5 --> S6[Step 6: Enterprise HA]
-    S6 --> S7[Step 7: Cloud Native AI]
-    end
-    style S1 fill:#f9f,stroke:#333,stroke-width:2px
+
+    S1 -.운영 자동화 기반.-> P1
+    S2 -.장애 복구 실습.-> P3
+    S3 -.성능/운영 최적화.-> P4
+    S4 -.컨테이너/네트워크 확장.-> P2
+    S5 -.보안 가드레일.-> P5
+    S6 -.HA/DB/스토리지 고도화.-> P3
+    S6 -.확장 자동화.-> P6
+    S7 -.관측성/AI 자동화.-> P4
+    S7 -.클라우드 연동.-> P7
 ```
 
 ---
@@ -79,12 +93,12 @@ graph TD
 
 ## 5. 단계별 자동화 보안 도구 (Automated Security Tools)
 
-| 단계 (Phase)          | 도구 (Tool)                            | 목적                                                         |
-| :-------------------- | :------------------------------------- | :----------------------------------------------------------- |
-| **Phase 1: Local**    | `pre-commit`, `Gitleaks`, `ShellCheck` | 커밋 전 민감 정보 유출 차단 및 스크립트 품질 검사            |
-| **Phase 2: CI**       | `CodeQL`, `Semgrep`, `pnpm audit`      | SAST 및 오픈소스 라이브러리 취약점(SCA) 심층 분석            |
-| **Phase 3: Artifact** | `Trivy`, `Harbor Scan`                 | Docker 이미지 OS/패키지 취약점 및 저장소 내 이미지 상시 스캔 |
-| **Phase 4: Alert**    | `Slack`, `SMTP`, `Webhook`             | 파이프라인 실패 및 시스템 보안 이벤트 실시간 알림            |
+| 검증 단계 (Stage) | 도구 (Tool)                                    | 목적                                                           |
+| :---------------- | :--------------------------------------------- | :------------------------------------------------------------- |
+| **Local Commit**  | `pre-commit`, `Gitleaks`, `ShellCheck`         | 커밋 전 민감 정보 유출 차단 및 스크립트 품질 검사              |
+| **Pre-push / CI** | `CodeQL`, `Semgrep`, `pnpm audit`, `pip-audit` | 원격 반영 전 SAST 및 오픈소스 라이브러리 취약점(SCA) 심층 분석 |
+| **Artifact**      | `Trivy`, `Harbor Scan`                         | Docker 이미지 OS/패키지 취약점 및 저장소 내 이미지 상시 스캔   |
+| **Alert**         | `Slack`, `SMTP`, `Webhook`                     | 파이프라인 실패 및 시스템 보안 이벤트 실시간 알림              |
 
 ## 6. 프로젝트 비전: 보안 필수 체계가 완비된 표준 환경 (Starter Kit)
 
@@ -102,4 +116,4 @@ graph TD
 - **IaC 코드화 (Ansible/Terraform):** 현재 문서 가이드를 원클릭 실행 가능한 코드로 전환
 - **Golden Image 빌드:** 보안 하드닝 완료 표준 OS 이미지 생성 자동화(Packer 활용)
 - **컴플라이언스 매핑:** KISA 가이드라인 및 CIS Benchmark 항목 준수 여부 시각화
-- **하이브리드 확장:** 온프레미스(Proxmox)와 퍼블릭 클라우드 간의 유연한 자원 연동(Cloud Bursting) 구현
+- **하이브리드 확장:** 온프레미스(Proxmox)와 AWS 간 VPN, S3, CloudFront 기반 연동 구현

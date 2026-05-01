@@ -36,7 +36,21 @@
 
 코드 작성 및 커밋 단계에서 결함을 차단하는 전진 방어 체계
 
-- **pre-commit 설정 및 강제화:** 커밋 직전 스타일 교정(Prettier) 및 파일 무결성 검증 자동 실행
+```mermaid
+flowchart LR
+    Dev["Developer"] --> Commit["git commit"]
+    Commit --> Local["pre-commit<br/>Gitleaks / ShellCheck / Prettier"]
+    Local --> Push["git push"]
+    Push --> PrePush["pre-push<br/>Gitleaks / pnpm audit / pip-audit"]
+    PrePush --> CI["CI Pipeline<br/>Semgrep / CodeQL"]
+    CI --> Image["Container Image"]
+    Image --> Trivy["Trivy Scan"]
+    Trivy --> Harbor["Harbor Registry<br/>Policy Gate"]
+    Harbor --> Deploy["Staging / Production"]
+```
+
+- **pre-commit 설정 및 강제화:** 커밋 직전 staged 파일 중심의 스타일 교정(Prettier), 파일 무결성, 시크릿 검증 자동 실행
+- **pre-push 보안 감사:** 원격 저장소 반영 전 전체 파일 기준 Gitleaks 및 SCA(`pnpm audit`, `pip-audit`) 수행
 - **Gitleaks 시크릿 유출 방지:** 소스 코드 내 API Key, 패스워드 등 민감 정보 포함 여부 실시간 감지 및 커밋 거부
 - **ShellCheck 정밀 진단:** 쉘 스크립트(.sh)의 문법 오류, 논리적 버그, 잠재적 보안 취약점 사전 식별
 

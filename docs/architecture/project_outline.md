@@ -5,6 +5,23 @@
 
 ---
 
+## Phase Dependency Map
+
+```mermaid
+flowchart LR
+    P1["Phase 1<br/>Foundation<br/>OS/하드닝/감사"] --> P2["Phase 2<br/>Perimeter<br/>네트워크/경계 보안"]
+    P2 --> P3["Phase 3<br/>Persistence<br/>스토리지/데이터"]
+    P3 --> P4["Phase 4<br/>Observability<br/>모니터링/APM/복구"]
+    P4 --> P5["Phase 5<br/>Pipeline<br/>보안 자동화/이미지"]
+    P5 --> P6["Phase 6<br/>Scalability<br/>IaC/서비스 확장"]
+    P6 --> P7["Phase 7<br/>Hybrid Cloud<br/>AWS/VPN/CDN"]
+
+    P1 -.기초 VM/패키지 표준.-> P6
+    P2 -.외부 진입점/인증서.-> P5
+    P3 -.객체 스토리지 인터페이스.-> P7
+    P4 -.지표 기반 확장 판단.-> P6
+```
+
 ## Phase 1: Foundation (기초 시스템 및 OS) {: #phase-1 }
 
 **목표:** OS 안정성 확보 및 시스템 보안 하드닝 기초 수립
@@ -89,7 +106,7 @@
 - **패키지 검사:**
   - `Trivy`: 컨테이너 이미지 아티팩트 및 OS 패키지의 보안 결함 분석 후 Slack 연동 통보
 
-## Phase 6: Scalability (IaC 및 하이브리드 확장) {: #phase-6 }
+## Phase 6: Scalability (IaC 및 서비스 확장) {: #phase-6 }
 
 **목표:** 인적 실수 배제 및 인프라 프로비저닝 자동화
 
@@ -102,7 +119,7 @@
   - **서비스 메시(고급):** Istio 사이드카 도입을 통한 정밀 트래픽 제어 및 서비스 간 mTLS 보안 강화
   - DB 가용성 고도화: MariaDB Galera Cluster 기반의 동기식 이중화 및 ProxySQL 부하 분산 구현. 쓰기 지연과 충돌 가능성이 있는 워크로드는 MariaDB Replication + ProxySQL 읽기/쓰기 분리 대안도 함께 평가
   - **오토 스케일링:** 트래픽 부하에 따른 리소스 동적 할당 및 인스턴스 확장 체계 연구
-  - 하이브리드 확장: 온프레미스와 퍼블릭 클라우드 간의 유연한 자원 연동(Cloud Bursting) 체계 분석
+  - 하이브리드 연계 준비: Phase 7에서 사용할 환경별 설정 분리, 배포 자동화, 오토스케일링 기준 수립
 
 ## Phase 7: Hybrid Cloud (AWS Integration) {: #phase-7 }
 

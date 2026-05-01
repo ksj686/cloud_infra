@@ -8,6 +8,21 @@
 
 하드웨어 결함에 대비한 물리 및 논리 볼륨 계층의 안정성 확보
 
+```mermaid
+flowchart TD
+    subgraph Node["Proxmox Node"]
+      Boot["OS / Boot Volume<br/>RAID1 or ZFS Mirror"]
+      OSD1["Ceph OSD Disk 1<br/>JBOD/IT mode"]
+      OSD2["Ceph OSD Disk 2<br/>JBOD/IT mode"]
+    end
+
+    OSD1 --> Ceph["Ceph Cluster<br/>Replication / CRUSH"]
+    OSD2 --> Ceph
+    Ceph --> RBD["RBD Pool<br/>VM/LXC Storage"]
+    MinIO["MinIO<br/>S3-compatible API"] --> App["Application"]
+    App -.Phase 7 전이 검증.-> S3["AWS S3"]
+```
+
 - **RAID 어레이 구축 및 관리:**
   - RAID 1(미러링) 또는 RAID 5 구성을 통해 물리 디스크 장애 시에도 무중단 데이터 가용성 유지
   - Ceph OSD 데이터 디스크와 RAID 계층을 중복 적용하지 않도록 역할 분리. OS/부트 볼륨은 RAID 1 또는 ZFS 미러로 보호하고, Ceph 데이터 디스크는 전용 디스크(JBOD/IT mode)를 우선 검토

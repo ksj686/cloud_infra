@@ -1,6 +1,6 @@
 # Git Hook 기반 협업 자동화 가이드 (Husky)
 
-본 문서는 팀 프로젝트 시 환경 불일치를 해소하기 위해 Git Hook(특히 `post-merge`)을 활용한 의존성 자동 동기화 체계 및 설정 방법 정리
+본 문서는 팀 프로젝트 시 환경 불일치를 해소하기 위해 Git Hook(`post-merge`, `pre-commit`, `pre-push`)을 활용한 의존성 자동 동기화 및 품질 검증 체계 정리
 
 ---
 
@@ -8,6 +8,7 @@
 
 - **문제점:** 동료가 추가한 신규 패키지가 포함된 코드를 `pull` 받은 후, 로컬 설치 명령(`pnpm install`, `uv sync`) 수행을 망각하여 발생하는 빌드 에러 방지
 - **해결책:** Git의 `merge` 이벤트 종료 후 실행되는 `post-merge` 훅을 통해 락파일 변경 시 설치 명령 자동화 수행
+- **검증 단계 분리:** 커밋 단계는 빠른 품질/시크릿 검사, 푸시 단계는 전체 파일 기준 보안/SCA 검사로 분리하여 개발 흐름과 보안 검증 강도 동시 확보
 - **공유 메커니즘:** 로컬 전용 훅(`.git/hooks`)의 한계를 극복하기 위해 `Husky`를 사용하여 팀 전체에 자동화 스크립트 공유 및 강제 적용
 
 ---
@@ -54,26 +55,40 @@ if echo "$changed_files" | grep -q "uv.lock"; then
 fi
 ```
 
-### 3.2 pre-commit 브릿지 훅 생성 (Husky ↔ python pre-commit 연동)
+### 3.2 pre-commit 브릿지 훅 생성 (빠른 품질/시크릿 검사)
 
-Husky가 파이썬 기반의 `pre-commit` 도구를 호출하도록 설정하여 도구 간 통합 관리 수행
+Husky가 파이썬 기반의 `pre-commit` 도구를 호출하도록 설정하여 staged 파일 중심의 빠른 검사를 수행
 
 - **파일명:** `.husky/pre-commit`
 - **내용:**
 
 ```bash
 #!/bin/bash
-# Husky를 통해 파이썬 pre-commit 도구 호출
-uv run pre-commit run --all-files
+# 커밋 단계에서는 staged 파일 중심의 빠른 품질/시크릿 검사만 수행
+uv run pre-commit run --hook-stage pre-commit
 ```
 
-### 3.3 실행 권한 및 설정 강제화
+### 3.3 pre-push 보안 감사 훅 생성 (전체 파일/SCA 검사)
+
+원격 저장소 반영 전 전체 파일 기준으로 무거운 보안 검사를 수행
+
+- **파일명:** `.husky/pre-push`
+- **내용:**
+
+```bash
+#!/bin/bash
+# 푸시 단계에서는 전체 파일 기준의 보안/SCA 검사를 수행
+uv run pre-commit run --hook-stage pre-push --all-files
+```
+
+### 3.4 실행 권한 및 설정 강제화
 
 ```powershell
 # 1. 훅 파일들에 대한 실행 권한 부여 (Git 인덱스 반영)
-git add .husky/post-merge .husky/pre-commit
+git add .husky/post-merge .husky/pre-commit .husky/pre-push
 git update-index --chmod=+x .husky/post-merge
 git update-index --chmod=+x .husky/pre-commit
+git update-index --chmod=+x .husky/pre-push
 ```
 
 ---
@@ -109,12 +124,9 @@ git update-index --chmod=+x .husky/pre-commit
 # 모든 패키지 설치 및 Husky 훅 활성화
 pnpm install
 uv sync
-
-# pre-commit 훅 등록 (보안/품질용)
-uv run pre-commit install
 ```
 
 ### 5.2 사후 관리
 
-- **자동화 적용:** 이후 `git pull` 시 락파일 변경이 감지되면 별도 명령 없이 패키지가 자동 업데이트됨.
+- **자동화 적용:** 이후 `git pull` 시 락파일 변경이 감지되면 별도 명령 없이 패키지가 자동 업데이트됨. 커밋 시 빠른 품질/시크릿 검사, 푸시 시 전체 보안/SCA 검사가 자동 실행됨.
 - **드리프트 방지:** 로컬에서 임의로 `post-merge` 파일을 수정하지 않으며, 수정 필요 시 공유용 브랜치를 통해 정식 반영 및 전파 수행.

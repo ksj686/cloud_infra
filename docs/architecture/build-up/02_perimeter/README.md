@@ -8,6 +8,16 @@
 
 공개 서비스 진입점 단일화 및 백엔드 서버의 직접 노출 방지 전략
 
+```mermaid
+flowchart LR
+    User["Client"] --> FW["UFW/IPTables<br/>최소 포트 허용"]
+    FW --> Nginx["Nginx Reverse Proxy<br/>TLS/HSTS/L7 Routing"]
+    Nginx --> API["Private API / App"]
+    Nginx --> Registry["Private Registry<br/>hub.kosa.kr"]
+    API --> DB["Private DB Network"]
+    Registry --> Harbor["Harbor or Registry v2"]
+```
+
 - **Nginx 서버 엔진 구축:** Nginx 설치 및 외부 전용 80(HTTP), 443(HTTPS) 포트 트래픽 수신 환경 구성
 - **부하 분산 및 지능형 라우팅:**
   - `upstream` 설정을 활용한 다중 백엔드 노드 부하 분산 및 고가용성(HA) 확보
@@ -41,6 +51,23 @@
 ## 3. 컨테이너 네트워크 고도화 (MacVLAN)
 
 성능 최적화 및 기존 네트워크 인프라와의 투명한 연동 구현. MacVLAN은 외부 네트워크에서 컨테이너를 독립 호스트처럼 식별해야 하는 경우에 한정하고, 내부 서비스 간 통신은 Bridge 네트워크를 병행하는 구조를 기본값으로 설계
+
+```mermaid
+flowchart TD
+    Host["Docker Host"]
+    External["External L2 Network"]
+    Macvlan["macvlan_net<br/>외부 식별 IP"]
+    Bridge["app_internal<br/>내부 서비스 통신"]
+    PublicSvc["Public-facing Container"]
+    InternalSvc["API / Worker / DB Client"]
+
+    External <--> Macvlan
+    Macvlan <--> PublicSvc
+    Host -.직접 통신 제한.-> Macvlan
+    Host --> Bridge
+    Bridge <--> PublicSvc
+    Bridge <--> InternalSvc
+```
 
 - **MacVLAN 환경 기술 명세:** 도커 컨테이너에 호스트 시스템 물리 네트워크 대역의 독립적인 IP 주소 할당
 - **구조적 제약:** MacVLAN 컨테이너는 동일 호스트와 직접 통신할 수 없으므로, 호스트-컨테이너 관리 트래픽이 필요하면 별도 Bridge 네트워크 연결 또는 호스트 측 macvlan shim 인터페이스 구성 필요

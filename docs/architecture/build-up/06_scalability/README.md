@@ -8,6 +8,19 @@
 
 인적 실수 배제 및 환경 복제 속도 극대화를 위한 자동화 공정
 
+```mermaid
+flowchart LR
+    Git["Git Repository<br/>Terraform / Ansible / Helm"] --> Terraform["Terraform<br/>Proxmox VM Provisioning"]
+    Terraform --> Nodes["VM / K8s Nodes"]
+    Git --> Ansible["Ansible<br/>OS Config / Hardening"]
+    Ansible --> Nodes
+    Git --> Argo["Argo CD<br/>GitOps Sync"]
+    Argo --> K8s["K8s Cluster"]
+    K8s --> App["Application Workloads"]
+    Metrics["Prometheus / Thanos Metrics"] --> Scale["Scaling Decision<br/>HPA/KEDA/Manual"]
+    Scale --> K8s
+```
+
 - **Terraform 프로비저닝:**
   - Proxmox API 연동을 통한 가상 머신(VM), 네트워크, 스토리지 리소스의 선언적 관리
   - **상태 관리:** 인프라 현재 상태와 코드 정의 상태의 실시간 동기화 체계 수립
@@ -47,14 +60,14 @@
   - **드리프트 탐지(Drift Detection):** 클러스터 상태 불일치 자동 감지 및 자동 복구(Self-healing) 가동
   - **상세 전략:** [K8s 설정 관리 및 재배포 전략](../../../engineering/standards/k8s_deployment_strategy.md) 참조
 
-## 4. 유연한 인프라 확장 및 미래 로드맵
+## 4. 유연한 서비스 확장 및 Phase 7 연계 준비
 
 부하 변화에 유연하게 대응하는 탄력적 인프라 연구
 
 - **오토 스케일링 (Auto-scaling):**
   - 트래픽 부하 및 리소스 사용량 분석 기반의 VM 인스턴스 동적 확장 체계 연구
   - **지능형 스케일링:** AI 예측 모델 연동을 통한 선제적 자원 증설(Proactive Scaling) 검증
-- **하이브리드 확장 및 서비스 메시:**
-  - 온프레미스(Proxmox)와 퍼블릭 클라우드 간의 유연한 자원 연동(Cloud Bursting) 기반 마련
+- **Phase 7 연계 준비 및 서비스 메시:**
+  - 온프레미스(Proxmox)와 퍼블릭 클라우드 연동에 필요한 환경별 설정 분리 및 배포 자동화 기반 마련
   - **CNI 전환 시나리오:** 네트워크 보안(Network Policy) 강화 및 엔터프라이즈 표준 확보를 위한 Flannel → Calico 단계적 마이그레이션 실습
   - **Istio 도입:** 사이드카 기반의 정밀 트래픽 제어 및 서비스 간 암호화(mTLS) 통신 연구

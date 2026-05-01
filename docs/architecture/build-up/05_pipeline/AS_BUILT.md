@@ -12,8 +12,11 @@
 
 ## 2. 보안 파이프라인 설정
 
+- **pre-commit 검사 항목:**
+- **pre-push 검사 항목:**
 - **CI 연동 도구:**
 - **Gitleaks/Semgrep 차단 임계치:**
+- **SCA 감사 도구:** `pnpm audit`, `pip-audit`
 
 ## 3. 자격 증명 관리 현황
 

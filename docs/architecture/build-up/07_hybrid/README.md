@@ -4,6 +4,19 @@ AWS 클라우드 자원을 활용한 글로벌 콘텐츠 전송 및 보안 경�
 
 ---
 
+```mermaid
+flowchart LR
+    OnPrem["On-premise<br/>Proxmox / Services"] <-->|"IPsec VPN"| VPC["AWS VPC<br/>Private Subnets"]
+    App["Application"] --> MinIO["MinIO<br/>Dev/Test S3 API"]
+    App --> S3["AWS S3<br/>Production Object Storage"]
+    User["User"] --> CF["CloudFront<br/>Edge Cache"]
+    CF -->|"OAC only"| S3
+    IaC["Terraform"] --> OnPrem
+    IaC --> VPC
+    IaC --> S3
+    IaC --> CF
+```
+
 ## 1. 정적 자산 가속화 및 오프로딩 (CloudFront)
 
 웹 서버의 부하를 줄이고 전 세계 사용자에게 빠른 응답성을 제공하는 전략

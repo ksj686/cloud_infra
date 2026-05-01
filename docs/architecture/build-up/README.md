@@ -6,6 +6,21 @@
 
 ## 🏗️ 구축 단계별 바로가기 (Phases)
 
+```mermaid
+flowchart TD
+    P1["Phase 1<br/>Foundation"] --> P2["Phase 2<br/>Perimeter"]
+    P2 --> P3["Phase 3<br/>Persistence"]
+    P3 --> P4["Phase 4<br/>Observability"]
+    P4 --> P5["Phase 5<br/>Pipeline"]
+    P5 --> P6["Phase 6<br/>Scalability"]
+    P6 --> P7["Phase 7<br/>Hybrid Cloud"]
+
+    P1 -.표준 VM/OS 하드닝.-> P5
+    P2 -.TLS/Registry 경계.-> P5
+    P3 -.MinIO/S3 인터페이스.-> P7
+    P4 -.메트릭/trace 기반 판단.-> P6
+```
+
 ### [Phase 1] 시스템 기초 및 OS 하드닝
 
 - **목표:** 안정적이고 보안이 강화된 베이스 서버 환경 구축

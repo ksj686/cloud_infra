@@ -22,6 +22,17 @@
 
 서비스 Throttling 원인 규명 및 코드 레벨 최적화
 
+```mermaid
+flowchart LR
+    App["Application<br/>OTel SDK / Auto Instrumentation"] --> Collector["OpenTelemetry Collector<br/>or Grafana Alloy"]
+    Collector --> Tempo["Grafana Tempo<br/>Trace Store"]
+    Collector --> Prom["Prometheus / Thanos<br/>Metrics"]
+    Logs["App/System Logs"] --> Loki["Loki<br/>Log Store"]
+    Tempo --> Grafana["Grafana Dashboard"]
+    Prom --> Grafana
+    Loki --> Grafana
+```
+
 - **APM 도구 도입 및 연동:**
   - OpenTelemetry SDK/자동 계측과 OpenTelemetry Collector 또는 Grafana Alloy를 통해 애플리케이션 trace를 수집하고 Grafana Tempo에 저장
   - Pinpoint 또는 Scouter는 Java 중심 트랜잭션 분석 실습 도구로 선택 적용하고, Python/Go/Node.js 등 다언어 서비스는 OpenTelemetry 기반 계측을 우선 적용
