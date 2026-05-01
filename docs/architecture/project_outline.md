@@ -44,6 +44,7 @@ flowchart LR
 
 - **부하 분산 및 가용성:**
   - Nginx 리버스 프록시: 업스트림 서버 부하 분산 및 백엔드 서버의 실제 IP 노출 방지(IP Masking)
+  - **목적별 로드밸런서 선택 기준:** 온프레미스 기본 진입점은 Nginx/Ingress로 유지하고, AWS 연계 시 HTTP/HTTPS 웹 트래픽은 ALB(Application Load Balancer), TCP/UDP·고정 IP·DB 프록시 전면 노출은 NLB(Network Load Balancer), 방화벽·IDS·IPS 삽입은 GWLB(Gateway Load Balancer)로 용도 분리
 - **네트워크 격리 및 고도화:**
   - Public/Private 서브넷 설계: 데이터베이스 및 내부 핵심 서비스를 인터넷으로부터 완전 격리 배치
   - **Bridge/MacVLAN 병행:** 내부 서비스 간 통신은 Docker Bridge 네트워크로 유지하고, 외부 네트워크에서 독립 IP 식별이 필요한 컨테이너만 MacVLAN에 연결
@@ -62,6 +63,7 @@ flowchart LR
 - **분산 스토리지 (Ceph):**
   - Proxmox 통합 관리: 하이퍼바이저 노드 간 디스크를 통합하여 데이터 삼중화(Replication) 및 자가 복구 구현
   - VM/LXC 영속성 확보: 공유 스토리지 기반의 무중단 라이브 마이그레이션 및 고가용성(HA) 지원
+  - **용도별 인터페이스 분리:** VM 디스크와 Kubernetes PVC는 RBD(RADOS Block Device), S3 호환 백업·업로드 저장소는 RGW(RADOS Gateway), 다중 노드 공유 파일은 CephFS로 분리하여 Object/Block/File 책임을 명확화
 - **사설 객체 저장소 (MinIO):**
   - S3 호환 API 구축: 온프레미스 환경에서 클라우드 네이티브한 파일 관리 체계 수립
   - **운영 전이 전략:** 표준 S3 SDK 인터페이스를 활용하여 개발/검증은 MinIO, 최종 운영은 Phase 7(AWS S3)로 환경 변수 기반 이관을 지원하되, IAM 권한, 버킷 정책, CORS, presigned URL 만료 시간, 멀티파트 업로드 동작은 별도 호환성 검증 수행
@@ -117,8 +119,8 @@ flowchart LR
 - **심화 로드맵:**
   - **설정 및 배포 자동화:** Helm Chart 기반 패키징 및 Argo CD를 활용한 GitOps 운영 체계 구축
   - **서비스 메시(고급):** Istio 사이드카 도입을 통한 정밀 트래픽 제어 및 서비스 간 mTLS 보안 강화
-  - DB 가용성 고도화: MariaDB Galera Cluster 기반의 동기식 이중화 및 ProxySQL 부하 분산 구현. 쓰기 지연과 충돌 가능성이 있는 워크로드는 MariaDB Replication + ProxySQL 읽기/쓰기 분리 대안도 함께 평가
-  - **오토 스케일링:** 트래픽 부하에 따른 리소스 동적 할당 및 인스턴스 확장 체계 연구. 운영 표준은 장애 도메인 분산이 가능한 다중 인스턴스 기반 수평 확장을 우선 적용
+  - DB 가용성 고도화: MariaDB Galera Cluster 기반의 동기식 이중화 및 ProxySQL 부하 분산 구현. MySQL 호환성이 우선인 경우 Percona XtraDB Cluster(PXC)를 대안으로 평가하고, 쓰기 지연과 충돌 가능성이 있는 워크로드는 MariaDB Replication + ProxySQL 읽기/쓰기 분리 대안도 함께 검토
+  - **오토 스케일링:** 트래픽 부하에 따른 리소스 동적 할당 및 인스턴스 확장 체계 연구. 운영 표준은 장애 도메인 분산이 가능한 다중 인스턴스 기반 수평 확장을 우선 적용하고, Kubernetes 워크로드는 HPA(Horizontal Pod Autoscaler)/KEDA 기반 Pod 확장과 Cluster Autoscaler/Karpenter 기반 노드 확장을 구분하여 설계
   - 하이브리드 연계 준비: Phase 7에서 사용할 환경별 설정 분리, 배포 자동화, 오토스케일링 기준 수립
 
 ## Phase 7: Hybrid Cloud (AWS Integration) {: #phase-7 }
@@ -138,3 +140,7 @@ flowchart LR
 - **하이브리드 자동화 (IaC):**
   - Terraform 기반 관리: 온프레미스(Proxmox)와 클라우드(AWS) 리소스를 단일 코드로 통합 프로비저닝
   - **운영 가시성:** 클라우드 리소스 사용량 및 비용에 대한 통합 모니터링 체계 수립
+- **클라우드 버스트(Cloud Burst) 확장:**
+  - 온프레미스 Kubernetes는 기본 트래픽을 처리하고, AWS EKS는 피크 트래픽과 장애 우회 영역으로 분리 운용
+  - Route 53 가중치/장애 조치 라우팅, ALB Ingress, KEDA/HPA, Karpenter를 조합하여 부하 증가 시 AWS 리소스 확장 및 부하 감소 시 축소 시나리오 검증
+  - 단일 클러스터에 온프레미스와 AWS 노드를 강제로 혼합하는 방식은 네트워크·CNI·인증서·노드 조인 자동화 난이도가 높으므로 고급 과제로 분리

@@ -204,6 +204,7 @@ nav:
           - 05 Impact & Future: resources/presentation/05_impact_and_future.md
   - Management:
       - Workflow: management/PROJECT_WORKFLOW.md
+      - Project Compare Review: management/PROJECT_COMPARE_REVIEW.md
       - Task Guide: management/CURRENT_TASK_GUIDE.md
       - Env Setup: management/ENVIRONMENT_SETUP.md
       - Roadmap: management/to-do-list.md

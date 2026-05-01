@@ -39,7 +39,52 @@ flowchart LR
 - **네트워크 격리 및 주소 계획:** IP 충돌 방지를 위한 독립적 대역 분리 및 서브넷 간 라우팅 정책 수립
 - **보안 가드레일:** VPN 터널 내 전송 데이터 암호화 및 보안 그룹(SG) 기반의 정밀한 서비스 간 접근 제어
 
-## 4. 하이브리드 자동화 관리 (Hybrid IaC)
+## 4. 하이브리드 Kubernetes 확장 (Cloud Burst)
+
+온프레미스 Kubernetes를 기본 처리 영역으로 두고, AWS EKS를 피크 트래픽과 장애 우회 영역으로 활용하는 확장 모델
+
+```mermaid
+flowchart TB
+    User["User"] --> Route53["Route 53<br/>Weighted / Failover"]
+    Route53 --> OnPremEntry["On-prem Ingress<br/>MetalLB / NGINX"]
+    Route53 --> AWSEntry["AWS ALB Ingress"]
+
+    subgraph OnPrem["On-premise Kubernetes"]
+        OnPremEntry --> OnPremApp["App Deployment"]
+        OnPremMetrics["Prometheus"] --> OnPremHPA["HPA"]
+        OnPremHPA --> OnPremApp
+    end
+
+    subgraph AWS["AWS EKS"]
+        AWSEntry --> AWSApp["App Deployment"]
+        AWSMetrics["Prometheus / AMP"] --> AWSKEDA["KEDA / HPA"]
+        AWSKEDA --> AWSApp
+        AWSApp --> Karpenter["Karpenter"]
+        Karpenter --> EC2["EC2 Worker Nodes"]
+    end
+
+    Git["Git Repository"] --> Argo["Argo CD"]
+    Argo --> OnPremApp
+    Argo --> AWSApp
+```
+
+- **평상시:** 온프레미스가 대부분의 트래픽 처리, AWS는 최소 리소스 유지
+- **부하 증가:** AWS EKS Deployment와 Worker Node를 확장하고 Route 53 가중치를 AWS 쪽으로 증가
+- **부하 감소:** AWS Pod/Node를 축소하고 트래픽을 온프레미스 중심으로 복원
+- **장애 상황:** 온프레미스 Ingress 또는 회선 장애 시 Route 53 Failover로 AWS ALB Ingress 전환
+- **운영 제약:** DB와 파일 업로드 저장소까지 양쪽에 동시 분산하면 지연 시간과 데이터 정합성 관리 난이도가 상승하므로, DB는 한쪽에 고정하고 파일은 S3/MinIO/Ceph RGW 같은 객체 저장소 인터페이스로 추상화
+
+## 5. 목적별 AWS 로드밸런서 선택
+
+| 구분     | 적합한 용도                                      | 본 프로젝트 판단                                       |
+| :------- | :----------------------------------------------- | :----------------------------------------------------- |
+| **ALB**  | HTTP/HTTPS, 경로/호스트 기반 라우팅, WAF 연동    | 웹 앱·API·EKS Ingress 진입점의 기본 선택               |
+| **NLB**  | TCP/UDP, 고정 IP, 낮은 지연 시간, DB 프록시 전면 | ProxySQL, TCP 서비스, 고정 IP 요구가 있을 때 제한 적용 |
+| **GWLB** | 방화벽, IDS/IPS, 보안 장비 삽입                  | 고급 보안 장비 연동 과제로 분리                        |
+
+로드밸런서는 성능 우열이 아니라 트래픽 성격에 따라 선택함. 일반 HTTP/HTTPS 서비스는 ALB, L4 TCP/UDP 서비스는 NLB, 보안 장비 체인은 GWLB 기준으로 분류함.
+
+## 6. 하이브리드 자동화 관리 (Hybrid IaC)
 
 온프레미스와 클라우드 리소스를 단일 파이프라인에서 관리하는 기법
 

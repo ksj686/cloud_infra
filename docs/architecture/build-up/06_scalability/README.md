@@ -36,13 +36,14 @@ flowchart LR
   - 3-Node 기반 동기식 멀티 마스터 복제 클러스터 구성
   - 노드 장애 시 즉각적인 쓰기 가용성 유지 및 데이터 무손실(RPO 0) 보장
   - 커밋 시점의 인증(Certification)과 전 노드 순서 보장이 필요하므로 쓰기 지연, 네트워크 지연, 쓰기 충돌 가능성을 부하 테스트로 검증
-  - 쓰기 부하가 높거나 읽기 확장이 핵심인 서비스는 MariaDB Replication + ProxySQL 읽기/쓰기 분리 구조를 대안으로 평가
+  - MySQL 호환성이 우선인 워크로드는 Percona XtraDB Cluster(PXC)를 대안으로 평가하고, 쓰기 부하가 높거나 읽기 확장이 핵심인 서비스는 MariaDB Replication + ProxySQL 읽기/쓰기 분리 구조를 함께 검토
 - **온프레미스 네트워크 고도화 (MetalLB):**
   - 클라우드 미지원 환경(Bare-metal)에서 `LoadBalancer` 타입 서비스 노출 체계 수립
   - 사설 IP 대역 할당 및 L2 모드 ARP 응답 대행을 통한 외부 접점 확보
 - **ProxySQL 부하 분산:**
   - 데이터베이스 전면에 L7 프록시 배치 및 읽기/쓰기 쿼리 자동 분리
   - 노드 상태 실시간 감시를 통한 지능형 장애 조치(Failover) 자동화
+  - ProxySQL 단일 인스턴스는 단일 장애점(SPoF)이 될 수 있으므로 운영 확장 단계에서는 ProxySQL 2대와 내부 NLB 또는 Keepalived 기반 VIP 구성을 비교 검토
 - **무중단 배포 (Rolling Update):**
   - **배포 전략:** `order: start-first` 설정을 통해 새 컨테이너 선가동 후 구버전 순차 종료 처리
   - **가용성 제어:** `parallelism: 1` 및 `delay` 설정을 통한 배포 영향도 최소화
@@ -68,6 +69,8 @@ flowchart LR
   - 트래픽 부하 및 리소스 사용량 분석 기반의 VM 인스턴스 동적 확장 체계 연구
   - 장애 도메인 분산과 무중단 배포를 고려하여 다중 인스턴스 기반 수평 확장을 우선 적용
   - **지능형 스케일링:** AI 예측 모델 연동을 통한 선제적 자원 증설(Proactive Scaling) 검증
+  - **Kubernetes 확장 기준:** Pod 수 조절은 HPA/KEDA, 노드 수 조절은 Cluster Autoscaler/Karpenter로 책임을 분리하고, Prometheus/Thanos 지표를 공통 판단 근거로 사용
+  - **로드밸런서 선택:** HTTP/HTTPS 서비스는 Ingress/ALB 성격의 L7 라우팅을 우선하고, TCP/UDP·고정 IP·DB 프록시 전면 노출은 NLB 성격의 L4 라우팅으로 분리
 - **Phase 7 연계 준비 및 서비스 메시:**
   - 온프레미스(Proxmox)와 퍼블릭 클라우드 연동에 필요한 환경별 설정 분리 및 배포 자동화 기반 마련
   - **CNI 전환 시나리오:** 네트워크 보안(Network Policy) 강화 및 엔터프라이즈 표준 확보를 위한 Flannel → Calico 단계적 마이그레이션 실습

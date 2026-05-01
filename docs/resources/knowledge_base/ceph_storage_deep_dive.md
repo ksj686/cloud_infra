@@ -31,19 +31,35 @@
 
 ---
 
-## 3. 핵심 기술 원리 (How it Works)
+## 3. 제공 스토리지 인터페이스 (Storage Interfaces)
 
-### 3.1 CRUSH 알고리즘 (Controlled Replication Under Scalable Hashing)
+Ceph는 하나의 분산 스토리지 클러스터 위에서 용도별 접근 방식을 제공함. 현재 프로젝트에서는 각 인터페이스의 책임을 분리하여 설계 복잡도를 낮춤.
+
+| 인터페이스                  | 역할                  | 프로젝트 활용 예시                                |
+| :-------------------------- | :-------------------- | :------------------------------------------------ |
+| **RBD(RADOS Block Device)** | 블록 스토리지         | Proxmox VM 디스크, Kubernetes PVC, DB 데이터 볼륨 |
+| **RGW(RADOS Gateway)**      | S3 호환 객체 스토리지 | 백업 아카이브, 파일 업로드 저장소, S3 전이 검증   |
+| **CephFS**                  | 공유 파일 시스템      | 다중 노드 공유 디렉터리, 모델/로그 파일 공유 실험 |
+
+- **RBD 우선 영역:** VM/LXC와 상태 저장 워크로드처럼 디스크 장치 semantics가 필요한 영역
+- **RGW 우선 영역:** 애플리케이션이 S3 SDK 또는 presigned URL 방식으로 접근하는 파일·백업 저장 영역
+- **CephFS 우선 영역:** 여러 노드가 동일 경로를 동시에 읽어야 하는 공유 파일 영역
+
+---
+
+## 4. 핵심 기술 원리 (How it Works)
+
+### 4.1 CRUSH 알고리즘 (Controlled Replication Under Scalable Hashing)
 
 - **원리:** 중앙 집중식 인덱스 서버 없이 수학적 계산을 통해 데이터의 위치를 결정
 - **이득:** 메타데이터 서버 병목 현상을 제거하여 대규모 환경에서도 고성능 유지
 
-### 3.2 데이터 삼중화 및 자가 복구 (Self-healing)
+### 4.2 데이터 삼중화 및 자가 복구 (Self-healing)
 
 - **복제 (Replication):** 데이터 저장 시 설정된 규칙에 따라 자동으로 여러 노드에 복제본 생성 (기본 3-copy)
 - **자동 복구:** 특정 노드나 디스크 장애 감지 시, 나머지 복제본을 활용하여 새로운 노드에 데이터를 자동 재구성하여 무결성 유지
 
-### 3.3 RAID와 Ceph OSD 책임 분리
+### 4.3 RAID와 Ceph OSD 책임 분리
 
 - **OS/부트 볼륨:** 하이퍼바이저 운영체제와 관리 도구 보호를 위해 RAID 1 또는 ZFS 미러 구성 가능.
 - **Ceph 데이터 디스크:** Ceph가 디스크 단위 장애 도메인, 복제, 재균형을 직접 관리할 수 있도록 OSD별 전용 디스크(JBOD/IT mode)를 우선 적용.
@@ -51,20 +67,32 @@
 
 ---
 
-## 4. 본 프로젝트에서의 전략적 가치 (Strategic Value)
+## 5. 본 프로젝트에서의 전략적 가치 (Strategic Value)
 
-### 4.1 가상화 가용성 극대화 (Proxmox 연동)
+### 5.1 가상화 가용성 극대화 (Proxmox 연동)
 
 - **효과:** VM의 디스크 이미지를 Ceph RBD(RADOS Block Device)에 저장하여, 물리 노드 장애 시 다른 노드로 VM을 즉각 이동(Live Migration) 및 재기동 가능
 - **SPoF 제거:** 로컬 스토리지의 한계(디스크 장애 시 VM 정지)를 근본적으로 극복
 
-### 4.2 데이터 영속성 보장 (Stateful Workloads)
+### 5.2 데이터 영속성 보장 (Stateful Workloads)
 
 - **컨테이너 연동:** 데이터베이스(MariaDB) 및 로그 저장소의 백엔드로 활용하여 컨테이너 삭제/재생성 시에도 데이터 보존 보장
+- **백업 저장소:** DB 백업과 설정 아카이브를 RGW 또는 MinIO/S3 호환 인터페이스로 저장하여 Phase 7의 AWS S3 전이 경로와 동일한 객체 저장소 패턴 검증
+- **Kubernetes 연동:** CSI(Container Storage Interface) Driver를 통해 RBD 기반 Persistent Volume을 제공하고, 워크로드 재스케줄링 시에도 데이터 지속성 유지
+
+```mermaid
+flowchart LR
+    VM["Proxmox VM / LXC"] --> RBD["Ceph RBD"]
+    Pod["Kubernetes Pod"] --> PVC["PVC"]
+    PVC --> RBD
+    Backup["DB Backup / Archive"] --> RGW["Ceph RGW<br/>S3-compatible API"]
+    Shared["Shared Files"] --> CephFS["CephFS"]
+```
 
 ---
 
-## 5. 결론 및 제언
+## 6. 결론 및 제언
 
 - Ceph는 단순한 저장소를 넘어 **'인프라 가용성의 최후의 보루'** 역할을 수행함
 - 초기 구축 복잡도는 높으나, 엔터프라이즈 급의 안정성과 확장성을 확보하기 위해 Phase 3의 핵심 기술로 반드시 채택 및 숙지 필요
+- 단일 용도로만 설명하면 가치가 축소되므로 발표와 문서에서는 **RBD=VM/PVC, RGW=S3 호환 객체 저장소, CephFS=공유 파일 시스템**으로 구분하여 설명 필요
